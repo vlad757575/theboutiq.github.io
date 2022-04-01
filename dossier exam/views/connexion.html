@@ -4,38 +4,152 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+      integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <title>Document</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        background-color: #edeef6;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: "poppins", sans-serif;
+        min-height: 100vh;
+        margin: 0;
+      }
+      .modal-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      button {
+        border: 0;
+        color: #edeef6;
+        background-color: rgb(36, 94, 36);
+        border-radius: 4px;
+        box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+        font-size: 25px;
+      }
+      .close-modal {
+        display: flex;
+        align-items: flex-end;
+        margin-right: -5px !important;
+      }
+      .modal-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        border-radius: 4px;
+        background-color: rgba(0, 0, 0, 0.7);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        width: 100vw;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.6s ease;
+      }
+      .modal {
+        background-color: #fff;
+        width: 500px;
+        max-width: 100%;
+        padding: 20px;
+        text-align: center;
+        border-radius: 5px;
+        box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+      }
+      modal h4 {
+        padding-top: 5px;
+        padding-bottom: 5px;
+      }
+      .formular {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+      }
+      input {
+        margin-top: 5%;
+
+        border-radius: 15px;
+        height: 30px;
+      }
+      ::placeholder {
+        text-align: center;
+      }
+
+      .submit {
+        margin: 7px 7px;
+      }
+      .modal-container.show {
+        pointer-events: auto;
+        opacity: 1;
+      }
+      .close-position {
+        display: flex;
+        float: right;
+        margin-top: 0% !important;
+      }
+    </style>
   </head>
   <body>
-    <div>
-      <form action="" method="post">
-        <h4>Déjà client ?</h4>
-        <div>
-          <label>Votre email</label>
-          <input
-            type="email"
-            placeholder="Entrer votre email"
-            name="email"
-            id="email"
-            required
-            autofocus
-          />
-        </div>
-        <div>
-          <label>Mot de passe</label>
-          <input
-            type="password"
-            placeholder="Entrer votre mot de passe"
-            name="password"
-            id="password"
-            required
-            autofocus
-          />
-        </div>
-        <button type="submit">Connexion</button>
-      </form>
+    <button id="open">Connexion</button>
 
-      <a href="#">Mot de passe oublié ?</a>
+    <div class="modal-container" id="modal_container">
+      <div class="modal">
+        <button id="close-modal" class="close-position">X</button>
+        <form action="" method="post">
+          <h4>Déjà client ?</h4>
+          <div class="formular">
+            <div>
+              <!-- <label>Votre email</label> -->
+              <input
+                type="email"
+                placeholder="Email"
+                name="email"
+                id="email"
+                required
+                autofocus
+              />
+            </div>
+            <div>
+              <!-- <label>Mot de passe</label> -->
+              <input
+                type="password"
+                placeholder="Mot de passe"
+                name="password"
+                id="password"
+                required
+                autofocus
+              />
+            </div>
+          </div>
+          <button type="submit" class="submit">Connexion</button>
+        </form>
+
+        <a href="#">Mot de passe oublié ?</a>
+      </div>
     </div>
   </body>
+  <script defer>
+    const open = document.getElementById("open");
+    const modal_container = document.getElementById("modal_container");
+    const close = document.getElementById("close-modal");
+
+    open.addEventListener("click", () => {
+      modal_container.classList.add("show");
+    });
+
+    close.addEventListener("click", () => {
+      modal_container.classList.remove("show");
+    });
+  </script>
 </html>

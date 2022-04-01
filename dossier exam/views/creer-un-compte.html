@@ -6,8 +6,59 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
+  <style>
+    *{
+      box-sizing: border-box;
+    }
+    body {
+      background-color: #edeef6;
+      /* display: flex;
+      align-items: center;
+      justify-content: center; */
+      min-height: 100vh;
+      margin:0;
+    }
+    .modal-container{
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.4);
+      width: 100vw;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.6s ease;
+    }
+    button {
+      background-color: #47a386;
+      color: #fff;
+      border: 0;
+      border-radius: 5px;
+      padding: 10px 15px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    }
+    .modal {
+      background-color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center; 
+      width: 600px;
+      max-width:100% ;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+      text-align: center;
+    }
+    .modal-container.show {
+      pointer-events: auto;
+      opacity: 1;
+    }
+  </style>
   <body>
-    <div>
+    <button id="open">Contact</button>
+    <div class="modal-container" id="modal_container">
+      <div class="modal">
+        <button id="close_modal" class="close-position">X</button>
       <form action="" method="post">
         <h4>Créez votre compte</h4>
         <p>*Champ requis</p>
@@ -68,8 +119,25 @@
           </div>
           <h4>Votre adresse</h4>
           <button type="submit">Créer un compte</button>
-        </form>
-      </form>
+        </div>
+          </form>
+          
+        
+      
     </div>
+    <script>
+      const open = document.getElementById("open");
+         const modal_container = document.getElementById("modal_container");
+         const close = document.getElementById("close_modal");
+     
+         open.addEventListener("click", () => {
+           modal_container.classList.add("show");
+         });
+     
+         close.addEventListener("click", () => {
+           modal_container.classList.remove("show");
+         });
+     
+         </script>
   </body>
 </html>
