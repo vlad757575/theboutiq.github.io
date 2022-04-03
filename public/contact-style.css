@@ -1,0 +1,25 @@
+.my-contact-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    padding: 0px 20px 20px 20px;
+    border-radius: 10px;
+    text-align: center;
+    
+}
+
+.my-contact {
+    display: block;
+    justify-content: center;
+    align-items: center;
+    
+}
+input{
+    text-align: center;
+    border-radius: 10px;
+}
+h2{
+    
+    border-bottom: 1px solid black;
+}

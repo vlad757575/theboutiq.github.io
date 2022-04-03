@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block css %}
+<link rel="stylesheet" href="{{asset('contact-style.css')}}">
+<link rel="stylesheet" href="{{asset('nav-bars.css')}}">
+<link rel="stylesheet" href="{{asset('formulars-style.css') }}">{% endblock %}
+
+
+{% block body%}
+{% include "/modals/connexion-modal.html.twig" %}
+<div class="my-contact-container">
+    <div class="my-contact">
+        <h2>Formulaire de contact</h2>
+        <form action="/action_page.php" method="post">
+
+            <input type="text" id="fname" name="fname" value="prenom" placeholder="prénom" required autofocus><br>
+
+            <input type="text" id="lname" name="lname" value="nom" placeholder="Entrez votre email" required autofocus><br><br>
+
+            <input type="email" id="email" name="email" value="email" placeholder="Entrez votre email" required autofocus><br><br>
+
+            <textarea name="message" rows="8" cols="20" minlength="10" maxlength="400" required autofocus>
+    Ecrivez votre message ici... 
+    </textarea> <br>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+</div>
+{% endblock %}

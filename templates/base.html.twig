@@ -9,40 +9,51 @@
     {% block css %}
     <!-- Bootstrap  and CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
-    <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="{{asset('formulars-style.css') }}">
+    <link rel="stylesheet" href="{{asset('nav-bars.css')}}">
+
     {% endblock %}
 </head>
 
 <body>
     <header>
-        {% block navbar %}
+
         <!--Nav-bar-->
-        <nav>
-            <img src="" href="#" alt="logo" />
-            <a href="#">Produit</a>
-            <a href="#">Contact</a>
-            <a href="#">Panier</a>
-            <a href="#">Connexion</a>
-            <a href="#">Mon compte</a>
-            <a href="#">Deconnexion</a>
+        <nav class="header">
+            <div class="logo">
+                <img src="" href="#" alt="logo" />
+            </div>
+            <div class="main-nav">
+                <a href="#">Produit</a>
+                <a href="{{path('contact')}}">Contact</a>
+            </div>
+            <div class="login-nav">
+                <a href="#">Panier</a>
+                <a href="#" id="open">Connexion</a>
+                <a href="#">Mon compte</a>
+                <a href="#">Deconnexion</a>
+            </div>
         </nav>
-        {% endblock %}
+
     </header>
+
+    {% block body%}
+    {% endblock %}
     <footer>
-        {% block footer-navbar %}
-        <nav>
+        <nav class="footer">
             <a href="#">Mentions légales</a>
             <a href="#">C.G.V & C.G.U</a>
             <a href="#">F.A.Q</a>
             <a href="#">Qui sommes-nous</a>
             <a href="#">Cookies</a>
         </nav>
-        {% endblock %}
+
     </footer>
 
     {% block javascript %}
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="{{asset('formular-script.js')}}"></script>
     <script src="/script.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo      crossorigin=" anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
