@@ -29,7 +29,8 @@
             </div>
             <div class="login-nav">
                 <a href="#">Panier</a>
-                <a href="#" id="open">Connexion</a>
+                <a href="{{path('login')}}" id="open">Connexion</a>
+                <a href="{{path('register')}}">Register</a>
                 <a href="#">Mon compte</a>
                 <a href="#">Deconnexion</a>
             </div>
@@ -37,7 +38,7 @@
 
     </header>
 
-    {% block body%}
+    {% block body %}
     {% endblock %}
     <footer>
         <nav class="footer">

@@ -28,23 +28,23 @@ class HomeController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/signin", name="signin")
-     */
-    public function signin(): Response
-    {
-        return $this->render('home/signin.html.twig', [
-            'controller_name' => 'HomeController',
-        ]);
-    }
+    // /**
+    //  * @Route("/signin", name="signin")
+    //  */
+    // public function signin(): Response
+    // {
+    //     return $this->render('home/signin.html.twig', [
+    //         'controller_name' => 'HomeController',
+    //     ]);
+    // }
 
-    /**
-     * @Route("/forgot-password", name="forgot-password")
-     */
-    public function forgotpassword(): Response
-    {
-        return $this->render('home/forgotpassword.html.twig', [
-            'controller_name' => 'HomeController',
-        ]);
-    }
+    // /**
+    //  * @Route("/forgot-password", name="forgot-password")
+    //  */
+    // public function forgotpassword(): Response
+    // {
+    //     return $this->render('home/forgotpassword.html.twig', [
+    //         'controller_name' => 'HomeController',
+    //     ]);
+    // }
 }
