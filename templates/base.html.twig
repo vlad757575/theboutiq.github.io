@@ -28,11 +28,16 @@
                 <a href="{{path('contact')}}">Contact</a>
             </div>
             <div class="login-nav">
+
+                {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                <a href="#">Mon compte {{ app.user.prenom }}</a>
+                <a href="{{ path('app_logout') }}">Deconnexion</a>
+                {% else %}
                 <a href="#">Panier</a>
                 <a href="{{path('login')}}" id="open">Connexion</a>
                 <a href="{{path('register')}}">Register</a>
-                <a href="#">Mon compte</a>
-                <a href="#">Deconnexion</a>
+                {% endif%}
+
             </div>
         </nav>
 
