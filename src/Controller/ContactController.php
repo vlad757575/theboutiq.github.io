@@ -25,7 +25,7 @@ class ContactController extends AbstractController
             $data = $formulaire->getData();
             // Envoi 
             $email = new TemplatedEmail;
-            $email->from('contact pronote <' . $data['email'] . '>')
+            $email->from('vld.lavrentiev@outlook.fr')
                 ->to('vladoo@yopmail.com')
                 ->replyTo($data['email'])
                 ->subject('Vous avez une demande de contact !')
