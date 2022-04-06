@@ -56,35 +56,4 @@ class HomeController extends AbstractController
     /**
      * @Route("/informations", name="informations")
      */
-    public function sendForm(Request $request, MailerInterface $mailer): Response
-    {
-
-        $formulaire = $this->createForm(ContactType::class);
-        $formulaire->handleRequest($request);
-
-        if ($formulaire->isSubmitted() && $formulaire->isValid()) {
-            $data = $formulaire->getData();
-
-            $email = new TemplatedEmail;
-            $email
-                ->from('Contact Pronote <' . $data['email'] . '>')
-                ->to('2alheure@yopmail.fr')
-                ->replyTo($data['email'])
-                ->subject('Vous avez une demande de contact.')
-                ->htmlTemplate('home/email-informations.html.twig')
-                ->context([
-                    'fromEmail' => $data['email'],
-                    'message' => nl2br($data['message']),
-                ]);
-
-            $mailer->send($email);
-
-            $this->addFlash('success', 'Message envoyé.');
-        }
-
-        return $this->render('generic/form.html.twig', [
-            'titre' => 'Contact',
-            'form' => $formulaire->createView()
-        ]);
-    }
 }
