@@ -1,14 +1,26 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ContactController!{% endblock %}
+{% block title %}Contact{% endblock %}
 
 {% block body %}
 <style>
     .example-wrapper {
-        margin: 1em auto;
-        max-width: 800px;
+        position: relative;
+        margin: 10em auto;
+        max-width: 700px;
+        max-height: 700px;
         width: 95%;
         font: 18px/1.5 sans-serif;
+        display: block;
+        justify-content: center;
+        align-items: center;
+
+    }
+
+    .title {
+
+        text-align: center;
+
     }
 
     .example-wrapper code {
@@ -18,6 +30,7 @@
 </style>
 
 <div class="example-wrapper">
+    <h3 class="title">Formulaire de contact</h3>
     {{ form_start(form) }}
     {{ form_widget(form) }}
     <input type="submit" class="btn btn-primary" value="Envoyer">

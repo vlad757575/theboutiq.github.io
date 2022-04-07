@@ -17,7 +17,8 @@ class ContactType extends AbstractType
     {
         $builder
 
-            ->add('nom', TextType::class, [
+
+            ->add('nom', TextType::class,  [
                 'constraints' => [
                     new Length([
                         'max' => 50

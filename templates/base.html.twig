@@ -8,18 +8,65 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     {% block css %}
     <!-- Bootstrap  and CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
-    <link rel="stylesheet" href="{{asset('formulars-style.css') }}">
+    <!-- <link rel="stylesheet" href="{{asset('formulars-style.css') }}"> -->
+    <link rel="stylesheet" href="{{asset('bootstrap.css')}}">
     <link rel="stylesheet" href="{{asset('nav-bars.css')}}">
 
     {% endblock %}
 </head>
 
+
 <body>
     <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">LOGO</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse " id="navbarNav">
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Accueil</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Produit</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{path('app_contact')}}">Contact</a>
+                        </li>
+                        {% if is_granted('ROLE_USER') %}
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">Bonjour {{ app.user.prenom }}</a>
+                        </li>
+                        <li class=" nav-item">
+                            <a href="{{ path('app_logout') }}" class="nav-link">Déconnexion</a>
+                        </li>
+                        {% if is_granted('ROLE_ADMIN') %}
+                        <li class="nav-item">
+                            <a href="{{path('app_produit_index')}}" class="nav-link">Liste produits</a>
+                        </li>
+                        {% endif %}
+
+                        {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Panier</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{path('login')}}">Connexion</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{path('register')}}">Register</a>
+                        </li>
+                        {% endif %}
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
 
         <!--Nav-bar-->
-        <nav class="header">
+        <!-- <nav class="header">
             <div class="logo">
                 <img src="" href="#" alt="logo" />
             </div>
@@ -29,43 +76,67 @@
             </div>
             <div class="login-nav">
 
-                {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                {% if is_granted('ROLE_USER') %}
                 <a href="#">Mon compte {{ app.user.prenom }}</a>
                 <a href="{{ path('app_logout') }}">Deconnexion</a>
+
+                {% if is_granted('ROLE_ADMIN') %}
+
+                <a href="{{path('app_produit_index')}}">liste produits</a>
+                <a href="">Liste utilisateurs</a>
+                {% endif %}
+
                 {% else %}
                 <a href="#">Panier</a>
                 <a href="{{path('login')}}" id="open">Connexion</a>
                 <a href="{{path('register')}}">Register</a>
-                {% endif%}
+
+
+                {% endif %}
 
             </div>
-        </nav>
+        </nav> -->
 
     </header>
 
     {% block body %}
-
-
     {% endblock %}
     <footer>
-        <nav class="footer">
+        <!-- <nav class="footer">
             <a href="#">Mentions légales</a>
             <a href="#">C.G.V & C.G.U</a>
             <a href="#">F.A.Q</a>
             <a href="#">Qui sommes-nous</a>
             <a href="#">Cookies</a>
-        </nav>
-
+        </nav> -->
+        <!--bootstrap navbar -->
+        <div class="container ">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light footer ">
+                <button class="navbar-toggler  mx-auto" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav mx-auto">
+                        <a class="nav-item nav-link" href="#">Mentions légales</a>
+                        <a class="nav-item nav-link" href="#">CGV & CGU</a>
+                        <a class="nav-item nav-link" href="#">FAQ</a>
+                        <a class="nav-item nav-link" href="#">Qui somme nous</a>
+                        <a class="nav-item nav-link" href="#">Cookies</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
     </footer>
 
     {% block javascript %}
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="{{asset('bootstrap.bundle.min')}}"></script>
     <script src="{{asset('formular-script.js')}}"></script>
     <script src="/script.js"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo      crossorigin=" anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     {% endblock %}
 </body>
 

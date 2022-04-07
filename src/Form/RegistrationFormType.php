@@ -28,10 +28,12 @@ class RegistrationFormType extends AbstractType
             ->add('prenom', TextType::class, [
                 // 'mapped' => false,
                 'required' => true,
+
             ])
             ->add('dateNaissance', DateType::class, [
                 // 'mapped' => false,
                 'required' => true,
+                'widget' => 'single_text'
             ])
             ->add('email')
             ->add('agreeTerms', CheckboxType::class, [
