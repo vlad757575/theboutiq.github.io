@@ -1,4 +1,4 @@
-*{
+/* *{
     box-sizing: border-box;
   }
   body {
@@ -37,7 +37,7 @@
   }
   .my-modal {
     /* margin: 10% auto; */
-    background-color: #fff;
+    /* background-color: #fff;
     display: flex;
     align-items: center ;
     justify-content: center; 
@@ -65,5 +65,27 @@
   }
   .submit {
       margin-bottom: 20px;
+  } */ 
+  .my-formular {
+    position: relative;
+    margin: 10em auto;
+    max-width: 700px;
+    max-height: 700px;
+    width: 95%;
+    font: 18px/1.5 sans-serif;
+    display: block;
+    justify-content: center;
+    align-items: center;
+  text-decoration: none;
   }
-  
+  a {
+    text-decoration: none;
+    color: aliceblue;
+  }
+  button {
+    margin-top: 10px;
+  }
+  .login-button {
+    width: 300px;
+    height: 300px;
+  }
