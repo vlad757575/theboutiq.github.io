@@ -77,15 +77,43 @@
     justify-content: center;
     align-items: center;
   text-decoration: none;
+  border: 2px solid white;
+  padding: 10px;
+  border-radius: 15px;
+  background-color: white;
+  
   }
   a {
     text-decoration: none;
-    color: aliceblue;
-  }
+      }
   button {
     margin-top: 10px;
+    background-color:rgba(233, 120, 100, 1) !important; 
   }
+
   .login-button {
     width: 300px;
     height: 300px;
+  }
+  .my-carrousel{
+    justify-content: center;
+    align-items: center;
+    max-width: 750px;
+    max-height: 750px;
+    margin: 150px auto 150px auto;
+  }
+  .link-style:hover{
+    border-bottom: 2px solid #E97864;
+    font-size: larger;
+    color: #E97864 !important;
+  }
+  .my-navbar {
+    background-color: rgba(41, 210, 187,0.8) !important;
+    
+  }
+  .my-navbar a {
+    color: rgba(rgb(169,169,169,0,5)) !important;
+  }
+  body {
+    background-color: rgba(233, 120, 100, 0.05);
   }

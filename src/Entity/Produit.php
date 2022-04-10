@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ProduitRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -52,10 +54,16 @@ class Produit
      */
     private $montantTtc;
 
-    public function getId(): ?int
+    /**
+     * @ORM\ManyToMany(targetEntity=Images::class)
+     */
+    private $images;
+
+    public function __construct()
     {
-        return $this->id;
+        $this->images = new ArrayCollection();
     }
+
 
     public function getAsin(): ?string
     {
@@ -137,6 +145,42 @@ class Produit
     public function setMontantTtc(int $montantTtc): self
     {
         $this->montantTtc = $montantTtc;
+
+        return $this;
+    }
+
+    public function getTauxtva(): ?TauxTva
+    {
+        return $this->tauxtva;
+    }
+
+    public function setTauxtva(?TauxTva $tauxtva): self
+    {
+        $this->tauxtva = $tauxtva;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Images>
+     */
+    public function getImages(): Collection
+    {
+        return $this->images;
+    }
+
+    public function addImage(Images $image): self
+    {
+        if (!$this->images->contains($image)) {
+            $this->images[] = $image;
+        }
+
+        return $this;
+    }
+
+    public function removeImage(Images $image): self
+    {
+        $this->images->removeElement($image);
 
         return $this;
     }

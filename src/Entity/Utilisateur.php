@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UtilisateurRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -56,6 +58,33 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="boolean")
      */
     private $isVerified = false;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Panier::class, mappedBy="utilisateur")
+     */
+    private $paniers;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=HistoriqueCommande::class, inversedBy="utilisateur")
+     */
+    private $historiqueCommande;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Adresse::class, mappedBy="utilisateur")
+     */
+    private $adresseLivraison;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Adresse::class, mappedBy="utilisateur")
+     */
+    private $adresseFacturation;
+
+    public function __construct()
+    {
+        $this->paniers = new ArrayCollection();
+        $this->adresseLivraison = new ArrayCollection();
+        $this->adresseFacturation = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -190,6 +219,108 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIsVerified(bool $isVerified): self
     {
         $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Panier>
+     */
+    public function getPaniers(): Collection
+    {
+        return $this->paniers;
+    }
+
+    public function addPanier(Panier $panier): self
+    {
+        if (!$this->paniers->contains($panier)) {
+            $this->paniers[] = $panier;
+            $panier->setUtilisateur($this);
+        }
+
+        return $this;
+    }
+
+    public function removePanier(Panier $panier): self
+    {
+        if ($this->paniers->removeElement($panier)) {
+            // set the owning side to null (unless already changed)
+            if ($panier->getUtilisateur() === $this) {
+                $panier->setUtilisateur(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getHistoriqueCommande(): ?HistoriqueCommande
+    {
+        return $this->historiqueCommande;
+    }
+
+    public function setHistoriqueCommande(?HistoriqueCommande $historiqueCommande): self
+    {
+        $this->historiqueCommande = $historiqueCommande;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Adresse>
+     */
+    public function getAdresseLivraison(): Collection
+    {
+        return $this->adresseLivraison;
+    }
+
+    public function addAdresseLivraison(Adresse $adresseLivraison): self
+    {
+        if (!$this->adresseLivraison->contains($adresseLivraison)) {
+            $this->adresseLivraison[] = $adresseLivraison;
+            $adresseLivraison->setUtilisateur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAdresseLivraison(Adresse $adresseLivraison): self
+    {
+        if ($this->adresseLivraison->removeElement($adresseLivraison)) {
+            // set the owning side to null (unless already changed)
+            if ($adresseLivraison->getUtilisateur() === $this) {
+                $adresseLivraison->setUtilisateur(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Adresse>
+     */
+    public function getAdresseFacturation(): Collection
+    {
+        return $this->adresseFacturation;
+    }
+
+    public function addAdresseFacturation(Adresse $adresseFacturation): self
+    {
+        if (!$this->adresseFacturation->contains($adresseFacturation)) {
+            $this->adresseFacturation[] = $adresseFacturation;
+            $adresseFacturation->setUtilisateur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAdresseFacturation(Adresse $adresseFacturation): self
+    {
+        if ($this->adresseFacturation->removeElement($adresseFacturation)) {
+            // set the owning side to null (unless already changed)
+            if ($adresseFacturation->getUtilisateur() === $this) {
+                $adresseFacturation->setUtilisateur(null);
+            }
+        }
 
         return $this;
     }

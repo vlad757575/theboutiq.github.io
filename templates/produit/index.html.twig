@@ -3,8 +3,8 @@
 {% block title %}Produit index{% endblock %}
 
 {% block body %}
-    <h1>Produit index</h1>
-
+<h1>Produits</h1>
+<div class="my-formular">
     <table class="table">
         <thead>
             <tr>
@@ -20,7 +20,7 @@
             </tr>
         </thead>
         <tbody>
-        {% for produit in produits %}
+            {% for produit in produits %}
             <tr>
                 <td>{{ produit.id }}</td>
                 <td>{{ produit.asin }}</td>
@@ -35,13 +35,15 @@
                     <a href="{{ path('app_produit_edit', {'id': produit.id}) }}">edit</a>
                 </td>
             </tr>
-        {% else %}
+            {% else %}
             <tr>
                 <td colspan="9">no records found</td>
             </tr>
-        {% endfor %}
+            {% endfor %}
         </tbody>
     </table>
+</div>
+<a href="{{ path('app_produit_new') }}">Create new</a>
 
-    <a href="{{ path('app_produit_new') }}">Create new</a>
+
 {% endblock %}
