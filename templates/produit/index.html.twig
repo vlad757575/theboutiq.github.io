@@ -69,7 +69,7 @@
                     <td>
 
                         {% if app.user and produit.stock > 0  %}
-                        <form action="{{path('app_add', {produit: produit.id}) }}">
+                        <form action="{{path('app_add', {produit: produit.id}) }}" method="POST">
                             <input type="number" name="quantite" id="quantite" min="1" max="{{produit.stock}}" step="1" placeholder="Quantité" class="input-quantite">
                             <button type="submit" class="btn-primary">
                                 <i class="fa fa-shopping-cart" aria-hidden="true"></i>Ajouter
@@ -78,7 +78,7 @@
                         {% elseif app.user and produit.stock == 0 %}
                     <td class="text-danger">Rupture de stock</td>
                     {% else %}
-                    <form action="{{path('app_add', {produit: produit.id}) }}">
+                    <form action="{{path('app_add', {produit: produit.id}) }}" method="POST">
                         <input type="number" name="quantite" id="quantite" min="1" max="{{produit.stock}}" step="1" placeholder="Quantité" class="input-quantite">
                         <button type="submit" class="btn-primary">
                             <i class="fa fa-shopping-cart disabled" aria-hidden="true"></i>Ajouter

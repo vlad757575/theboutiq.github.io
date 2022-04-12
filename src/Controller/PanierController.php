@@ -4,10 +4,13 @@ namespace App\Controller;
 
 use App\Entity\Panier;
 use App\Entity\Produit;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Exception\BadRequestException;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class PanierController extends AbstractController
 {
@@ -34,11 +37,17 @@ class PanierController extends AbstractController
     /**
      * @Route("/add/{produit}", name="app_add")
      */
-    public function add(Produit $produit, SessionInterface $session): Response
+    public function add(Produit $produit, SessionInterface $session, Request $request): Response
     {
-        // $session->set("panier", 3);
-        // dd($session->get("panier"));
+        $quantite = $request->request->get('quantite');
+        if ($quantite <= 0) throw new BadRequestHttpException;
 
-        return new Response('Ajouté' . $produit->getNom());
+        // dd($quantite, $produit, $session);
+        $panier = $session->get('panier', []);
+        if (!empty($panier[$produit->getId()])) $panier[$produit->getId()] = max(0, min($quantite + $panier[$produit->getId()], $produit->getStock()));
+
+        else $panier[$produit->getId()] = min($quantite, $produit->getStock());
+        $session->set("panier", $panier);
+        return $this->redirectToRoute('app_produit_index');
     }
 }
