@@ -69,17 +69,17 @@
   .my-formular {
     position: relative;
     margin: 10em auto;
-    max-width: 700px;
-    max-height: 700px;
-    width: 95%;
+    padding: 35px;
+    max-width: 500px;
+    max-height: 800px;
+    width: 80%;
     font: 18px/1.5 sans-serif;
     display: block;
     justify-content: center;
     align-items: center;
   text-decoration: none;
   border: 2px solid white;
-  padding: 10px;
-  border-radius: 15px;
+    border-radius: 15px;
   background-color: white;
   
   }
@@ -88,7 +88,7 @@
       }
   button {
     margin-top: 10px;
-    background-color:rgba(233, 120, 100, 1) !important; 
+    /* background-color:rgba(233, 120, 100, 1) !important;  */
   }
 
   .login-button {
@@ -109,11 +109,46 @@
   }
   .my-navbar {
     background-color: rgba(41, 210, 187,0.8) !important;
-    
+    position: relative;
+    width: 100% !important;
   }
+  .my-navbar-bottom {
+position: fixed;
+left: 0;
+    bottom: 0;
+    width: 100%;
+
+  }
+   
   .my-navbar a {
     color: rgba(rgb(169,169,169,0,5)) !important;
   }
   body {
     background-color: rgba(233, 120, 100, 0.05);
+  }
+  .carousel-item img {
+    object-fit: scale-down;
+  }
+
+ 
+  .my-product{
+    max-width: 1200px;
+    max-height: 900px;
+    margin: 100px auto 100px auto;
+background-color: white;
+border: 1px solid white;
+border-radius: 10px;
+display:flex;
+justify-content: space-around;
+align-items: center;
+  }
+  .my-cart{
+
+  }
+  .picture-accordion {
+    display: block;
+    margin: 30px 0px 30px 30px;
+  }
+  .my-accordion{
+    max-width: 500px;
   }

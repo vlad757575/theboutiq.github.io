@@ -59,11 +59,26 @@ class Produit
      */
     private $images;
 
+    function resume(): string
+    {
+
+        if (strlen($this->description) > 20)
+            $resume = substr($this->description, 0, 20) . '...';
+        else $resume = $this->description;
+
+        return $resume;
+    }
+
+
     public function __construct()
     {
         $this->images = new ArrayCollection();
     }
 
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
 
     public function getAsin(): ?string
     {
@@ -103,6 +118,7 @@ class Produit
 
     public function getDescription(): ?string
     {
+
         return $this->description;
     }
 

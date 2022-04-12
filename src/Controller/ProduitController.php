@@ -15,6 +15,9 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class ProduitController extends AbstractController
 {
+
+
+
     /**
      * @Route("/", name="app_produit_index", methods={"GET"})
      */

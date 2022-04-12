@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="{{asset('bootstrap.css')}}">
     <link rel="stylesheet" href="{{asset('nav-bars.css')}}">
     <link rel="stylesheet" href="{{asset('formulars-style.css')}}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
 
 
@@ -33,11 +34,12 @@
                             <a class="nav-link active link-style" aria-current="page" href="{{path('index')}}">Accueil</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link link-style" href="#">Produit</a>
+                            <a class="nav-link link-style" href="{{path('app_produit_index')}}">Produit</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link link-style" href="{{path('app_contact')}}">Contact</a>
                         </li>
+
                         {% if is_granted('ROLE_USER') %}
                         <li class="nav-item">
                             <a href="#" class="nav-link link-style">Bonjour {{ app.user.prenom }}</a>
@@ -49,11 +51,14 @@
                         <li class="nav-item">
                             <a href="{{path('app_produit_index')}}" class="nav-link link-style">Liste produits</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link link-style" href="{{path('show_panier')}}">Panier</a>
+                        </li>
                         {% endif %}
 
                         {% else %}
                         <li class="nav-item">
-                            <a class="nav-link link-style" href="{{path('app_panier')}}">Panier</a>
+                            <a class="nav-link link-style" href="{{path('show_panier')}}">Panier</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link link-style" href="{{path('login')}}">Connexion</a>
@@ -73,7 +78,7 @@
 
         <!--bootstrap navbar -->
         <div class="container ">
-            <nav class="navbar navbar-expand-lg navbar-light my-navbar footer ">
+            <nav class="navbar navbar-expand-lg navbar-light my-navbar my-navbar-bottom">
                 <button class="navbar-toggler  mx-auto" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
