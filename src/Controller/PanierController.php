@@ -15,26 +15,6 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 class PanierController extends AbstractController
 {
     /**
-     * @Route("/panier", name="show_panier")
-     */
-    public function index(): Response
-    {
-        return $this->render('panier/panier.html.twig', [
-            'controller_name' => 'PanierController',
-        ]);
-    }
-
-    /**
-     * @Route("/rshow_panier", name="rshow_panier")
-     */
-    // public function showPanier(Panier $panier): Response
-    // {
-    //     return $this->render('panier/show.html.twig', [
-    //         'panier' => $panier,
-    //     ]);
-    // }
-
-    /**
      * @Route("/add/{produit}", name="app_add")
      */
     public function add(Produit $produit, SessionInterface $session, Request $request): Response
@@ -46,8 +26,21 @@ class PanierController extends AbstractController
         $panier = $session->get('panier', []);
         if (!empty($panier[$produit->getId()])) $panier[$produit->getId()] = max(0, min($quantite + $panier[$produit->getId()], $produit->getStock()));
 
-        else $panier[$produit->getId()] = min($quantite, $produit->getStock());
+        else $panier[$produit->getId()] = [
+
+            'quantite' => min($quantite, $produit->getStock()),
+            'produit' => $produit
+        ];
+
         $session->set("panier", $panier);
         return $this->redirectToRoute('app_produit_index');
+    }
+    /**
+     * @Route("/panier", name="panier")
+     */
+    function show(SessionInterface $session): Response
+    {
+        $panier = $session->get('panier', []);
+        return $this->render('panier/panier.html.twig');
     }
 }

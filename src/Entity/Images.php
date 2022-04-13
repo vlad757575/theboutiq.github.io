@@ -22,6 +22,11 @@ class Images
      */
     private $image;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Produit::class, inversedBy="image")
+     */
+    private $produit;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -35,6 +40,18 @@ class Images
     public function setImage(?string $image): self
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    public function getProduit(): ?Produit
+    {
+        return $this->produit;
+    }
+
+    public function setProduit(?Produit $produit): self
+    {
+        $this->produit = $produit;
 
         return $this;
     }

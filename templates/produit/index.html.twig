@@ -1,13 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Produit index{% endblock %}
+{% block title %}produit{% endblock %}
 
 {% block body %}
 <div class="my-product">
 
 
     <div class="picture-accordion">
-        <img src="https://picsum.photos/500" alt="image-produit">
+        <img src="https://picsum.photos/420" alt="image-produit">
         {% for produit in produits %}
         <div class="my-accordion">
             <div class="accordion" id="accordionExample">
@@ -70,7 +70,7 @@
 
                         {% if app.user and produit.stock > 0  %}
                         <form action="{{path('app_add', {produit: produit.id}) }}" method="POST">
-                            <input type="number" name="quantite" id="quantite" min="1" max="{{produit.stock}}" step="1" placeholder="Quantité" class="input-quantite">
+                            <input type="number" name="quantite" id="quantite" min="1" max="{{produit.stock}}" step="1" placeholder="Quantité" value="1" class="input-quantite" required>
                             <button type="submit" class="btn-primary">
                                 <i class="fa fa-shopping-cart" aria-hidden="true"></i>Ajouter
                             </button>
@@ -78,11 +78,12 @@
                         {% elseif app.user and produit.stock == 0 %}
                     <td class="text-danger">Rupture de stock</td>
                     {% else %}
-                    <form action="{{path('app_add', {produit: produit.id}) }}" method="POST">
+                    <form>
                         <input type="number" name="quantite" id="quantite" min="1" max="{{produit.stock}}" step="1" placeholder="Quantité" class="input-quantite">
-                        <button type="submit" class="btn-primary">
-                            <i class="fa fa-shopping-cart disabled" aria-hidden="true"></i>Ajouter
-                        </button>
+                        <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            <i class=" fa fa-shopping-cart disabled" aria-hidden="true"></i>Ajouter
+                        </a>
+
                     </form>
 
                     {% endif %}
@@ -104,5 +105,21 @@
     <!-- <a href="{{ path('app_produit_new') }}">Create new</a> -->
 </div>
 
-
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h5>
+                    Connectez-vous pour ajouter un produit au panier
+                </h5>
+            </div>
+            <div class="modal-footer">
+                <a class="nav-link link-style" href="{{path('login')}}">Connexion</a>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

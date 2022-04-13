@@ -68,7 +68,7 @@
   } */ 
   .my-formular {
     position: relative;
-    margin: 10em auto;
+    margin: 5em auto;
     padding: 35px;
     max-width: 500px;
     max-height: 800px;
@@ -133,8 +133,8 @@ left: 0;
  
   .my-product{
     max-width: 1200px;
-    max-height: 900px;
-    margin: 100px auto 100px auto;
+    max-height: 800px;
+    margin: 3em auto 3em auto;
 background-color: white;
 border: 1px solid white;
 border-radius: 10px;
@@ -147,8 +147,24 @@ align-items: center;
   }
   .picture-accordion {
     display: block;
-    margin: 30px 0px 30px 30px;
+    margin: 1em 0px 1em 1em;
   }
   .my-accordion{
-    max-width: 500px;
+    max-width: 420px;
   }
+  .my-icon {
+    
+  }
+
+  @media all and (max-width: 600px) {
+    .my-product{
+    max-width: 1200px;
+    max-height: 800px;
+    margin: 3em auto 3em auto;
+background-color: white;
+border: 1px solid white;
+border-radius: 10px;
+display:block;
+justify-content: space-around;
+align-items: center;
+  }}

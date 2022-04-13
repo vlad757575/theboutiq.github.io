@@ -45,20 +45,10 @@ class Commande
     private $transporteur;
 
     /**
-     * @ORM\ManyToMany(targetEntity=HistoriqueCommande::class, mappedBy="commande")
-     */
-    private $historiqueCommandes;
-
-    /**
-     * @ORM\ManyToMany(targetEntity=Etat::class)
+     * @ORM\ManyToOne(targetEntity=Etat::class, inversedBy="commandes")
      */
     private $etat;
 
-    public function __construct()
-    {
-        $this->historiqueCommandes = new ArrayCollection();
-        $this->etat = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -125,53 +115,14 @@ class Commande
         return $this;
     }
 
-    /**
-     * @return Collection<int, HistoriqueCommande>
-     */
-    public function getHistoriqueCommandes(): Collection
-    {
-        return $this->historiqueCommandes;
-    }
-
-    public function addHistoriqueCommande(HistoriqueCommande $historiqueCommande): self
-    {
-        if (!$this->historiqueCommandes->contains($historiqueCommande)) {
-            $this->historiqueCommandes[] = $historiqueCommande;
-            $historiqueCommande->addCommande($this);
-        }
-
-        return $this;
-    }
-
-    public function removeHistoriqueCommande(HistoriqueCommande $historiqueCommande): self
-    {
-        if ($this->historiqueCommandes->removeElement($historiqueCommande)) {
-            $historiqueCommande->removeCommande($this);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Etat>
-     */
-    public function getEtat(): Collection
+    public function getEtat(): ?Etat
     {
         return $this->etat;
     }
 
-    public function addEtat(Etat $etat): self
+    public function setEtat(?Etat $etat): self
     {
-        if (!$this->etat->contains($etat)) {
-            $this->etat[] = $etat;
-        }
-
-        return $this;
-    }
-
-    public function removeEtat(Etat $etat): self
-    {
-        $this->etat->removeElement($etat);
+        $this->etat = $etat;
 
         return $this;
     }

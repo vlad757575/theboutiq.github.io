@@ -55,9 +55,15 @@ class Produit
     private $montantTtc;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Images::class)
+     * @ORM\OneToMany(targetEntity=Images::class, mappedBy="produit")
      */
-    private $images;
+    private $image;
+
+    public function __construct()
+    {
+        $this->image = new ArrayCollection();
+    }
+
 
     function resume(): string
     {
@@ -67,12 +73,6 @@ class Produit
         else $resume = $this->description;
 
         return $resume;
-    }
-
-
-    public function __construct()
-    {
-        $this->images = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -180,15 +180,16 @@ class Produit
     /**
      * @return Collection<int, Images>
      */
-    public function getImages(): Collection
+    public function getImage(): Collection
     {
-        return $this->images;
+        return $this->image;
     }
 
     public function addImage(Images $image): self
     {
-        if (!$this->images->contains($image)) {
-            $this->images[] = $image;
+        if (!$this->image->contains($image)) {
+            $this->image[] = $image;
+            $image->setProduit($this);
         }
 
         return $this;
@@ -196,7 +197,12 @@ class Produit
 
     public function removeImage(Images $image): self
     {
-        $this->images->removeElement($image);
+        if ($this->image->removeElement($image)) {
+            // set the owning side to null (unless already changed)
+            if ($image->getProduit() === $this) {
+                $image->setProduit(null);
+            }
+        }
 
         return $this;
     }
