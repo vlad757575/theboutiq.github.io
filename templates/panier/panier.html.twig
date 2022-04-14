@@ -18,11 +18,15 @@
         </thead>
         <tbody>
             <tr>
-                <img href="{{ produit.image}}" alt="">
-                <td scope="row">{{produit.nom}}</td>
-                <td>{{panier.produit.quantite}}</td>
-                <td>{{produit.prix}}</td>
-                <td>{{prix.total}}</td>
+                {% for entree in panier %}
+                <img href="#" alt="">
+                <td scope="row">{{entree.produit.nom}}</td>
+                <td>{{entree.quantite}}</td>
+                <td>{{entree.produit.MontantHt}}</td>
+                <td>{{entree.quantite * entree.produit.MontantHt}} </td>
+                {% else %}
+                <h5>Votre panier est vide</h5>
+                {% endfor %}
             </tr>
             <tr>
                 <td scope="row"></td>
@@ -30,8 +34,8 @@
                 <td></td>
             </tr>
         </tbody><br>
-        <button>Valider</button>
-        <button>Vider le panier</button>
+        <a href="{{path('paiement')}}">Payer</a>
+        <a href="{{path('vider_panier')}}">Vider le panier</a>
     </table>
 </div>
 {% endblock %}

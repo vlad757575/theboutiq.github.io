@@ -65,16 +65,34 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $panier;
 
+
     /**
-     * @ORM\OneToMany(targetEntity=Adresse::class, mappedBy="utilisateur")
+     * @ORM\OneToMany(targetEntity=Commande::class, mappedBy="utilisateur")
      */
-    private $adresse;
+    private $commande;
+
+    /**
+     * @ORM\OneToMany(targetEntity=AdresseFacturation::class, mappedBy="utilisateur")
+     */
+    private $Adressefacturation;
+
+    /**
+     * @ORM\Column(type="string", length=40)
+     */
+    private $telephone;
+
+    /**
+     * @ORM\OneToMany(targetEntity=AdresseLivraison::class, mappedBy="utilisateur")
+     */
+    private $adresseLivraison;
 
     public function __construct()
     {
 
         $this->panier = new ArrayCollection();
-        $this->adresse = new ArrayCollection();
+        $this->commande = new ArrayCollection();
+        $this->Adressefacturation = new ArrayCollection();
+        $this->adresseLivraison = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -244,30 +262,103 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+
     /**
-     * @return Collection<int, Adresse>
+     * @return Collection<int, Commande>
      */
-    public function getAdresse(): Collection
+    public function getCommande(): Collection
     {
-        return $this->adresse;
+        return $this->commande;
     }
 
-    public function addAdresse(Adresse $adresse): self
+    public function addCommande(Commande $commande): self
     {
-        if (!$this->adresse->contains($adresse)) {
-            $this->adresse[] = $adresse;
-            $adresse->setUtilisateur($this);
+        if (!$this->commande->contains($commande)) {
+            $this->commande[] = $commande;
+            $commande->setUtilisateur($this);
         }
 
         return $this;
     }
 
-    public function removeAdresse(Adresse $adresse): self
+    public function removeCommande(Commande $commande): self
     {
-        if ($this->adresse->removeElement($adresse)) {
+        if ($this->commande->removeElement($commande)) {
             // set the owning side to null (unless already changed)
-            if ($adresse->getUtilisateur() === $this) {
-                $adresse->setUtilisateur(null);
+            if ($commande->getUtilisateur() === $this) {
+                $commande->setUtilisateur(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, AdresseFacturation>
+     */
+    public function getAdressefacturation(): Collection
+    {
+        return $this->Adressefacturation;
+    }
+
+    public function addAdressefacturation(AdresseFacturation $adressefacturation): self
+    {
+        if (!$this->Adressefacturation->contains($adressefacturation)) {
+            $this->Adressefacturation[] = $adressefacturation;
+            $adressefacturation->setUtilisateur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAdressefacturation(AdresseFacturation $adressefacturation): self
+    {
+        if ($this->Adressefacturation->removeElement($adressefacturation)) {
+            // set the owning side to null (unless already changed)
+            if ($adressefacturation->getUtilisateur() === $this) {
+                $adressefacturation->setUtilisateur(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getTelephone(): ?string
+    {
+        return $this->telephone;
+    }
+
+    public function setTelephone(string $telephone): self
+    {
+        $this->telephone = $telephone;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, AdresseLivraison>
+     */
+    public function getAdresseLivraison(): Collection
+    {
+        return $this->adresseLivraison;
+    }
+
+    public function addAdresseLivraison(AdresseLivraison $adresseLivraison): self
+    {
+        if (!$this->adresseLivraison->contains($adresseLivraison)) {
+            $this->adresseLivraison[] = $adresseLivraison;
+            $adresseLivraison->setUtilisateur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAdresseLivraison(AdresseLivraison $adresseLivraison): self
+    {
+        if ($this->adresseLivraison->removeElement($adresseLivraison)) {
+            // set the owning side to null (unless already changed)
+            if ($adresseLivraison->getUtilisateur() === $this) {
+                $adresseLivraison->setUtilisateur(null);
             }
         }
 

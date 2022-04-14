@@ -45,7 +45,7 @@ class EtatRepository extends ServiceEntityRepository
         }
     }
 
-    // /**
+
     //  * @return Etat[] Returns an array of Etat objects
     //  */
     /*
@@ -60,7 +60,7 @@ class EtatRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
-    */
+    
 
     /*
     public function findOneBySomeField($value): ?Etat

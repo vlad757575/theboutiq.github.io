@@ -2,30 +2,30 @@
 
 namespace App\Repository;
 
-use App\Entity\Adresse;
+use App\Entity\AdresseLivraison;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method Adresse|null find($id, $lockMode = null, $lockVersion = null)
- * @method Adresse|null findOneBy(array $criteria, array $orderBy = null)
- * @method Adresse[]    findAll()
- * @method Adresse[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method AdresseLivraison|null find($id, $lockMode = null, $lockVersion = null)
+ * @method AdresseLivraison|null findOneBy(array $criteria, array $orderBy = null)
+ * @method AdresseLivraison[]    findAll()
+ * @method AdresseLivraison[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class AdresseRepository extends ServiceEntityRepository
+class AdresseLivraisonRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Adresse::class);
+        parent::__construct($registry, AdresseLivraison::class);
     }
 
     /**
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function add(Adresse $entity, bool $flush = true): void
+    public function add(AdresseLivraison $entity, bool $flush = true): void
     {
         $this->_em->persist($entity);
         if ($flush) {
@@ -37,7 +37,7 @@ class AdresseRepository extends ServiceEntityRepository
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function remove(Adresse $entity, bool $flush = true): void
+    public function remove(AdresseLivraison $entity, bool $flush = true): void
     {
         $this->_em->remove($entity);
         if ($flush) {
@@ -46,7 +46,7 @@ class AdresseRepository extends ServiceEntityRepository
     }
 
     // /**
-    //  * @return Adresse[] Returns an array of Adresse objects
+    //  * @return AdresseLivraison[] Returns an array of AdresseLivraison objects
     //  */
     /*
     public function findByExampleField($value)
@@ -63,7 +63,7 @@ class AdresseRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Adresse
+    public function findOneBySomeField($value): ?AdresseLivraison
     {
         return $this->createQueryBuilder('a')
             ->andWhere('a.exampleField = :val')
