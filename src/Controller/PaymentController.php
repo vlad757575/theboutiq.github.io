@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use Stripe\Stripe;
 use App\Entity\Commande;
+use App\Entity\Etat;
 use Stripe\Checkout\Session;
 use App\Repository\EtatRepository;
 use App\Repository\ProduitRepository;
@@ -28,7 +29,7 @@ class PaymentController extends AbstractController
     /**
      * @Route("/", name="paiement")
      */
-    public function index(SessionInterface $session, ProduitRepository $prod, CommandeRepository $cr, EtatRepository $etat): Response
+    public function index(SessionInterface $session, ProduitRepository $prod, CommandeRepository $cr, EtatRepository $er): Response
     {
 
         $panier = $session->get('panier');
@@ -42,13 +43,13 @@ class PaymentController extends AbstractController
 
         $ids = array_keys($panier);
         $produits = $prod->getAllProduits($ids);
-        $etat = $etat->findAll([
-            'etat' => $etat,
-        ]);
+
+
+        $etat = $er->find(1);
 
 
         $commande = new Commande;
-        $commande = $etat->setEtat('Paiement en attente');
+        $commande->setEtat($etat);
         $commande->setToken(hash('sha256', random_bytes(32)));
         $line_items = [];
 
@@ -85,7 +86,7 @@ class PaymentController extends AbstractController
      * @Route("/success/{token}", name="payment_success")
      */
 
-    public function success($token, SessionInterface $session, CommandeRepository $cr): Response
+    public function success($token, SessionInterface $session, CommandeRepository $cr, EtatRepository $er): Response
     {
         $commande = $cr->findOneBy([
             'token' => $token
@@ -93,8 +94,11 @@ class PaymentController extends AbstractController
 
         if (empty($commande)) throw new AccessDeniedHttpException;
 
+        $etat = $er->find(2);
+
+
         $session->set('panier', []);
-        $commande->setEtat('Payée');
+        $commande->setEtat($etat);
         $cr->add($commande);
 
         return $this->render('payment/success.html.twig');
