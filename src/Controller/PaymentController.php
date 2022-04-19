@@ -4,14 +4,14 @@ namespace App\Controller;
 
 use Stripe\Stripe;
 use App\Entity\Commande;
-use App\Entity\Etat;
 use Stripe\Checkout\Session;
+use App\Entity\CommandeProduit;
 use App\Repository\EtatRepository;
 use App\Repository\ProduitRepository;
 use App\Repository\CommandeRepository;
+use DateTime;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-// use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -51,11 +51,23 @@ class PaymentController extends AbstractController
         $commande = new Commande;
         $commande->setEtat($etat);
         $commande->setToken(hash('sha256', random_bytes(32)));
+        $commande->setDateCommande(new DateTime());
         $line_items = [];
 
         foreach ($panier as $id => $quantite) {
             $produit = $produits[$id];
-            $commande->addProduit($produit);
+            if ($quantite > $produit->getStock()) {
+                $this->addFlash('error', 'Le produit n\'est plus en stock ');
+                return $this->redirectToRoute('panier');
+            }
+
+            // $commande->addProduit($produit);
+            $cp = new CommandeProduit;
+            $cp->setQuantite($quantite);
+            $cp->setProduit($produit);
+            $commande->addCommandeProduit($cp);
+
+
 
 
             $line_items[] = [
@@ -63,15 +75,15 @@ class PaymentController extends AbstractController
                     'currency' => 'eur',
                     'product_data' => [
                         'name' => $produit->getNom(),
-                        'images' => [$produit->getImage()] // Lien ABSOLU
+                        // 'images' => [$produit->getImage()] // Lien ABSOLU
                     ],
-                    'unit_amount' => $produit->getMontantHt() * 100 // Montant en centimes
+                    'unit_amount' => $produit->getMontantTtc() * 100 // Montant en centimes
                 ],
                 'quantity' => $quantite,
             ];
         }
 
-        $cr->add($commande);
+
         $checkout = Session::create([
             'line_items' => $line_items,
             'mode' => 'payment',
@@ -79,13 +91,14 @@ class PaymentController extends AbstractController
             'cancel_url' => $this->generateUrl('payment_cancel', [], UrlGeneratorInterface::ABSOLUTE_URL), // Lien ABSOLU
         ]);
 
+        $cr->add($commande);
+
         return $this->redirect($checkout->url);
     }
 
     /**
      * @Route("/success/{token}", name="payment_success")
      */
-
     public function success($token, SessionInterface $session, CommandeRepository $cr, EtatRepository $er): Response
     {
         $commande = $cr->findOneBy([
@@ -100,8 +113,8 @@ class PaymentController extends AbstractController
         $session->set('panier', []);
         $commande->setEtat($etat);
         $cr->add($commande);
-
-        return $this->render('payment/success.html.twig');
+        foreach ($commande as $id => $quantite)
+            return $this->render('payment/success.html.twig');
     }
 
     /**
@@ -109,6 +122,6 @@ class PaymentController extends AbstractController
      */
     public function cancel()
     {
-        return $this->render('payment/cancel.html.twig');
+        return $this->render('payment/failed.html.twig');
     }
 }

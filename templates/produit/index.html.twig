@@ -65,7 +65,7 @@
                 <tr>
 
                     <td>{{ produit.nom }}</td>
-                    <td>{{ produit.montantTtc }}</td>
+                    <td>{{ produit.montantHt *(produit.tva /100 + 1) }}</td>
                     <td>
 
                         {% if app.user and produit.stock > 0  %}
@@ -102,7 +102,7 @@
         </table>
     </div>
     {% endfor %}
-    <!-- <a href="{{ path('app_produit_new') }}">Create new</a> -->
+
 </div>
 
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

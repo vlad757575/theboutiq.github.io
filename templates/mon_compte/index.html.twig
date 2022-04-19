@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon compte{% endblock %}
+
+{% block body %}
+
+<div>
+    <div>
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{path('index')}}">Accueil</a></li>
+                <li class="breadcrumb-item current-page">Mon compte</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+<div>
+    <H3 class="my-heading">Bonjour {{ app.user.prenom }}! Bienvenue sur ton espace personnel </H3>
+</div>
+
+<div class="my-account">
+    <a href="{{path('app_historique')}}" class=" nav-link link-style ">HISTORIQUE ET DÉTAILS DE MES COMMANDES</a>
+    <a href=" {{path('app_adresses')}}">MES ADRESSES</a>
+    <a href="{{path('app_infos')}}">MES INFORMATIONS PERSONELLES</a>
+    <a href="{{path('app_retours')}}">MES RETOURS</a>
+</div>
+
+{% endblock %}

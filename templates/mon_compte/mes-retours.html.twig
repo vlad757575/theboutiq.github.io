@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes retours{% endblock %}
+
+{% block body %}
+
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb" class="my-breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{path('index')}}">Accueil</a></li>
+        <li class="breadcrumb-item"><a href="{{path('app_mon_compte')}}">Mon compte</a></li>
+        <li class="breadcrumb-item current-page" aria-current="page">Mes Retours</li>
+    </ol>
+</nav>
+
+{% endblock %}

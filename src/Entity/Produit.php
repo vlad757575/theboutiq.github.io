@@ -49,10 +49,7 @@ class Produit
      */
     private $montantHt;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $montantTtc;
+
 
     /**
      * @ORM\OneToMany(targetEntity=Images::class, mappedBy="produit")
@@ -65,14 +62,15 @@ class Produit
     private $tva;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Commande::class, mappedBy="produit")
+     * @ORM\OneToMany(targetEntity=CommandeProduit::class, mappedBy="produit")
      */
-    private $commandes;
+    private $commandeProduits;
+
 
     public function __construct()
     {
         $this->image = new ArrayCollection();
-        $this->commandes = new ArrayCollection();
+        $this->commandeProduits = new ArrayCollection();
     }
 
 
@@ -164,17 +162,11 @@ class Produit
         return $this;
     }
 
-    public function getMontantTtc(): ?int
+    public function getMontantTtc()
     {
-        return $this->montantTtc;
+        return $this->montantHt * ($this->tva / 100 + 1);
     }
 
-    public function setMontantTtc(int $montantTtc): self
-    {
-        $this->montantTtc = $montantTtc;
-
-        return $this;
-    }
     /**
      * @return Collection<int, Images>
      */
@@ -205,32 +197,6 @@ class Produit
         return $this;
     }
 
-    /**
-     * @return Collection<int, Commande>
-     */
-    public function getCommandes(): Collection
-    {
-        return $this->commandes;
-    }
-
-    public function addCommande(Commande $commande): self
-    {
-        if (!$this->commandes->contains($commande)) {
-            $this->commandes[] = $commande;
-            $commande->addProduit($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCommande(Commande $commande): self
-    {
-        if ($this->commandes->removeElement($commande)) {
-            $commande->removeProduit($this);
-        }
-
-        return $this;
-    }
     public function getTva(): ?float
     {
         return $this->tva;
@@ -239,6 +205,36 @@ class Produit
     public function setTva(int $tva): self
     {
         $this->tva = $tva;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, CommandeProduit>
+     */
+    public function getCommandeProduits(): Collection
+    {
+        return $this->commandeProduits;
+    }
+
+    public function addCommandeProduit(CommandeProduit $commandeProduit): self
+    {
+        if (!$this->commandeProduits->contains($commandeProduit)) {
+            $this->commandeProduits[] = $commandeProduit;
+            $commandeProduit->setProduit($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommandeProduit(CommandeProduit $commandeProduit): self
+    {
+        if ($this->commandeProduits->removeElement($commandeProduit)) {
+            // set the owning side to null (unless already changed)
+            if ($commandeProduit->getProduit() === $this) {
+                $commandeProduit->setProduit(null);
+            }
+        }
 
         return $this;
     }

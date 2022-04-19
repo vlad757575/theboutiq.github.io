@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes adresses{% endblock %}
+
+{% block body %}
+
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{path('index')}}">Accueil</a></li>
+        <li class="breadcrumb-item"><a href="{{path('app_mon_compte')}}">Mon compte</a></li>
+        <li class="breadcrumb-item current-page" aria-current="page">Mes adresses</li>
+    </ol>
+</nav>
+{% endblock %}

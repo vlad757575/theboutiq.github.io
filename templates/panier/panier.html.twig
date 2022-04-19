@@ -23,7 +23,7 @@
                 <td scope="row">{{entree.produit.nom}}</td>
                 <td>{{entree.quantite}}</td>
                 <td>{{entree.produit.MontantHt}}</td>
-                <td>{{entree.quantite * entree.produit.MontantHt}} </td>
+                <td>{{entree.quantite * entree.produit.MontantHt * (entree.produit.tva /100 + 1)}} </td>
                 {% else %}
                 <h5>Votre panier est vide</h5>
                 {% endfor %}
