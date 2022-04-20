@@ -113,8 +113,8 @@ class PaymentController extends AbstractController
         $session->set('panier', []);
         $commande->setEtat($etat);
         $cr->add($commande);
-        foreach ($commande as $id => $quantite)
-            return $this->render('payment/success.html.twig');
+        // foreach ($commande as $id => $quantite)
+        return $this->render('payment/success.html.twig');
     }
 
     /**

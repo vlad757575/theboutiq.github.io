@@ -2,14 +2,23 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\Utilisateur;
+use App\Form\UtilisateurType;
+use App\Repository\UtilisateurRepository;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+
+
+
 
 class MonCompteController extends AbstractController
 {
     /**
-     * @Route("/mon/compte", name="app_mon_compte")
+     * @Route("/mon/compte", name="mon_compte")
      */
     public function index(): Response
     {
@@ -30,23 +39,24 @@ class MonCompteController extends AbstractController
     }
 
 
+    // /**
+    //  * @Route("/mes/adresses", name="app_adresses")
+    //  */
+    // public function adresse(): Response
+    // {
+    //     return $this->render('mon_compte/adresses.html.twig', [
+    //         'controller_name' => 'MonCompteController',
+
+    //     ]);
+    // }
+
+
     /**
-     * @Route("/mes/adresses", name="app_adresses")
+     * @Route("/mes/infos", name="app_adresses")
      */
     public function adresse(): Response
     {
         return $this->render('mon_compte/adresses.html.twig', [
-            'controller_name' => 'MonCompteController',
-
-        ]);
-    }
-
-    /**
-     * @Route("/mes/infos", name="app_infos")
-     */
-    public function infos(): Response
-    {
-        return $this->render('mon_compte/mes-infos.html.twig', [
             'controller_name' => 'MonCompteController',
 
         ]);

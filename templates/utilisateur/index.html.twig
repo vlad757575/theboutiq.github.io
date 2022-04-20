@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Utilisateur index{% endblock %}
+
+{% block body %}
+<h1>Utilisateur index</h1>
+
+<div>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Nom</th>
+                <td>{{ utilisateur.nom }}</td>
+            </tr>
+            <tr>
+                <th>Prenom</th>
+                <td>{{ utilisateur.prenom}}</td>
+            </tr>
+            <tr>
+                <th>Telephone</th>
+                <td>{{utilisateur.telephone}}</td>
+            </tr>
+            <tr>
+                <th>date de naissance</th>
+                <td>{{utilisateur.datenaissance|date('d/m/Y')}}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ utilisateur.email }}</td>
+            </tr>
+
+        </tbody>
+    </table>
+</div>
+<a href=" {{ path('app_forgot_password_request') }}">Modifier votre mot de passe</a>
+<a href="{{ path('app_utilisateur_edit', {'id': utilisateur.id}) }}">Modifier</a>
+
+
+
+<a href="{{ path('app_utilisateur_new') }}">Create new</a>
+{% endblock %}

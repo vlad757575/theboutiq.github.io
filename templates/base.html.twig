@@ -43,7 +43,7 @@
                         {% if is_granted('ROLE_USER') %}
 
                         <li class="nav-item">
-                            <a href="{{path('app_mon_compte')}}" class="nav-link link-style">Bonjour {{ app.user.prenom }}</a>
+                            <a href="{{path('mon_compte')}}" class="nav-link link-style">Bonjour {{ app.user.prenom }}</a>
                         </li>
                         <!-- <li class="nav-item">
                             <a class="nav-link link-style" href="{{path('panier')}}">Panier</a>
@@ -61,6 +61,8 @@
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
+
+                                <!-- <li><a href="{{path('paiement')}}">Payer</a></li> -->
                                 <li><a class="dropdown-item" href="#">Total: €</a></li>
                                 <li><a class="dropdown-item" href="{{path('panier')}}">Voir le panier</a></li>
 
@@ -102,7 +104,8 @@
     <footer>
 
         <!--bootstrap navbar -->
-        <div class="container ">
+        <div class="container">
+
             <nav class="navbar navbar-expand-lg navbar-light my-navbar my-navbar-bottom">
                 <button class="navbar-toggler  mx-auto" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -117,6 +120,18 @@
                     </div>
                 </div>
             </nav>
+
+            <div class="my-social-navbar">
+                <div>
+                    <p>retrouvez nous sur les réseaux sociaux</p>
+                </div>
+                <div>
+                    <i class="bi bi-facebook"></i>
+                    <i class="bi bi-instagram"></i>
+                    <i class="bi bi-twitter"></i>
+
+                </div>
+            </div>
         </div>
     </footer>
 

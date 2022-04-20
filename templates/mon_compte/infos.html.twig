@@ -15,14 +15,15 @@
     </div>
 </div>
 <div>
-    <H3 class="my-heading">Bonjour {{ app.user.prenom }}! Bienvenue sur ton espace personnel </H3>
-</div>
+    <ol>
+        <li>{{app.user.nom}}</li>
+        <li>{{app.user.prenom}}</li>
+        <li>{{app.user.dateNaissance ? app.user.dateNaissance|date('d-m-Y') : '' }}</li>
+        <li>{{app.user.telephone}}</li>
+        <li>{{app.user.email}}</li>
 
-<div class="my-account">
-    <a href="{{path('app_historique')}}" class=" nav-link link-style ">HISTORIQUE ET DÉTAILS DE MES COMMANDES</a>
-    <a href=" {{path('app_adresses')}}">MES ADRESSES</a>
-    <a href="{{path('user', {id: app.user.id})}}">MES INFORMATIONS PERSONELLES</a>
-    <a href="{{path('app_retours')}}">MES RETOURS</a>
+    </ol>
+
 </div>
 
 {% endblock %}

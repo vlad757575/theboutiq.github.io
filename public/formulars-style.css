@@ -142,9 +142,7 @@ display:flex;
 justify-content: space-around;
 align-items: center;
   }
-  .my-cart{
-
-  }
+  
   .picture-accordion {
     display: block;
     margin: 1em 0px 1em 1em;
@@ -152,9 +150,7 @@ align-items: center;
   .my-accordion{
     max-width: 420px;
   }
-  .my-icon {
-    
-  }
+  
 
   @media all and (max-width: 600px) {
     .my-product{
@@ -194,4 +190,15 @@ align-items: center;
 }
 .my-breadcrumb {
   margin: 3px 3px 3px 50px;
+}
+
+.my-social-navbar {
+  display: flex;
+  justify-content: space-between;
+  position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    
+  
 }
