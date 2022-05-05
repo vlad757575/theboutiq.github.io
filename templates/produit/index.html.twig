@@ -50,14 +50,15 @@
             </div>
         </div>
     </div>
-    <div class="">
+
+    <div class="my-product">
         <h1>Produits</h1>
         <table class="table">
             <thead>
                 <tr>
                     <th>Nom</th>
                     <th>MontantTtc</th>
-                    <th>actions</th>
+
                 </tr>
             </thead>
             <tbody>
@@ -65,26 +66,33 @@
                 <tr>
 
                     <td>{{ produit.nom }}</td>
-                    <td>{{ produit.montantHt *(produit.tva /100 + 1) }}</td>
-                    <td>
+                    <td>{{ produit.montantHt *(produit.tva /100 + 1) }} €</td>
 
-                        {% if app.user and produit.stock > 0  %}
-                        <form action="{{path('app_add', {produit: produit.id}) }}" method="POST">
+
+                    {% if app.user and produit.stock > 0  %}
+
+
+                    <form action="{{path('app_add', {produit: produit.id}) }}" method="POST">
+                        <input type="number" name="quantite" id="quantite" min="1" max="{{produit.stock}}" step="1" placeholder="Quantité" value="1" class="input-quantite" required>
+                        <button type="submit" class="my-button">
+                            <i class="fa fa-shopping-cart " aria-hidden="true"></i>Ajouter
+                        </button>
+                    </form>
+                    <form action="">
+                        <div class="right__controllers">
+                            <div class="buttons">
+                                <span id="moins"><img src="images/icon-minus.svg" alt="moins logo"></span>
+                                <span id="counter">0</span>
+                                <span id="plus"><img src="images/icon-plus.svg" alt="plus logo"></span>
+                            </div>
                             <input type="number" name="quantite" id="quantite" min="1" max="{{produit.stock}}" step="1" placeholder="Quantité" value="1" class="input-quantite" required>
-                            <button type="submit" class="btn-primary">
-                                <i class="fa fa-shopping-cart" aria-hidden="true"></i>Ajouter
-                            </button>
-                        </form>
-                        {% elseif app.user and produit.stock == 0 %}
+                            <button id="addArticle"><img src="images/icon-cart-white.svg" alt=""> Add to cart</button>
+                        </div>
+                    </form>
+                    {% elseif app.user and produit.stock == 0 %}
                     <td class="text-danger">Rupture de stock</td>
                     {% else %}
-                    <form>
-                        <input type="number" name="quantite" id="quantite" min="1" max="{{produit.stock}}" step="1" placeholder="Quantité" class="input-quantite">
-                        <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                            <i class=" fa fa-shopping-cart disabled" aria-hidden="true"></i>Ajouter
-                        </a>
 
-                    </form>
 
                     {% endif %}
                     {% if is_granted('ROLE_ADMIN') %}
@@ -101,6 +109,13 @@
             </tbody>
         </table>
     </div>
+    <form action="{{path('app_add', {produit: produit.id}) }}" method="$_POST">
+        <input type="number" name="quantite" id="quantite" min="1" max="{{produit.stock}}" step="1" placeholder="Quantité" class="input-quantite">
+        <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <i class=" fa fa-shopping-cart disabled" aria-hidden="true"></i>Ajouter
+        </a>
+
+    </form>
     {% endfor %}
 
 </div>

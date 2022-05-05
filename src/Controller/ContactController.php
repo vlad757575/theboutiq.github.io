@@ -26,7 +26,7 @@ class ContactController extends AbstractController
             // Envoi 
             $email = new TemplatedEmail;
             $email->from('vld.lavrentiev@outlook.fr')
-                ->to('vladoo@yopmail.com')
+                ->to('vld.lavrentiev@outlook.fr')
                 ->replyTo($data['email'])
                 ->subject('Vous avez une demande de contact !')
                 ->htmlTemplate('contact/email-contact.html.twig')

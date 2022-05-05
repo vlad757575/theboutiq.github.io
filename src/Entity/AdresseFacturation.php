@@ -146,8 +146,10 @@ class AdresseFacturation
         return $this;
     }
 
+
     public function getUtilisateur(): ?Utilisateur
     {
+
         return $this->utilisateur;
     }
 

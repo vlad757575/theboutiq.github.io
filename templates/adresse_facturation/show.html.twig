@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}AdresseFacturation{% endblock %}
+
+{% block body %}
+    <h1>AdresseFacturation</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ adresse_facturation.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ adresse_facturation.nom }}</td>
+            </tr>
+            <tr>
+                <th>Numero_rue</th>
+                <td>{{ adresse_facturation.numeroRue }}</td>
+            </tr>
+            <tr>
+                <th>Rue</th>
+                <td>{{ adresse_facturation.rue }}</td>
+            </tr>
+            <tr>
+                <th>Codepostal</th>
+                <td>{{ adresse_facturation.codepostal }}</td>
+            </tr>
+            <tr>
+                <th>Ville</th>
+                <td>{{ adresse_facturation.ville }}</td>
+            </tr>
+            <tr>
+                <th>Pays</th>
+                <td>{{ adresse_facturation.pays }}</td>
+            </tr>
+            <tr>
+                <th>Infocomplementaire</th>
+                <td>{{ adresse_facturation.infocomplementaire }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_adresse_facturation_index') }}">back to list</a>
+
+    <a href="{{ path('app_adresse_facturation_edit', {'id': adresse_facturation.id}) }}">edit</a>
+
+    {{ include('adresse_facturation/_delete_form.html.twig') }}
+{% endblock %}

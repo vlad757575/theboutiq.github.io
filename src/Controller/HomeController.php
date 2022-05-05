@@ -33,6 +33,25 @@ class HomeController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/mentions-legales", name="app_mentions")
+     */
+    public function mentions(): Response
+    {
+        return $this->render('home/mentions-legales.html.twig', [
+            'controller_name' => 'HomeController',
+        ]);
+    }
+
+    /**
+     * @Route("/cguv", name="app_cguv")
+     */
+    public function cgv(): Response
+    {
+        return $this->render('home/cguv.html.twig', [
+            'controller_name' => 'HomeController',
+        ]);
+    }
 
 
     // /**

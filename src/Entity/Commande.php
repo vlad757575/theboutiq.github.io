@@ -45,6 +45,14 @@ class Commande
      */
     private $commandeProduits;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=AdresseLivraison::class, inversedBy="commandes")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $adresseLivraison;
+
+
+
     public function __construct()
     {
         $this->commandeProduits = new ArrayCollection();
@@ -133,6 +141,18 @@ class Commande
                 $commandeProduit->setCommande(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getAdresseLivraison(): ?AdresseLivraison
+    {
+        return $this->adresseLivraison;
+    }
+
+    public function setAdresseLivraison(?AdresseLivraison $adresseLivraison): self
+    {
+        $this->adresseLivraison = $adresseLivraison;
 
         return $this;
     }

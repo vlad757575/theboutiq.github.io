@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}AdresseLivraison index{% endblock %}
+
+{% block body %}
+    <h1>AdresseLivraison index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>NumeroRue</th>
+                <th>Rue</th>
+                <th>Codepostal</th>
+                <th>Ville</th>
+                <th>Pays</th>
+                <th>Infocomplementaire</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for adresse_livraison in adresse_livraisons %}
+            <tr>
+                <td>{{ adresse_livraison.id }}</td>
+                <td>{{ adresse_livraison.nom }}</td>
+                <td>{{ adresse_livraison.numeroRue }}</td>
+                <td>{{ adresse_livraison.rue }}</td>
+                <td>{{ adresse_livraison.codepostal }}</td>
+                <td>{{ adresse_livraison.ville }}</td>
+                <td>{{ adresse_livraison.pays }}</td>
+                <td>{{ adresse_livraison.infocomplementaire }}</td>
+                <td>
+                    <a href="{{ path('app_adresse_livraison_show', {'id': adresse_livraison.id}) }}">show</a>
+                    <a href="{{ path('app_adresse_livraison_edit', {'id': adresse_livraison.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_adresse_livraison_new') }}">Create new</a>
+{% endblock %}

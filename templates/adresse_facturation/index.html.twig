@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}AdresseFacturation index{% endblock %}
+
+{% block body %}
+<h1>AdresseFacturation index</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nom</th>
+            <th>Numero_rue</th>
+            <th>Rue</th>
+            <th>Codepostal</th>
+            <th>Ville</th>
+            <th>Pays</th>
+            <th>Infocomplementaire</th>
+            <th>actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for adresse_facturation in app.user.adresseFacturation %}
+        <tr>
+            <td>{{adresse_facturation.id }}</td>
+            <td>{{ adresse_facturation.nom }}</td>
+            <td>{{ adresse_facturation.numeroRue }}</td>
+            <td>{{ adresse_facturation.rue }}</td>
+            <td>{{ adresse_facturation.codepostal }}</td>
+            <td>{{ adresse_facturation.ville }}</td>
+            <td>{{ adresse_facturation.pays }}</td>
+            <td>{{ adresse_facturation.infocomplementaire }}</td>
+            <td>
+                <a href="{{ path('app_adresse_facturation_show', {'id': adresse_facturation.id}) }}">show</a>
+                <a href="{{ path('app_adresse_facturation_edit', {'id': adresse_facturation.id}) }}">edit</a>
+            </td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="9">no records found</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<a href="{{ path('app_adresse_facturation_new') }}">Create new</a>
+{% endblock %}

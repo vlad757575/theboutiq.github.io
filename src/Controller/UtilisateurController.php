@@ -38,10 +38,13 @@ class UtilisateurController extends AbstractController
     public function new(Request $request, UtilisateurRepository $utilisateurRepository): Response
     {
         $utilisateur = new Utilisateur();
-        $form = $this->createForm(UtilisateurType::class, $utilisateur);
+        $form = $this->createForm(UtilisateurType::class, $this->getUser());
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+
+
             $utilisateurRepository->add($utilisateur);
             return $this->redirectToRoute('app_utilisateur_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -62,6 +65,7 @@ class UtilisateurController extends AbstractController
         ]);
     }
 
+
     /**
      * @Route("/{id}/edit", name="app_utilisateur_edit", methods={"GET", "POST"})
      */
@@ -81,6 +85,7 @@ class UtilisateurController extends AbstractController
             'form' => $form,
         ]);
     }
+
 
     /**
      * @Route("/{id}", name="app_utilisateur_delete", methods={"POST"})

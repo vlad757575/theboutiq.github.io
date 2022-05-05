@@ -66,7 +66,11 @@
   .submit {
       margin-bottom: 20px;
   } */ 
+
+ 
+
   .my-formular {
+    
     position: relative;
     margin: 5em auto;
     padding: 35px;
@@ -108,6 +112,7 @@
     color: #E97864 !important;
   }
   .my-navbar {
+    font-family: 'Source Sans Pro', sans-serif;
     background-color: rgba(41, 210, 187,0.8) !important;
     position: relative;
     width: 100% !important;
@@ -201,6 +206,28 @@ align-items: center;
     width: 100%;
     
   
+}
+
+.mentions {
+  margin: 10%;
+  background-color: white;
+  max-width: 80%;
+  padding: 1.5rem;
+  border:4px solid white;
+  border-radius: 10px;
+  
+}
+.mentions p {
+  justify-content: center;
+  text-align: justify;
+  margin-top: 2%;
+
+}
+.mentions h2 {
+  text-align: center;
+}
+.my-button {
+  color: #E97864 !important;
 }
 
 
