@@ -64,14 +64,9 @@
             <tbody>
                 {% for produit in produits %}
                 <tr>
-
                     <td>{{ produit.nom }}</td>
                     <td>{{ produit.montantHt *(produit.tva /100 + 1) }} €</td>
-
-
                     {% if app.user and produit.stock > 0  %}
-
-
                     <form action="{{path('app_add', {produit: produit.id}) }}" method="POST">
                         <input type="number" name="quantite" id="quantite" min="1" max="{{produit.stock}}" step="1" placeholder="Quantité" value="1" class="input-quantite" required>
                         <button type="submit" class="my-button">
@@ -86,7 +81,7 @@
                                 <span id="plus"><img src="images/icon-plus.svg" alt="plus logo"></span>
                             </div>
                             <input type="number" name="quantite" id="quantite" min="1" max="{{produit.stock}}" step="1" placeholder="Quantité" value="1" class="input-quantite" required>
-                            <button id="addArticle"><img src="images/icon-cart-white.svg" alt=""> Add to cart</button>
+                            <button id="addArticle"><img src="images/icon-cart-white.svg" alt=""> Ajouter au panier</button>
                         </div>
                     </form>
                     {% elseif app.user and produit.stock == 0 %}

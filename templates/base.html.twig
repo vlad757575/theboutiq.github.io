@@ -5,6 +5,8 @@
     <title>{% block title%} mon site web {% endblock %} </title>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
+    <meta name="keywords" content="e-commerce">
+    <meta name="description" content="Theboutiq! est une entreprise Française  qui s'engage à fournir un service  de qualité.  100% made in France. Livraison sous 48-72 heures. Retours gratuits sous 30 jours ! ">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     {% block css %}
     <!-- Bootstrap  and CSS -->
@@ -28,7 +30,7 @@
     <header>
         <nav class="navbar navbar-expand-lg navbar-light my-navbar">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">LOGO</a>
+                <a class="navbar-brand" href="#"><img src="{{asset('logos/logo-theboutiq3.png')}}" style='width: 100px;' class="logo" alt=""></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -49,34 +51,15 @@
                         <li class="nav-item">
                             <a href="{{path('mon_compte')}}" class="nav-link link-style">Bonjour {{ app.user.prenom }}</a>
                         </li>
-                        <!-- <li class="nav-item">
-                            <a class="nav-link link-style" href="{{path('panier')}}">Panier</a>
-                        </li> -->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="{{path('panier')}}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Panier
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <!-- For -->
-                                <li></li>
-                                <li></li>
-                                <li></li>
-                                <li></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
 
-                                <!-- <li><a href="{{path('paiement')}}">Payer</a></li> -->
                                 <li><a class="dropdown-item" href="#">Total: €</a></li>
                                 <li><a class="dropdown-item" href="{{path('panier')}}">Voir le panier</a></li>
-
-
-
                             </ul>
-                            <!-- else -->
-                            <!-- <p>Vide</p> -->
-                            <!--endfor -->
-                        </li>
                         <li class=" nav-item">
                             <a href="{{ path('app_logout') }}" class="nav-link link-style">Déconnexion</a>
                         </li>

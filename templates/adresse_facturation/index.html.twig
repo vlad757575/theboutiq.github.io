@@ -8,7 +8,9 @@
 <table class="table">
     <thead>
         <tr>
+            {% if is_granted('ROLE_ADMIN')%}
             <th>Id</th>
+            {% endif %}
             <th>Nom</th>
             <th>Numero_rue</th>
             <th>Rue</th>
@@ -22,7 +24,9 @@
     <tbody>
         {% for adresse_facturation in app.user.adresseFacturation %}
         <tr>
+            {% if is_granted('ROLE_ADMIN')%}
             <td>{{adresse_facturation.id }}</td>
+            {% endif %}
             <td>{{ adresse_facturation.nom }}</td>
             <td>{{ adresse_facturation.numeroRue }}</td>
             <td>{{ adresse_facturation.rue }}</td>

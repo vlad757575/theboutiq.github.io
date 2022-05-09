@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}nouveau produit{% endblock %}
+{% block title %}Nouveau produit{% endblock %}
 
 {% block body %}
 <div class="my-formular">
@@ -8,6 +8,6 @@
 
     {{ include('produit/_form.html.twig') }} <br>
 
-    <a href="{{ path('app_produit_index') }}">back to list</a>
+    <a href="{{ path('app_produit_index') }}">Retour</a>
 </div>
 {% endblock %}

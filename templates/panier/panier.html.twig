@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Panier{% endblock %}
+{% block title %}Mon panier{% endblock %}
 
 {% block body %}
 
@@ -34,7 +34,7 @@
                 <td></td>
             </tr>
         </tbody><br>
-        <a href="{{path('paiement')}}">Payer</a>
+        <a href="{{path('app_adresse_livraison_index')}}">Valider le panier</a>
         <a href="{{path('vider_panier')}}">Vider le panier</a>
     </table>
 </div>

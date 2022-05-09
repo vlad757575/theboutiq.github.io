@@ -113,7 +113,8 @@
   }
   .my-navbar {
     font-family: 'Source Sans Pro', sans-serif;
-    background-color: rgba(41, 210, 187,0.8) !important;
+    /* background-color: rgba(41, 210, 187,0.8) !important; */
+    background-color: black !important;
     position: relative;
     width: 100% !important;
   }
@@ -228,6 +229,10 @@ align-items: center;
 }
 .my-button {
   color: #E97864 !important;
+}
+.logo {
+  margin: -10px;
+  margin-left: 5%;
 }
 
 
