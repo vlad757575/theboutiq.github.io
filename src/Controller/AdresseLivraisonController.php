@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\Utilisateur;
 
 /**
  * @Route("/adresse/livraison")
@@ -79,7 +80,7 @@ class AdresseLivraisonController extends AbstractController
      */
     public function delete(Request $request, AdresseLivraison $adresseLivraison, AdresseLivraisonRepository $adresseLivraisonRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$adresseLivraison->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $adresseLivraison->getId(), $request->request->get('_token'))) {
             $adresseLivraisonRepository->remove($adresseLivraison);
         }
 
