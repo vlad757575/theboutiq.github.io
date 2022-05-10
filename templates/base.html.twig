@@ -49,7 +49,7 @@
                         {% if is_granted('ROLE_USER') %}
 
                         <li class="nav-item">
-                            <a href="{{path('mon_compte')}}" class="nav-link link-style">Bonjour {{ app.user.prenom }}</a>
+                            <a href="{{path('mon_compte')}}" class="nav-link link-style">Mon compte {{ app.user.prenom }}</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="{{path('panier')}}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -76,6 +76,9 @@
 
                         <li class="nav-item">
                             <a class="nav-link link-style" href="{{path('login')}}">Connexion</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link link-style" href="{{path('register')}}">Inscription</a>
                         </li>
 
                         {% endif %}

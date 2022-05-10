@@ -129,7 +129,7 @@ class ResetPasswordController extends AbstractController
 
             $user->setPassword($encodedPassword);
             $this->entityManager->flush();
-
+            $notification = "Votre mot de passe a été mis à jour !";
             // The session is cleaned up after the password has been changed.
             $this->cleanSessionAfterReset();
 
@@ -137,7 +137,9 @@ class ResetPasswordController extends AbstractController
         }
 
         return $this->render('reset_password/reset.html.twig', [
+
             'resetForm' => $form->createView(),
+            'notification' => $notification,
         ]);
     }
 

@@ -17,6 +17,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 
 class RegistrationFormType extends AbstractType
 {
@@ -52,18 +53,17 @@ class RegistrationFormType extends AbstractType
             ])
 
             ->add('email', EmailType::class)
-            ->add('agreeTerms', CheckboxType::class, [
-                'mapped' => false,
-                'constraints' => [
-                    new IsTrue([
-                        'message' => 'You should agree to our terms.',
-                    ]),
-                ],
-            ])
 
-            ->add('plainPassword', PasswordType::class, [
+
+            ->add('plainPassword', RepeatedType::class, [
+                'type' => PasswordType::class,
                 'label' => 'Mot de passe',
+                'label' => 'Votre mot de passe',
+                'invalid_message' => 'Le mot de passe et la confirmation doivent être identiques',
                 'mapped' => false,
+                'required' => true,
+                'first_options' => ['label' => 'Mot de passe'],
+                'second_options' => ['label' => 'Confirmez votre mot de passe'],
                 'attr' => ['autocomplete' => 'new-password'],
                 'constraints' => [
                     new NotBlank,
@@ -90,6 +90,19 @@ class RegistrationFormType extends AbstractType
 
                 ],
 
+            ])
+            // ->add('passwordConfirm', PasswordType::class, [
+            //     'mapped' => false,
+            //     'label' => 'confirmez votre mot de passe',
+            //     'attr' => ['placeholder' => 'Confirmez votre mot de passe'],
+            // ])
+            ->add('agreeTerms', CheckboxType::class, [
+                'mapped' => false,
+                'constraints' => [
+                    new IsTrue([
+                        'message' => 'Vous devez accepter les conditions générales.',
+                    ]),
+                ],
             ]);
     }
 
