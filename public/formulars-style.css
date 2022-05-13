@@ -106,8 +106,8 @@
     max-height: 750px;
     margin: 150px auto 150px auto;
   }
-  .link-style:hover{
-    border-bottom: 2px solid #E97864;
+  a:hover{
+    /* border-bottom: 2px solid #E97864; */
     font-size: larger;
     color: #E97864 !important;
   }
@@ -119,6 +119,7 @@
     width: 100% !important;
   }
   .my-navbar-bottom {
+    display: block;
     position: fixed;
     left: 0;
     bottom: 0;
@@ -200,8 +201,8 @@ align-items: center;
 
 .my-social-navbar {
   display: flex;
-  justify-content: space-between;
-  position: fixed;
+  /* justify-content: space-between; */
+  /* position: fixed; */
     left: 0;
     bottom: 0;
     width: 100%;
@@ -226,6 +227,10 @@ align-items: center;
 }
 .mentions h2 {
   text-align: center;
+  color: #E97864
+}
+.mentions h3 {
+  color:rgb(41, 210, 187) ;
 }
 .my-button {
   color: #E97864 !important;
@@ -234,5 +239,7 @@ align-items: center;
   margin: -10px;
   margin-left: 5%;
 }
+
+
 
 

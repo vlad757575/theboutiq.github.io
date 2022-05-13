@@ -21,14 +21,17 @@ class DashboardController extends AbstractDashboardController
         return parent::index();
     }
 
+    //Menu admin config
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('Projet De Certification 2022');
+            ->setTitle('Menu admin Theboutiq!');
     }
+
 
     public function configureMenuItems(): iterable
     {
+        // j'ajoute les differentes tables de ma bdd pour acceder au crud
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToCrud('Utilisateur', 'fas fa-list', Utilisateur::class);
         yield MenuItem::linkToCrud('Produit', 'fas fa-list', Produit::class);

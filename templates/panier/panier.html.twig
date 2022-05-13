@@ -7,13 +7,13 @@
 
 <div class="example-wrapper">
     <h1>Panier</h1>
-    <table class="table table-striped table-inverse table-responsive">
-        <thead class="thead-inverse">
+    <table class="table mt3">
+        <thead class="">
             <tr>
-                <th></th>
-                <th>Article</th>
-                <th>Quantité</th>
-                <th>Prix</th>
+                <th scope="col"></th>
+                <th scope="col">Article</th>
+                <th scope="col">Quantité</th>
+                <th scope="col">Prix</th>
             </tr>
         </thead>
         <tbody>
@@ -30,7 +30,7 @@
             </tr>
             <tr>
                 <td scope="row"></td>
-                <td></td>
+                <td>{{panier | length}}</td>
                 <td></td>
             </tr>
         </tbody><br>

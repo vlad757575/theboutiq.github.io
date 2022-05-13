@@ -45,7 +45,7 @@ class Produit
     private $stock;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="float")
      */
     private $montantHt;
 

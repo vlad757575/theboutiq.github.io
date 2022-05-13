@@ -86,6 +86,7 @@ class ProduitController extends AbstractController
      */
     public function delete(Request $request, Produit $produit, ProduitRepository $produitRepository): Response
     {
+        //si le token est valide
         if ($this->isCsrfTokenValid('delete' . $produit->getId(), $request->request->get('_token'))) {
             $produitRepository->remove($produit);
         }
