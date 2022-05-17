@@ -28,6 +28,12 @@ class DashboardController extends AbstractDashboardController
             ->setTitle('Menu admin Theboutiq!');
     }
 
+    // public function menu()
+    // {
+
+    //     return $this->renderForm('commande/new.html.twig');
+    // }
+
 
     public function configureMenuItems(): iterable
     {

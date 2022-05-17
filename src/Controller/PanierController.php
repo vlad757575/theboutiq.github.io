@@ -4,8 +4,10 @@ namespace App\Controller;
 
 use App\Entity\Panier;
 use App\Entity\Produit;
+use App\Form\RecapitulatifType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use App\Repository\ProduitRepository;
+use Stripe\Util\Set;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -25,7 +27,10 @@ class PanierController extends AbstractController
     public function index(Produit $produit, SessionInterface $session, Request $request): Response
     {
         $quantite = $request->request->get('quantite');
-        if ($quantite <= 0) throw new BadRequestHttpException;
+        // dd($quantite);
+        if ($quantite <= 0) {
+            throw new BadRequestHttpException;
+        }
 
 
         $panier = $session->get('panier', []);
@@ -39,7 +44,7 @@ class PanierController extends AbstractController
         return $this->redirectToRoute('app_produit_index');
     }
     /**
-     * @Route("/panier", name="panier")
+     * @Route("/panier", name="app_panier")
      */
     public function show(SessionInterface $session, ProduitRepository $pr): Response
     {
@@ -81,5 +86,48 @@ class PanierController extends AbstractController
 
 
         return $this->redirectToRoute('app_produit_index');
+    }
+
+    // /**
+    //  * @Route("/plus/{produit}", name="app_plus")
+    //  */
+    // public function ajout(SessionInterface $session, Produit $produit): Response
+    // {
+    //     $panier = $session->get('panier', []);
+    //     $id = $produit->getId();
+
+    //     if (empty($panier[$id])) {
+    //         $panier[$id] = 1;
+    //     } else {
+    //         $panier[$id]++;
+    //     }
+    //     $session->set('panier', $panier);
+    //     return $this->redirectToRoute('panier/panier.html.twig', [
+    //         'produit' => $produit,
+    //     ]);
+    // }
+
+    /**
+     * @Route("/plus/{produit}", name="app_plus")
+     */
+    public function ajout($id): Response
+    {
+        $panier = $this->session->get('panier', []);
+        unset($panier[$id]);
+        return $this->session->set('panier', $panier);
+    }
+
+
+    /**
+     * @Route("/recapitulatif", name="recapitulatif")
+     */
+    public function recapitulatif()
+    {
+        $form = $this->createForm(RecapitulatifType::class, null, [
+            'user' => $this->getUser()
+        ]);
+        return $this->render("panier/recapitulatif.html.twig", [
+            'form' => $form->createView()
+        ]);
     }
 }

@@ -3,39 +3,57 @@
 {% block title %}Mon panier{% endblock %}
 
 {% block body %}
+<div class="panier border">
+    <div>
+        <table class="table border border-warning">
+            <thead>
 
-
-<div class="example-wrapper">
-    <h1>Panier</h1>
-    <table class="table mt3">
-        <thead class="">
-            <tr>
-                <th scope="col"></th>
-                <th scope="col">Article</th>
-                <th scope="col">Quantité</th>
-                <th scope="col">Prix</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Produit</th>
+                    <th scope="col">Quantité</th>
+                    <th scope="col">Prix</th>
+                    <th scope="col">Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% set total = null %}
                 {% for entree in panier %}
-                <img href="#" alt="">
-                <td scope="row">{{entree.produit.nom}}</td>
-                <td>{{entree.quantite}}</td>
-                <td>{{entree.produit.MontantHt}}</td>
-                <td>{{entree.quantite * entree.produit.MontantHt * (entree.produit.tva /100 + 1)}} </td>
+                <tr>
+
+                    <td><img src="{{asset('uploads/euro.png')}}" alt="" style="width: 2rem;"></td>
+                    <td>{{entree.produit.nom}}</td>
+                    <td>
+
+
+                        {{entree.quantite}}
+
+
+                    </td>
+
+                    <td>{{entree.produit.MontantTtc}}€ </td>
+                    <td>{{ entree.produit.MontantTtc * entree.quantite}}€ </td>
+                    <td><i class=" bi bi-trash"></i></td>
+                    <td>{{total}} &nbsp;</td>
+                </tr>
+                <tr>
+                    <td scope="row"></td>
+                    <td>{{panier | length}}</td>
+
+                </tr>
+                <p> {% set total = total + (entree.produit.montantTtc * entree.quantite) %}€</p>
                 {% else %}
-                <h5>Votre panier est vide</h5>
+                <h5 class="oups"> Oups ! Votre panier est vide</h5>
                 {% endfor %}
-            </tr>
-            <tr>
-                <td scope="row"></td>
-                <td>{{panier | length}}</td>
-                <td></td>
-            </tr>
-        </tbody><br>
-        <a href="{{path('app_adresse_livraison_index')}}">Valider le panier</a>
-        <a href="{{path('vider_panier')}}">Vider le panier</a>
-    </table>
+            </tbody>
+        </table>
+    </div>
+    <div>
+        <button type="button" class="btn btn-primary"> <a href="{{path('recapitulatif')}}">Valider le panier</a></button>
+        <button type="button" class="btn btn-primary"> <a href="{{path('vider_panier')}}">Vider le panier</a></button>
+    </div>
+
+
 </div>
+
 {% endblock %}

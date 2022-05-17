@@ -19,7 +19,7 @@
 </div>
 
 <div class="my-account">
-    <a href="{{path('app_commande_index')}}" class=" nav-link link-style ">HISTORIQUE ET DÉTAILS DE MES COMMANDES</a>
+    <a href="{{path('app_commande_index',{id: app.user.id})}}" class=" nav-link link-style ">HISTORIQUE ET DÉTAILS DE MES COMMANDES</a>
     <a href=" {{path('app_adresse_facturation_index')}}">MES ADRESSES FACTURATION</a>
     <a href="{{path('app_adresse_livraison_index')}}">MES ADRESSES DE LIVRAISON</a>
     <a href="{{path('user', {id: app.user.id})}}">MES INFORMATIONS PERSONELLES</a>

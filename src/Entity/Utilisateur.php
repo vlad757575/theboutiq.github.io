@@ -81,6 +81,11 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $telephone;
 
+    /**
+     * @ORM\OneToMany(targetEntity=AdresseLivraison::class, mappedBy="utilisateur")
+     */
+    private $adresseLivraison;
+
 
 
     public function __construct()
@@ -340,6 +345,36 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     public function setTelephone(string $telephone): self
     {
         $this->telephone = $telephone;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, AdresseLivraison>
+     */
+    public function getAdresseLivraison(): Collection
+    {
+        return $this->adresseLivraison;
+    }
+
+    public function addAdresseLivraison(AdresseLivraison $adresseLivraison): self
+    {
+        if (!$this->adresseLivraison->contains($adresseLivraison)) {
+            $this->adresseLivraison[] = $adresseLivraison;
+            $adresseLivraison->setUtilisateur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAdresseLivraison(AdresseLivraison $adresseLivraison): self
+    {
+        if ($this->adresseLivraison->removeElement($adresseLivraison)) {
+            // set the owning side to null (unless already changed)
+            if ($adresseLivraison->getUtilisateur() === $this) {
+                $adresseLivraison->setUtilisateur(null);
+            }
+        }
 
         return $this;
     }

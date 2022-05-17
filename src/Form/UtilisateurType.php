@@ -7,6 +7,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class UtilisateurType extends AbstractType
@@ -14,7 +16,7 @@ class UtilisateurType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('email')
+            ->add('email', EmailType::class)
 
             ->add('nom', TextType::class, [
                 'label' => 'Nom',
@@ -26,7 +28,7 @@ class UtilisateurType extends AbstractType
                 'label' => 'Date de naissance',
                 'widget' => 'single_text'
             ])
-            ->add('telephone');
+            ->add('telephone', TelType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

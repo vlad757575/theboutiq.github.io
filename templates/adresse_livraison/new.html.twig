@@ -1,11 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New AdresseLivraison{% endblock %}
+{% block title %}Nouvelle adresse de livraison{% endblock %}
 
 {% block body %}
-    <h1>Create new AdresseLivraison</h1>
+<h1 class="text-align">Nouvelle adresse de livraison</h1>
 
-    {{ include('adresse_livraison/_form.html.twig') }}
+<div class="my-formular">
+    {{ form_start(form)}}
 
-    <a href="{{ path('app_adresse_livraison_index') }}">back to list</a>
+    {{form_end(form)}}
+</div>
+
+<a href="{{ path('app_adresse_livraison_index') }}">back to list</a>
 {% endblock %}

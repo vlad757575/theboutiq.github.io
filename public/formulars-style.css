@@ -70,21 +70,9 @@
  
 
   .my-formular {
-    
-    position: relative;
-    margin: 5em auto;
-    padding: 35px;
     max-width: 500px;
-    max-height: 800px;
-    width: 80%;
-    font: 18px/1.5 sans-serif;
-    display: block;
-    justify-content: center;
-    align-items: center;
-    text-decoration: none;
-    border: 2px solid white;
-    border-radius: 15px;
-    background-color: white;
+    margin: 7em auto;
+    
   
   }
   a {
@@ -240,6 +228,18 @@ align-items: center;
   margin-left: 5%;
 }
 
+.panier{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+ .produits {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+
+ }
 
 
 

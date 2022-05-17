@@ -1,9 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}AdresseLivraison index{% endblock %}
+{% block title %}Mon adresse de livraison{% endblock %}
 
 {% block body %}
-<h1>AdresseLivraison index</h1>
+<h1>Mon adresse de livraison</h1>
+
 
 <table class="table">
     <thead>
@@ -22,12 +23,16 @@
         </tr>
     </thead>
     <tbody>
+
+
+
         {% for adresse_livraison in adresse_livraisons %}
         <tr>
+
             {% if is_granted('ROLE_ADMIN')%}
             <td>{{ adresse_livraison.id }}</td>
             {% endif %}
-            <td>{{ app.user.adresse_livraison.nom }}</td>
+            <td>{{ adresse_livraison.nom }}</td>
             <td>{{ adresse_livraison.numeroRue }}</td>
             <td>{{ adresse_livraison.rue }}</td>
             <td>{{ adresse_livraison.codepostal }}</td>
@@ -39,13 +44,13 @@
                 <a href="{{ path('app_adresse_livraison_edit', {'id': adresse_livraison.id}) }}">edit</a>
             </td>
         </tr>
-        {% else %}
-        <tr>
-            <td colspan="9">no records found</td>
-        </tr>
-        {% endfor %}
+
     </tbody>
+    {% else %}
+    Vous n'avez pas encore ajouté d'adresse de livraison. Pour en ajouter une, veuillez <a href="#">cliquer ici.</a>
+    {% endfor %}
 </table>
+
 
 <a href="{{ path('app_adresse_livraison_new') }}">Nouvelle adresse</a>
 {% endblock %}

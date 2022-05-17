@@ -21,6 +21,7 @@ class AdresseLivraisonController extends AbstractController
      */
     public function index(AdresseLivraisonRepository $adresseLivraisonRepository): Response
     {
+
         return $this->render('adresse_livraison/index.html.twig', [
             'adresse_livraisons' => $adresseLivraisonRepository->findAll(),
         ]);
@@ -31,6 +32,7 @@ class AdresseLivraisonController extends AbstractController
      */
     public function new(Request $request, AdresseLivraisonRepository $adresseLivraisonRepository): Response
     {
+
         $adresseLivraison = new AdresseLivraison();
         $form = $this->createForm(AdresseLivraisonType::class, $adresseLivraison);
         $form->handleRequest($request);

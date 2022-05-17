@@ -42,12 +42,13 @@ class Commande
 
     /**
      * @ORM\OneToMany(targetEntity=CommandeProduit::class, mappedBy="commande", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=false)
      */
     private $commandeProduits;
 
     /**
      * @ORM\ManyToOne(targetEntity=AdresseLivraison::class, inversedBy="commandes")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $adresseLivraison;
 
