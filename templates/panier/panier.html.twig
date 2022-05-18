@@ -23,23 +23,24 @@
 
                     <td><img src="{{asset('uploads/euro.png')}}" alt="" style="width: 2rem;"></td>
                     <td>{{entree.produit.nom}}</td>
-                    <td>
-
-
-                        {{entree.quantite}}
-
-
-                    </td>
-
+                    <td> {{entree.quantite}}</td>
                     <td>{{entree.produit.MontantTtc}}€ </td>
                     <td>{{ entree.produit.MontantTtc * entree.quantite}}€ </td>
+
+                    <form action="{{ path('remove_ligne_panier', {produit: produit.id}) }}" method="post">
+
+                        <td><button type="submit">-</button></td>
+                    </form>
                     <td><i class=" bi bi-trash"></i></td>
+
+                    <form action="{{ path('add_ligne_panier', {produit: produit.id}) }}" method="post">
+                        <td><button>+</button></td>
+                    </form>
                     <td>{{total}} &nbsp;</td>
                 </tr>
                 <tr>
                     <td scope="row"></td>
                     <td>{{panier | length}}</td>
-
                 </tr>
                 <p> {% set total = total + (entree.produit.montantTtc * entree.quantite) %}€</p>
                 {% else %}

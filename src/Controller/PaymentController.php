@@ -16,9 +16,9 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\CoreExtension;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
-
-
+use Symfony\Component\Security\Core\Security;
 
 /**
  * @IsGranted("ROLE_USER")
@@ -29,7 +29,7 @@ class PaymentController extends AbstractController
     /**
      * @Route("/", name="paiement")
      */
-    public function index(SessionInterface $session, ProduitRepository $prod, CommandeRepository $cr, EtatRepository $er): Response
+    public function index(SessionInterface $session, ProduitRepository $prod, CommandeRepository $cr, EtatRepository $er, Security $security): Response
     {
 
         $panier = $session->get('panier');
@@ -52,6 +52,11 @@ class PaymentController extends AbstractController
         $commande->setEtat($etat);
         $commande->setToken(hash('sha256', random_bytes(32)));
         $commande->setDateCommande(new DateTime());
+
+        $utilisateur = $security->getUser();
+        $commande->setUtilisateur($utilisateur);
+
+
         $line_items = [];
 
         foreach ($panier as $id => $quantite) {

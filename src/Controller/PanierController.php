@@ -27,7 +27,7 @@ class PanierController extends AbstractController
     public function index(Produit $produit, SessionInterface $session, Request $request): Response
     {
         $quantite = $request->request->get('quantite');
-        // dd($quantite);
+
         if ($quantite <= 0) {
             throw new BadRequestHttpException;
         }
@@ -48,7 +48,9 @@ class PanierController extends AbstractController
      */
     public function show(SessionInterface $session, ProduitRepository $pr): Response
     {
+
         $panier = $session->get('panier', []);
+        // dd($panier);
 
         $ids = array_keys($panier);
         $produits = $pr->getAllProduits($ids);
@@ -70,6 +72,7 @@ class PanierController extends AbstractController
         return $this->render(
             'panier/panier.html.twig',
             [
+                'produit' => $produit,
                 'panier' => $printablePanier,
                 'total' => $total,
                 'tva' => $tva,
@@ -88,33 +91,48 @@ class PanierController extends AbstractController
         return $this->redirectToRoute('app_produit_index');
     }
 
-    // /**
-    //  * @Route("/plus/{produit}", name="app_plus")
-    //  */
-    // public function ajout(SessionInterface $session, Produit $produit): Response
-    // {
-    //     $panier = $session->get('panier', []);
-    //     $id = $produit->getId();
+    /**
+     * @Route("/plus/{produit}", name="add_ligne_panier")
+     */
+    public function ajout(SessionInterface $session, Produit $produit): Response
+    {
+        $panier = $session->get('panier', []);
+        $entree = $produit = $produit->getId();
 
-    //     if (empty($panier[$id])) {
-    //         $panier[$id] = 1;
-    //     } else {
-    //         $panier[$id]++;
-    //     }
-    //     $session->set('panier', $panier);
-    //     return $this->redirectToRoute('panier/panier.html.twig', [
-    //         'produit' => $produit,
-    //     ]);
-    // }
+        if (empty($panier[$produit])) {
+            $entree[$produit] = 1;
+        } else {
+            $entree[$produit]++;
+        }
+        $session->set('panier', $panier);
+        return $this->redirectToRoute('app_panier', [
+            'produit' => $produit,
+            'entree' => $entree,
+        ]);
+    }
+
+
+
 
     /**
-     * @Route("/plus/{produit}", name="app_plus")
+     * @Route("/minus/{produit}", name="remove_ligne_panier")
      */
-    public function ajout($id): Response
+    public function delete(Produit $produit, SessionInterface $session)
     {
-        $panier = $this->session->get('panier', []);
-        unset($panier[$id]);
-        return $this->session->set('panier', $panier);
+        // On récupère le panier actuel
+        $panier = $session->get("panier", []);
+        $produit = $produit->getId();
+
+        if (!empty($panier[$produit])) {
+            if ($panier[$produit] > 1) {
+                $panier[$produit]--;
+            } else {
+                unset($panier[$produit]);
+            }
+        }
+        // On sauvegarde dans la session
+        $session->set("panier", $panier);
+        return $this->redirectToRoute("app_panier");
     }
 
 
