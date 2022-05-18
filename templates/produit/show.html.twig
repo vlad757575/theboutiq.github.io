@@ -5,46 +5,29 @@
 {% block body %}
 <h1>Produit</h1>
 
-<table class="table">
-    <tbody>
-        <tr>
-            <th>Id</th>
-            <td>{{ produit.id }}</td>
-        </tr>
-        <tr>
-            <th>Asin</th>
-            <td>{{ produit.asin }}</td>
-        </tr>
-        <tr>
-            <th>Ean</th>
-            <td>{{ produit.ean }}</td>
-        </tr>
-        <tr>
-            <th>Nom</th>
-            <td>{{ produit.nom }}</td>
-        </tr>
-        <tr>
-            <th>Description</th>
-            <td>{{ resume(produit.resume) }}</td>
-        </tr>
-        <tr>
-            <th>Stock</th>
-            <td>{{ produit.stock }}</td>
-        </tr>
-        <tr>
-            <th>MontantHt</th>
-            <td>{{ produit.montantHt }}</td>
-        </tr>
-        <tr>
-            <th>MontantTtc</th>
-            <td>{{ produit.montantTtc }}</td>
-        </tr>
-    </tbody>
-</table>
+<div>
+    <div class="row my-product-container">
 
-<a href="{{ path('app_produit_index') }}">back to list</a>
+        <div class="col-md-5">
+            <div class="my-product-detail">
+                <div class="my-product text-center">
 
-<a href="{{ path('app_produit_edit', {'id': produit.id}) }}">edit</a>
-
-{{ include('produit/_delete_form.html.twig') }}
-{% endblock %}
+                    <a href="{{path('app_produit_show', {'id': produit.id}) }}"> <img src="https://www.cdiscount.com/pdt2/1/1/1/1/1200x1200/auc5065010060111/rw/cire-de-soja-2kg-premium-sans-ogm-et-100-natu.jpg" alt="{{produit.nom}}" class="img-fluid">
+                    </a>
+                </div>
+                <div class="detail-product-right">
+                    <h5>{{produit.nom}}</h5>
+                    <span class="product-subtitle">{{produit.ean}}</span>
+                    {% if app.user and produit.stock > 0  %}
+                    <span class="product-price">{{ produit.montantHt *(produit.tva /100 + 1)|number_format(2) }} €</span>
+                    <form action="{{path('app_add', {produit: produit.id}) }}" method="POST">
+                        <input type="number" name="quantite" id="quantite" min="1" max="{{produit.stock}}" step="1" placeholder="Quantité" value="1" class="input-quantite" required>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fa fa-shopping-cart " aria-hidden="true"></i>Ajouter
+                        </button>
+                        {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock %}

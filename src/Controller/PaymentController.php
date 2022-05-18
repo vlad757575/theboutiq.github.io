@@ -57,6 +57,9 @@ class PaymentController extends AbstractController
         $commande->setUtilisateur($utilisateur);
 
 
+        // $commande->setAdresseLivraison($utilisateur);
+
+
         $line_items = [];
 
         foreach ($panier as $id => $quantite) {

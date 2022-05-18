@@ -6,7 +6,7 @@
 <div class="my-product">
 
 
-    <div class="picture-accordion">
+    <!-- <div class="picture-accordion">
         <img src="https://picsum.photos/420" alt="image-produit">
         {% for produit in produits %}
         <div class="my-accordion">
@@ -111,10 +111,10 @@
         </a>
 
     </form>
-    {% endfor %}
+    {% endfor %} -->
 
 </div>
-
+<!-- //modal si un visiteur veut rajouter un produit au panier -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -132,12 +132,29 @@
         </div>
     </div>
 </div>
-{% for produit in produits %}
-<div class="col md-4">
-    <div class="my-product">
-        <h4>Produit 1</h4>
-    </div>
+<div class="row my-product-container">
+    {% for produit in produits %}
+    <div class="col-md-4">
+        <div class="my-product text-center">
+            <h5>{{produit.nom}}</h5>
+            <span class="product-subtitle">{{produit.ean}}</span>
+            <a href="{{path('app_produit_show', {'id': produit.id}) }}"> <img src="https://www.cdiscount.com/pdt2/1/1/1/1/1200x1200/auc5065010060111/rw/cire-de-soja-2kg-premium-sans-ogm-et-100-natu.jpg" alt="{{produit.nom}}" class="img-fluid my-picture">
+            </a>
+            {% if app.user and produit.stock > 0  %}
+            <span class="product-price">{{ produit.montantHt *(produit.tva /100 + 1)|number_format(2) }} €</span>
+            <form action="{{path('app_add', {produit: produit.id}) }}" method="POST">
+                <input type="number" name="quantite" id="quantite" min="1" max="{{produit.stock}}" step="1" placeholder="Quantité" value="1" class="input-quantite" required>
+                <button type="submit" class="btn btn-primary">
+                    <i class="fa fa-shopping-cart " aria-hidden="true"></i>Ajouter
+                </button>
+                {% endif %}
+                {% if is_granted('ROLE_ADMIN') %}
+                <a href="{{ path('app_produit_show', {'id': produit.id}) }}">show</a>
+                <a href="{{ path('app_produit_edit', {'id': produit.id}) }}">edit</a>
+                {% endif %}
+        </div>
 
+    </div>
+    {% endfor %}
 </div>
-{% endfor %}
 {% endblock %}

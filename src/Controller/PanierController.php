@@ -27,6 +27,7 @@ class PanierController extends AbstractController
     public function index(Produit $produit, SessionInterface $session, Request $request): Response
     {
         $quantite = $request->request->get('quantite');
+        // dd($quantite);
 
         if ($quantite <= 0) {
             throw new BadRequestHttpException;
@@ -35,10 +36,11 @@ class PanierController extends AbstractController
 
         $panier = $session->get('panier', []);
 
-        if (!empty($panier[$produit->getId()]))
+        if (!empty($panier[$produit->getId()])) {
             $panier[$produit->getId()] = min($quantite + $panier[$produit->getId()], $produit->getStock());
-        else $panier[$produit->getId()] = min($quantite, $produit->getStock());
-
+        } else {
+            $panier[$produit->getId()] = min($quantite, $produit->getStock());
+        }
         $session->set("panier", $panier);
 
         return $this->redirectToRoute('app_produit_index');
@@ -92,23 +94,27 @@ class PanierController extends AbstractController
     }
 
     /**
-     * @Route("/plus/{produit}", name="add_ligne_panier")
+     * @Route("/plus/{id}", name="add_ligne_panier")
      */
     public function ajout(SessionInterface $session, Produit $produit): Response
     {
         $panier = $session->get('panier', []);
-        $entree = $produit = $produit->getId();
+        $id = $produit->getId();
 
-        if (empty($panier[$produit])) {
-            $entree[$produit] = 1;
+        if (empty($panier[$id])) {
+            $panier[$id] = 1;
         } else {
-            $entree[$produit]++;
+            $panier[$id]++;
         }
         $session->set('panier', $panier);
-        return $this->redirectToRoute('app_panier', [
-            'produit' => $produit,
-            'entree' => $entree,
-        ]);
+        // dump($panier);
+
+        return $this->redirectToRoute(
+            'app_panier'
+            // , [
+            // 'produit' => $produit,
+            // ]
+        );
     }
 
 

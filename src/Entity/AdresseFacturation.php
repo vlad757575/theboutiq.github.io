@@ -66,6 +66,10 @@ class AdresseFacturation
     {
         return $this->nom;
     }
+    public function __toString()
+    {
+        return $this->getNom();
+    }
 
     public function setNom(string $nom): self
     {

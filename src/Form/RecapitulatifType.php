@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\AdresseFacturation;
 use App\Entity\AdresseLivraison;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -19,6 +20,15 @@ class RecapitulatifType extends AbstractType
                 'required' => true,
                 'class' => AdresseLivraison::class,
                 'choices' => $user->getAdresseLivraison(),
+                'multiple' => false,
+                'expanded' => true
+
+            ])
+            ->add('facturation', EntityType::class, [
+                'label' => 'Choisissez votre adresse de facturation',
+                'required' => true,
+                'class' => AdresseFacturation::class,
+                'choices' => $user->getAdresseFacturation(),
                 'multiple' => false,
                 'expanded' => true
 

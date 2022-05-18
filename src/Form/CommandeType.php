@@ -13,19 +13,12 @@ class CommandeType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        $user = $options['user'];
         $builder
-            ->add('token')
-            ->add('dateCommande')
-            ->add('etat')
-            ->add(
-                'utilisateur_id',
-                EntityType::class,
-                [
-                    'class' => Utilisateur::class,
-                    'choice_label' => 'id',
-                ]
-            )
-            ->add('adresseLivraison');
+            ->add('mes commandes', EntityType::class, [
+                'class' => Utilisateur::class,
+                'choices' => $user->getCommande(),
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
