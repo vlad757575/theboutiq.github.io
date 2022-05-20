@@ -1,7 +1,7 @@
 
   .my-formular {
-    max-width: 500px;
-    margin: 7em auto;
+    max-width:60vw;
+    margin: 100px auto;
     
   
   }
@@ -95,7 +95,18 @@ margin-bottom: 150px;
    .detail-product-right {
     
    }
-  
+  .input-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* padding-top: 5px;
+    margin-top: 5px; */
+  }
+
+  .input-button input {
+    margin-top: 9px;
+    margin-right: 5px;
+  }
   .picture-accordion {
     display: block;
     margin: 1em 0px 1em 1em;
@@ -186,18 +197,31 @@ margin-bottom: 150px;
   margin: -10px;
   margin-left: 5%;
 }
-
+.adresses {
+  margin: auto;
+}
+.landing-page{
+  background-image: url("{{ asset('logos/background.jpg') }}");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: #E97864;
+}
 .panier{
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
+  margin: 230px auto;
 }
  .produits {
    display: flex;
    justify-content: space-between;
    align-items: center;
 
+ }
+ i {
+   font-size: 25px;
  }
 
 

@@ -85,7 +85,7 @@ class PanierController extends AbstractController
     /**
      * @Route("/vider-panier", name="vider_panier")
      */
-    public function del(SessionInterface $session): Response
+    public function clearAll(SessionInterface $session): Response
     {
         $session->set('panier', []);
 
@@ -96,7 +96,7 @@ class PanierController extends AbstractController
     /**
      * @Route("/plus/{id}", name="add_ligne_panier")
      */
-    public function ajout(SessionInterface $session, Produit $produit): Response
+    public function plus(SessionInterface $session, Produit $produit): Response
     {
         $panier = $session->get('panier', []);
         $id = $produit->getId();
@@ -123,7 +123,7 @@ class PanierController extends AbstractController
     /**
      * @Route("/minus/{produit}", name="remove_ligne_panier")
      */
-    public function delete(Produit $produit, SessionInterface $session)
+    public function minus(Produit $produit, SessionInterface $session)
     {
         // On récupère le panier actuel
         $panier = $session->get("panier", []);
@@ -140,7 +140,24 @@ class PanierController extends AbstractController
         $session->set("panier", $panier);
         return $this->redirectToRoute("app_panier");
     }
+    /**
+     * @Route("/delete/{id}", name="delign")
+     */
+    public function deleteLigne(Produit $produit, SessionInterface $session)
+    {
+        // On récupère le panier actuel
+        $panier = $session->get("panier", []);
+        $id = $produit->getId();
 
+        if (!empty($panier[$produit])) {
+            unset($panier[$produit]);
+        }
+
+        // On sauvegarde dans la session
+        $session->set("panier", $panier);
+
+        return $this->redirectToRoute("app_panier");
+    }
 
     /**
      * @Route("/recapitulatif", name="recapitulatif")

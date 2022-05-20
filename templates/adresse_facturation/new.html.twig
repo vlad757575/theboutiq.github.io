@@ -1,11 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New AdresseFacturation{% endblock %}
+{% block title %}Nouvelle adresse de facturation{% endblock %}
 
 {% block body %}
-    <h1>Create new AdresseFacturation</h1>
+<h1>Nouvelle adresse de facturation</h1>
 
-    {{ include('adresse_facturation/_form.html.twig') }}
-
-    <a href="{{ path('app_adresse_facturation_index') }}">back to list</a>
+{{ include('adresse_facturation/_form.html.twig') }}
+<div class="container my-formular">
+    <a href="{{ path('app_adresse_facturation_index') }}">Retour</a>
+</div>
 {% endblock %}
