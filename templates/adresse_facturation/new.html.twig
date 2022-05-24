@@ -3,10 +3,8 @@
 {% block title %}Nouvelle adresse de facturation{% endblock %}
 
 {% block body %}
-<h1>Nouvelle adresse de facturation</h1>
-
-{{ include('adresse_facturation/_form.html.twig') }}
-<div class="container my-formular">
-    <a href="{{ path('app_adresse_facturation_index') }}">Retour</a>
+<div class="my-formular">
+    <h1 class="text-center m-5">Nouvelle adresse de facturation</h1>
+    {{ include('adresse_facturation/_form.html.twig') }}
 </div>
 {% endblock %}

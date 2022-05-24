@@ -2,26 +2,35 @@
 
 namespace App\Controller;
 
+use App\Entity\Utilisateur;
 use App\Entity\AdresseLivraison;
 use App\Form\AdresseLivraisonType;
-use App\Repository\AdresseLivraisonRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
+use App\Repository\AdresseLivraisonRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Entity\Utilisateur;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * @Route("/adresse/livraison")
  */
 class AdresseLivraisonController extends AbstractController
 {
+
+    private $entityManager;
+
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
     /**
      * @Route("/", name="app_adresse_livraison_index", methods={"GET"})
      */
     public function index(AdresseLivraisonRepository $adresseLivraisonRepository): Response
     {
-
+        // dd($this->getUser());
         return $this->render('adresse_livraison/index.html.twig', [
             'adresse_livraisons' => $adresseLivraisonRepository->findAll(),
         ]);
@@ -39,6 +48,10 @@ class AdresseLivraisonController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $adresseLivraisonRepository->add($adresseLivraison);
+            $adresseLivraison->setUtilisateur($this->getUser());
+            $this->entityManager->persist($adresseLivraison);
+            $this->entityManager->flush();
+
             return $this->redirectToRoute('app_adresse_livraison_index', [], Response::HTTP_SEE_OTHER);
         }
 

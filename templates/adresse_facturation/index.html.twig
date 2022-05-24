@@ -3,50 +3,30 @@
 {% block title %}Mes adresses de facturation{% endblock %}
 
 {% block body %}
-<div class="container mx-auto">
-    <h1 class="text-center">Mes adresses de facturation</h1>
-    <table class="table">
-        <thead>
-            <tr>
-                {% if is_granted('ROLE_ADMIN')%}
-                <th>Id</th>
-                {% endif %}
-                <th>Nom</th>
-                <th>Numero_rue</th>
-                <th>Rue</th>
-                <th>Codepostal</th>
-                <th>Ville</th>
-                <th>Pays</th>
-                <th>Infocomplementaire</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for adresse_facturation in app.user.adresseFacturation %}
-            <tr>
-                {% if is_granted('ROLE_ADMIN')%}
-                <td>{{adresse_facturation.id }}</td>
-                {% endif %}
-                <td>{{ adresse_facturation.nom }}</td>
-                <td>{{ adresse_facturation.numeroRue }}</td>
-                <td>{{ adresse_facturation.rue }}</td>
-                <td>{{ adresse_facturation.codepostal }}</td>
-                <td>{{ adresse_facturation.ville }}</td>
-                <td>{{ adresse_facturation.pays }}</td>
-                <td>{{ adresse_facturation.infocomplementaire }}</td>
-                <td>
-                    <a href="{{ path('app_adresse_facturation_show', {'id': adresse_facturation.id}) }}">Details</a>
-                    <a href="{{ path('app_adresse_facturation_edit', {'id': adresse_facturation.id}) }}">Modifier</a>
-                </td>
-            </tr>
-            {% else %}
-            <tr>
-                <td colspan="9">no records found</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-</div>
+<div class="container my-formular">
+    <h1 class="text-center m-5">Mes adresses de facturation</h1>
+    {% if app.user.adresseLivraison|length == 0 %}
+    <p class="text-center"> Vous n'avez pas encore ajouté d'adresse de Facturation. Pour en ajouter une, veuillez <a href="{{path('app_adresse_facturation_new')}}">cliquer ici.</a></p>
+    {% else %}
 
-<a href="{{ path('app_adresse_facturation_new') }}">Créer</a>
-{% endblock %}
+    <div class="row">
+        {% for adresse_facturation in app.user.adresseFacturation %}
+        <div class="col-md-4">
+            <div class="card" style="width: 18rem;">
+
+                <div class="card-body">
+                    <h5 class="card-title">{{ adresse_facturation.nom }}</h5>
+                    <p class="card-text">{{adresse_facturation.numeroRue}} - {{adresse_facturation.rue}} <br> {{adresse_facturation.codepostal}} - {{adresse_facturation.ville}} <br>{{adresse_facturation.pays}}</p>
+                    <a class="btn btn-info" href="{{ path('app_adresse_facturation_show', {'id': adresse_facturation.id}) }}">Details</a>
+                    <a class="btn btn-info" href="{{ path('app_adresse_facturation_edit', {'id': adresse_facturation.id}) }}">Modifier</a>
+                </div>
+            </div>
+
+        </div>
+
+
+        {% endfor %}
+        {% endif %}
+        <a class="btn btn-info m-5" href="{{ path('app_adresse_facturation_new') }}">Créer une nouvelle</a>
+    </div>
+    {% endblock %}

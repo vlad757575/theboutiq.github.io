@@ -3,18 +3,25 @@
 namespace App\Controller;
 
 use App\Entity\AdresseFacturation;
-use App\Form\AdresseFacturation1Type;
-use App\Repository\AdresseFacturationRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Form\AdresseFacturationType;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Repository\AdresseFacturationRepository;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * @Route("/adresse/facturation")
  */
 class AdresseFacturationController extends AbstractController
 {
+    private $entityManager;
+
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
 
     /**
      * @Route("/", name="app_adresse_facturation_index", methods={"GET"})
@@ -32,7 +39,7 @@ class AdresseFacturationController extends AbstractController
     public function new(Request $request, AdresseFacturationRepository $adresseFacturationRepository): Response
     {
         $adresseFacturation = new AdresseFacturation();
-        $form = $this->createForm(AdresseFacturation1Type::class, $adresseFacturation);
+        $form = $this->createForm(AdresseFacturationType::class, $adresseFacturation);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -41,6 +48,11 @@ class AdresseFacturationController extends AbstractController
 
 
             $adresseFacturationRepository->add($adresseFacturation);
+            $adresseFacturation->setUtilisateur($this->getUser());
+            $this->entityManager->persist($adresseFacturation);
+
+            $this->entityManager->flush();
+
 
             return $this->redirectToRoute('app_adresse_facturation_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -56,7 +68,7 @@ class AdresseFacturationController extends AbstractController
      */
     public function show(AdresseFacturation $adresseFacturation): Response
     {
-        return $this->render('mon_compte/adresses.html.twig', [
+        return $this->render('adresse_facturation/show.html.twig', [
             'adresse_facturation' => $adresseFacturation,
         ]);
     }
@@ -66,7 +78,7 @@ class AdresseFacturationController extends AbstractController
      */
     public function edit(Request $request, AdresseFacturation $adresseFacturation, AdresseFacturationRepository $adresseFacturationRepository): Response
     {
-        $form = $this->createForm(AdresseFacturation1Type::class, $adresseFacturation);
+        $form = $this->createForm(AdresseFacturationType::class, $adresseFacturation);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

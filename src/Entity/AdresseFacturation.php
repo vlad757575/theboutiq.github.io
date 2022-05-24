@@ -57,6 +57,16 @@ class AdresseFacturation
      */
     private $utilisateur;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $nomPrenom;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $societe;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -160,6 +170,30 @@ class AdresseFacturation
     public function setUtilisateur(?Utilisateur $utilisateur): self
     {
         $this->utilisateur = $utilisateur;
+
+        return $this;
+    }
+
+    public function getNomPrenom(): ?string
+    {
+        return $this->nomPrenom;
+    }
+
+    public function setNomPrenom(string $nomPrenom): self
+    {
+        $this->nomPrenom = $nomPrenom;
+
+        return $this;
+    }
+
+    public function getSociete(): ?string
+    {
+        return $this->societe;
+    }
+
+    public function setSociete(?string $societe): self
+    {
+        $this->societe = $societe;
 
         return $this;
     }

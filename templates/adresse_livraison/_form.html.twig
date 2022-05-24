@@ -1,6 +1,18 @@
-<div class="my-form">
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
-    {{ form_end(form) }}
+{{ form_start(form) }}
+<div class="row">
+
+    <div class="col-md-6">{{ form_row(form.nom)}}</div>
+    <div class="col-md-6">{{ form_row(form.nom_prenom)}}</div>
+    <div class="col-md-6">{{ form_row(form.societe)}}</div>
+
+    <div class="col-md-6">{{ form_row(form.numeroRue)}}</div>
+    <div class="col-md-6">{{ form_row(form.rue)}}</div>
+    <div class="col-md-6">{{ form_row(form.codepostal)}}</div>
+
+    <div class="col-md-6">{{ form_row(form.ville)}}</div>
+    <div class="col-md-6">{{ form_row(form.pays)}}</div>
+    <div class="col-md-12">{{ form_row(form.infocomplementaire)}}</div>
+
 </div>
+
+{{ form_end(form) }}

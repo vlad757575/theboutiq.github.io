@@ -3,13 +3,12 @@
 {% block title %}Nouvelle adresse de livraison{% endblock %}
 
 {% block body %}
-<h1 class="text-align">Nouvelle adresse de livraison</h1>
+<div class="my-formular container ">
+    <h1 class="text-center m-5">Nouvelle adresse de livraison</h1>
 
-<div class="my-formular">
-    {{ form_start(form)}}
+    {{ include('adresse_livraison/_form.html.twig') }}
 
-    {{form_end(form)}}
 </div>
 
-<a href="{{ path('app_adresse_livraison_index') }}">back to list</a>
+<a href="{{ path('app_adresse_livraison_index') }}">Retour</a>
 {% endblock %}
