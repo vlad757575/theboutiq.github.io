@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\AdresseLivraison;
 use App\Entity\Commande;
 use App\Entity\Utilisateur;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -18,6 +19,10 @@ class CommandeType extends AbstractType
             ->add('mes commandes', EntityType::class, [
                 'class' => Utilisateur::class,
                 'choices' => $user->getCommande(),
+            ])
+            ->add('adresse livraison', EntityType::class, [
+                'class' => Utilisateur::class,
+                'choices' => $user->getAdresseLivraison(),
             ]);
     }
 

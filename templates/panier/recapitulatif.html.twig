@@ -16,16 +16,35 @@
         </div>
         <div class="col-md-6">
             <b>Récapitulatif de ma commande</b><br>
-            {% for entree in panier %}
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Produit</th>
+                        <th scope="col">Quantité</th>
+                        <th scope="col">Prix</th>
+                        <th scope="col">Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% set total = null %}
+                    {% for entree in panier %}
+                    <tr>
 
-            <p>{{entree.produit.nom}}</p>
-            <p>{{entree.produit.montantHt}}</p>
+                        <td>{{entree.produit.nom}}</td>
+                        <td> {{entree.quantite}}</td>
+                        <td>{{entree.produit.MontantTtc}}€ </td>
+                        <td>{{ entree.produit.MontantTtc * entree.quantite}}€ </td>
 
-            {% endfor %}
+                    </tr>
+                    {% set total = total + (produit.montantTtc * entree.quantite) %}
+                    {% endfor %}
+                </tbody>
+            </table>
 
 
 
-            <button type="button" class="btn btn-primary"><a href="{{path('paiement')}}"></a>Payer</button>
+
+            <a href="{{path('paiement')}}" class="btn btn-primary">Payer</a>
         </div>
     </div>
 </div>

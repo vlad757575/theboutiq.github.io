@@ -43,19 +43,19 @@ class PanierController extends AbstractController
         }
         $session->set("panier", $panier);
 
-        return $this->redirectToRoute('app_produit_index');
+        return $this->redirectToRoute('app_produit_index', ['produit' => $produit,]);
     }
     /**
      * @Route("/panier", name="app_panier")
      */
-    public function show(SessionInterface $session, ProduitRepository $pr): Response
+    public function show(SessionInterface $session, ProduitRepository $produit): Response
     {
         // Je recupere mon panier
         $panier = $session->get('panier', []);
 
         $ids = array_keys($panier);
         //Je recupere tout les produits
-        $produits = $pr->getAllProduits($ids);
+        $produits = $produit->getAllProduits($ids);
         //Je definis une valeur de base aux variables tva et total
         $tva = 0;
         $total = 0;
@@ -68,14 +68,9 @@ class PanierController extends AbstractController
             $tva += $produit->getMontantHt() * $quantite * $produit->getTva() / 100;
             $total += $produit->getMontantHt() * $quantite;
 
-            // if (!$produit) {
-            //     $this->deleteLigne($id);
-            //     continue;
-            // }
-
             $printablePanier[$id] = [
                 'quantite' => $quantite,
-                'produit' => $produit
+                'produit' => $produit,
             ];
         }
 
@@ -109,13 +104,13 @@ class PanierController extends AbstractController
     {
         // je recupere le panier et les produits
         $panier = $session->get('panier', []);
-        $id = $produit->getId();
+        $produit = $produit->getId();
         //Si le prduit n'est pas dans le panier j'en ajoute un
-        if (empty($panier[$id])) {
-            $panier[$id] = 1;
+        if (empty($panier[$produit])) {
+            $panier[$produit] = 1;
         } else {
             // sinon j'incremente
-            $panier[$id]++;
+            $panier[$produit]++;
         }
         // Je sauvgarde le panier
         $session->set('panier', $panier);
@@ -126,9 +121,6 @@ class PanierController extends AbstractController
 
         );
     }
-
-
-
 
     /**
      * @Route("/minus/{produit}", name="remove_ligne_panier")
@@ -158,7 +150,7 @@ class PanierController extends AbstractController
     {
         // Je récupère le panier actuel
         $panier = $session->get("panier", []);
-        $id = $produit->getId();
+        $produit = $produit->getId();
         // je verifie si le panier est vide ou pas
         if (!empty($panier[$produit])) {
             // Si il est pas vide je supprime la ligne du produit en question
@@ -195,10 +187,7 @@ class PanierController extends AbstractController
             $tva += $produit->getMontantHt() * $quantite * $produit->getTva() / 100;
             $total += $produit->getMontantHt() * $quantite;
 
-            // if (!$produit) {
-            //     $this->deleteLigne($id);
-            //     continue;
-            // }
+
 
             $printablePanier[$id] = [
                 'quantite' => $quantite,
@@ -213,8 +202,9 @@ class PanierController extends AbstractController
         // J'apelle la vue recapitulatif
         return $this->render("panier/recapitulatif.html.twig", [
             'form' => $form->createView(),
-            'panier' => $printablePanier
-            // 'panier' => $panier->show(),
+            'panier' => $printablePanier,
+            'produit' => $produit,
+
 
         ]);
     }

@@ -2,23 +2,25 @@
 
 namespace App\Controller;
 
+use DateTime;
 use Stripe\Stripe;
 use App\Entity\Commande;
+use App\Entity\Utilisateur;
 use Stripe\Checkout\Session;
 use App\Entity\CommandeProduit;
 use App\Repository\EtatRepository;
 use App\Repository\ProduitRepository;
+use App\Entity\AdresseLivraison;
 use App\Repository\CommandeRepository;
-use DateTime;
+use Symfony\Component\Security\Core\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Form\Extension\Core\CoreExtension;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\Extension\Core\CoreExtension;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
-use Symfony\Component\Security\Core\Security;
 
 /**
  * @IsGranted("ROLE_USER")
@@ -43,12 +45,10 @@ class PaymentController extends AbstractController
 
         $ids = array_keys($panier);
         $produits = $prod->getAllProduits($ids);
-
-
         $etat = $er->find(1);
-
-
         $commande = new Commande;
+
+
         $commande->setEtat($etat);
         $commande->setToken(hash('sha256', random_bytes(32)));
         $commande->setDateCommande(new DateTime());
@@ -56,8 +56,13 @@ class PaymentController extends AbstractController
         $utilisateur = $security->getUser();
         $commande->setUtilisateur($utilisateur);
 
-
+        // $commande->setAdresseLivraison($ut);
+        // $adresseLivraison = $utilisateur->getAdresseLivraison();
         // $commande->setAdresseLivraison($utilisateur);
+
+
+
+
 
 
         $line_items = [];
@@ -128,8 +133,13 @@ class PaymentController extends AbstractController
     /**
      * @Route("/cancel", name="payment_cancel")
      */
-    public function cancel()
+    public function cancel(CommandeRepository $cr, EtatRepository $er, SessionInterface $session)
     {
+        // $etat = $er->find(3);
+
+        // $session->set('panier', []);
+        // $commande->setEtat($etat);
+        // $cr->add($commande);
         return $this->render('payment/failed.html.twig');
     }
 }
