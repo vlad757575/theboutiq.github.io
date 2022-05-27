@@ -18,7 +18,7 @@
             You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
         </div> -->
         {% endif %}
-        <div class="my-formular">
+        <div>
             <h3 class=" mb-3 font-weight-normal text-center ">Connectez vous</h3>
             <label for="inputEmail">Votre email</label>
             <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
@@ -34,17 +34,16 @@
                     <input type="checkbox" name="_remember_me"> Se souvenir de moi </input>
                 </label>
             </div>
-
-
             <button class="btn btn-block btn-info" type="submit">
                 Connexion
             </button>
             <hr>
-            <a href="{{ path('app_forgot_password_request') }}" class="nav-link link-style">Mot de passe oublié ?</a>
+            <div class="account-helper">
+                <a href="{{ path('app_forgot_password_request') }}" class="nav-link link-style">Mot de passe oublié ?</a>
 
 
-            <a href="{{path('register')}}" class="nav-link link-style">Créer un compte</a>
-
+                <a href="{{path('register')}}" class="nav-link link-style">Créer un compte</a>
+            </div>
 
     </form>
 </div>

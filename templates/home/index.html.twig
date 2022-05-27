@@ -1,10 +1,26 @@
 {% extends 'base.html.twig' %}
 
 {% block body%}
-<div class="landing-page">
 
-</div>
-<div id="carouselExampleCaptions" class="carousel slide my-carrousel" data-bs-ride="carousel">
+<section class="landing-page">
+
+    <div class="btn">
+
+    </div>
+    <div class="landing-img ">
+        <div>
+            <div class="landing-btn">
+                <div>
+                    <h1 class="text-center aa"><a href="{{path('app_produit_index')}}"> découvrez nos produits</a></h1>
+                    <a href="{{path('app_produit_index')}}"> <img src="{{asset('logos/theboutiq-logo-small.png')}}" alt="logo"></a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- <div id="carouselExampleCaptions" class="carousel slide my-carrousel" data-bs-ride="carousel">
     <div class="carousel-indicators">
         <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
         <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -41,6 +57,6 @@
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Suivant</span>
     </button>
-</div>
+</div> -->
 
 {% endblock %}

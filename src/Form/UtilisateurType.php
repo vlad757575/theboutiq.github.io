@@ -8,6 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
@@ -28,7 +29,10 @@ class UtilisateurType extends AbstractType
                 'label' => 'Date de naissance',
                 'widget' => 'single_text'
             ])
-            ->add('telephone', TelType::class);
+            ->add('telephone', TelType::class)
+            ->add('Valider', SubmitType::class, [
+                'label' => 'Enregistrer',
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

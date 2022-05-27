@@ -28,9 +28,9 @@
     max-height: 750px;
     margin: 150px auto 150px auto;
   }
-  a:hover{
-    /* border-bottom: 2px solid #E97864; */
-    font-size: larger;
+  a-hover:hover{
+    border-bottom: 1px solid #E97864; 
+   font-size: larger;
     color: #E97864 !important;
   }
   .my-navbar {
@@ -45,7 +45,7 @@
     position: fixed;
     left: 0;
     bottom: 0;
-    width: 100%;
+    width: 100% !important;
 
   }
    
@@ -92,19 +92,20 @@ margin-bottom: 150px;
    }
 
    .my-product-detail{
-     display: flex;
-     justify-content: space-around;
+    display: flex;
+    margin: 100px auto;
+    align-items: center;
+    justify-content: center;
+    
    }
 
    .detail-product-right {
-    
+    margin-left: 7%;
    }
   .input-button {
     display: flex;
     align-items: center;
-    justify-content: center;
-    /* padding-top: 5px;
-    margin-top: 5px; */
+    justify-content: space-around;
   }
 
   .input-button input {
@@ -119,20 +120,6 @@ margin-bottom: 150px;
   .my-accordion{
     max-width: 420px;
   }
-  
-
-  @media all and (max-width: 600px) {
-    .my-product{
-    max-width: 1200px;
-    max-height: 800px;
-    margin: 3em auto 3em auto;
-    background-color: white;
-    border: 1px solid white;
-    border-radius: 10px;
-    display:block;
-    justify-content: space-around;
-    align-items: center;
-  }}
 
 .my-heading {
   text-align: center;
@@ -143,7 +130,6 @@ margin-bottom: 150px;
   display: flex;
   flex-direction: column;
   margin: 50px 10px 10px 50px ;
-
 }
 
 .my-account a {
@@ -163,13 +149,9 @@ margin-bottom: 150px;
 
 .my-social-navbar {
   display: flex;
-  /* justify-content: space-between; */
-  /* position: fixed; */
     left: 0;
     bottom: 0;
-    width: 100%;
-    
-  
+    width: 100%; 
 }
 
 .mentions {
@@ -204,13 +186,7 @@ margin-bottom: 150px;
 .adresses {
   margin: auto;
 }
-.landing-page{
-  background-image: url("{{ asset('logos/background.jpg') }}");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-color: #E97864;
-}
+
 .panier{
   display: flex;
   justify-content: center;
@@ -227,6 +203,17 @@ margin-bottom: 150px;
  i {
    font-size: 25px;
  }
+
+ .account-helper {
+   display: flex;
+   justify-content: center;
+ }
+ .confirm-section {
+   background-color: whitesmoke;
+   /* margin-left: 3px; */
+ }
+
+ 
 
 
 

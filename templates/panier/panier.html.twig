@@ -27,8 +27,13 @@
                     <td>{{entree.produit.MontantTtc}}€ </td>
                     <td>{{ entree.produit.MontantTtc * entree.quantite}}€ </td>
                     <td>
-                        <a href="{{path('add_ligne_panier', {'id': entree.produit.id})}}"><i class="bi bi-cart-plus"></i></a>
-                        <a href="{{path('remove_ligne_panier', {'produit':entree.produit.id})}}"><i class="bi bi-cart-dash"></i></a>
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <button type="button" class="btn btn-primary"><a href="{{path('remove_ligne_panier', {'produit':entree.produit.id})}}"><i class="bi bi-cart-dash"></i></a></button>
+                            <button type="button" class="btn btn-primary">X</button>
+                            <button type="button" class="btn btn-primary"> <a href="{{path('add_ligne_panier', {'id': entree.produit.id})}}"><i class="bi bi-cart-plus"></i></a></button>
+                        </div>
+                        <!-- <a href="{{path('add_ligne_panier', {'id': entree.produit.id})}}"><i class="bi bi-cart-plus"></i></a>
+                        <a href="{{path('remove_ligne_panier', {'produit':entree.produit.id})}}"><i class="bi bi-cart-dash"></i></a> -->
                     </td>
                 </tr>
                 {% set total = total + (produit.montantTtc * entree.quantite) %}
@@ -42,7 +47,7 @@
     </div>
 
     <div>
-        <button type="button" class="btn btn-primary"> <a href="{{path('recapitulatif')}}">Valider le panier</a></button>
+        <button type="button" class="btn btn-primary"> <a href="{{path('choix')}}">Valider le panier</a></button>
         <button type="button" class="btn btn-primary"> <a href="{{path('vider_panier')}}">Vider le panier</a></button>
     </div>
 </div>

@@ -37,8 +37,11 @@ security:
   access_control:
     - { path: ^/admin, roles: ROLE_ADMIN }
     - { path: ^/user, roles: ROLE_USER }
+    - { path: ^/panier, roles: ROLE_USER }
+    - { path: ^/recapitulatif, roles: ROLE_USER }
     - { path: ^/produit/edit, roles: ROLE_ADMIN }
     - { path: ^/produit/new, roles: ROLE_ADMIN }
+    - { path: ^/admin, roles: ROLE_ADMIN }
 
 when@test:
   security:

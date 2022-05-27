@@ -1,6 +1,0 @@
-.landing-page{
-    background-image: url("{{ asset('logos/background.jpg') }}");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-}

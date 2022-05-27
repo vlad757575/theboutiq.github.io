@@ -94,7 +94,7 @@ class AdresseLivraison
 
     public function __toString()
     {
-        return $this->getNom();
+        return $this->getNom() . '[br]' . $this->getNumeroRue() . ' ' . $this->getRue() . '[br]' . $this->getCodepostal() . ' ' . $this->getVille() . '[br]' . $this->getPays();
     }
 
 

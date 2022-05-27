@@ -50,12 +50,6 @@ class Produit
     private $montantHt;
 
 
-
-    /**
-     * @ORM\OneToMany(targetEntity=Images::class, mappedBy="produit")
-     */
-    private $image;
-
     /**
      * @ORM\Column(type="float")
      */
@@ -65,6 +59,11 @@ class Produit
      * @ORM\OneToMany(targetEntity=CommandeProduit::class, mappedBy="produit")
      */
     private $commandeProduits;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $image;
 
 
     public function __construct()
@@ -167,35 +166,6 @@ class Produit
         return $this->montantHt * ($this->tva / 100 + 1);
     }
 
-    /**
-     * @return Collection<int, Images>
-     */
-    public function getImage(): Collection
-    {
-        return $this->image;
-    }
-
-    public function addImage(Images $image): self
-    {
-        if (!$this->image->contains($image)) {
-            $this->image[] = $image;
-            $image->setProduit($this);
-        }
-
-        return $this;
-    }
-
-    public function removeImage(Images $image): self
-    {
-        if ($this->image->removeElement($image)) {
-            // set the owning side to null (unless already changed)
-            if ($image->getProduit() === $this) {
-                $image->setProduit(null);
-            }
-        }
-
-        return $this;
-    }
 
     public function getTva(): ?float
     {
@@ -235,6 +205,18 @@ class Produit
                 $commandeProduit->setProduit(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(string $image): self
+    {
+        $this->image = $image;
 
         return $this;
     }

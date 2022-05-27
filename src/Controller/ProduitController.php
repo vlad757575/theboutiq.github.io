@@ -2,14 +2,15 @@
 
 namespace App\Controller;
 
+use Exception;
 use App\Entity\Produit;
 use App\Form\ProduitType;
 use App\Repository\ProduitRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * @Route("/produit")
@@ -40,8 +41,30 @@ class ProduitController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $produitRepository->add($produit);
-            return $this->redirectToRoute('app_produit_index', [], Response::HTTP_SEE_OTHER);
+
+            $image = $form->get('image')->getdata();
+            $ok = true;;
+
+            if ($image) {
+                $newName = 'image_' . uniqid() . '.' . $image->guessExtension();
+
+                try {
+                    $image->move(
+                        $this->getParameter('imageDirectory'),
+                        $newName
+                    );
+
+                    $produit->setImage($newName);
+                } catch (Exception $e) {
+                    $this->addFlash('error', 'Un probleme est survenu');
+                    $ok = false;
+                }
+            }
+
+            if ($ok) {
+                $produitRepository->add($produit);
+                return $this->redirectToRoute('app_produit_index', [], Response::HTTP_SEE_OTHER);
+            }
         }
 
         return $this->renderForm('produit/new.html.twig', [

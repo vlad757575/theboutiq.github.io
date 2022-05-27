@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\Panier;
+
 use App\Entity\Produit;
 use App\Form\RecapitulatifType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -164,9 +164,9 @@ class PanierController extends AbstractController
     }
 
     /**
-     * @Route("/recapitulatif", name="recapitulatif")
+     * @Route("/choix", name="choix")
      */
-    public function recapitulatif(SessionInterface $session, ProduitRepository $pr)
+    public function choix(SessionInterface $session, ProduitRepository $produit)
     {
 
 
@@ -174,7 +174,7 @@ class PanierController extends AbstractController
 
         $ids = array_keys($panier);
         //Je recupere tout les produits
-        $produits = $pr->getAllProduits($ids);
+        $produits = $produit->getAllProduits($ids);
         //Je definis une valeur de base aux variables tva et total
         $tva = 0;
         $total = 0;
@@ -194,18 +194,31 @@ class PanierController extends AbstractController
                 'produit' => $produit
             ];
         }
+        if (!$this->getUser()->getAdresseLivraison()->getValues()) {
+            return $this->redirectToRoute('app_adresse_livraison_new');
+        }
         //Je recupere une form
         $form = $this->createForm(RecapitulatifType::class, null, [
             'user' => $this->getUser(),
         ]);
 
+
+
         // J'apelle la vue recapitulatif
-        return $this->render("panier/recapitulatif.html.twig", [
+        return $this->render("panier/choix.html.twig", [
             'form' => $form->createView(),
             'panier' => $printablePanier,
             'produit' => $produit,
 
 
         ]);
+    }
+
+    /**
+     * @Route("/recapitulatif", name="recapitulatif")
+     */
+    public function recapitulatif()
+    {
+        return $this->render('panier/recapitulatif.html.twig');
     }
 }

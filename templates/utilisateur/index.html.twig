@@ -29,12 +29,15 @@
                 <th>Nom</th>
                 <td>{{ utilisateur.email }}</td>
             </tr>
-
         </tbody>
     </table>
+    <div class="account-helper m-3">
+        <a href=" {{ path('app_forgot_password_request') }}" class="btn btn-primary">Modifier votre mot de passe</a>
+        <a href="{{ path('app_utilisateur_edit', {'id': utilisateur.id}) }}" class="btn btn-primary">Modifier vos informations</a>
+    </div>
 </div>
-<a href=" {{ path('app_forgot_password_request') }}">Modifier votre mot de passe</a>
-<a href="{{ path('app_utilisateur_edit', {'id': utilisateur.id}) }}">Modifier vos informations</a>
+
+
 
 <!-- <a href="{{ path('app_utilisateur_new') }}">Create new</a> -->
 {% endblock %}

@@ -1,51 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Mon panier{% endblock %}
+{% block title %}Récapitulatif{% endblock %}
 
 {% block body %}
-<div class="container">
-    <h2 class="text-center m-5">Recapitulatif de ma commande</h2>
-    <p>Choisissez votre adresse de livraison et de facturation.</p>
-    <hr>
-    <div class="row">
-        <div class="col-md-6">
-
-            <!-- <b>Choisir mon adresse de livraison</b><br> -->
-            {{ form(form)}}
-            <!-- <b>Choisir mon adresse de facturation</b> -->
-        </div>
-        <div class="col-md-6">
-            <b>Récapitulatif de ma commande</b><br>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">Produit</th>
-                        <th scope="col">Quantité</th>
-                        <th scope="col">Prix</th>
-                        <th scope="col">Total</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% set total = null %}
-                    {% for entree in panier %}
-                    <tr>
-
-                        <td>{{entree.produit.nom}}</td>
-                        <td> {{entree.quantite}}</td>
-                        <td>{{entree.produit.MontantTtc}}€ </td>
-                        <td>{{ entree.produit.MontantTtc * entree.quantite}}€ </td>
-
-                    </tr>
-                    {% set total = total + (produit.montantTtc * entree.quantite) %}
-                    {% endfor %}
-                </tbody>
-            </table>
-
-
-
-
-            <a href="{{path('paiement')}}" class="btn btn-primary">Payer</a>
-        </div>
-    </div>
-</div>
 {% endblock %}

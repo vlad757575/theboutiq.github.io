@@ -5,34 +5,15 @@
 {% block body %}
 <h1>Mes commandes</h1>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Token</th>
-            <th>DateCommande</th>
-            <th>actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for commande in commandes %}
-        <tr>
-            <td>{{ commande.id }}</td>
-            <td>{{ commande.token }}</td>
-            <td>{{ commande.dateCommande ? commande.dateCommande|date('Y-m-d') : '' }}</td>
-            <td>
-                <a href="{{ path('app_commande_show', {'id': commande.id}) }}">Details</a>
-                <a href="{{ path('app_commande_edit', {'id': commande.id}) }}">Modifier</a>
-            </td>
-        </tr>
-        {% else %}
-        <tr>
-            <td colspan="4">Vous n'avez pas encore de commandes</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
-{% if is_granted('ROLE_ADMIN') %}
-<a href="{{ path('app_commande_new') }}">Nouvelle commande</a>
-{% endif %}
+
+
+{% for commande in app.user.commande %}
+<div class="col-md-4">
+    <p>{{commande.id}}</p>
+    <p>{{commande.dateCommande|date('d-m-Y')}}</p>
+
+</div>
+
+
+{% endfor %}
 {% endblock %}

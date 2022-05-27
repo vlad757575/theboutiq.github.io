@@ -1,33 +1,37 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}produits{% endblock %}
+{% block title %}produit{% endblock %}
 
 {% block body %}
-<h1>Produit</h1>
+
+
+
+
 
 <div>
-    <div class="row my-product-container">
+    <div class="my-product-detail">
+        <div class="my-product text-center">
 
-        <div class="col-md-5">
-            <div class="my-product-detail">
-                <div class="my-product text-center">
-
-                    <a href="{{path('app_produit_show', {'id': produit.id}) }}"> <img src="https://www.cdiscount.com/pdt2/1/1/1/1/1200x1200/auc5065010060111/rw/cire-de-soja-2kg-premium-sans-ogm-et-100-natu.jpg" alt="{{produit.nom}}" class="img-fluid">
-                    </a>
+            <a href="{{path('app_produit_show', {'id': produit.id}) }}"> <img src="https://www.cdiscount.com/pdt2/1/1/1/1/1200x1200/auc5065010060111/rw/cire-de-soja-2kg-premium-sans-ogm-et-100-natu.jpg" alt="{{produit.nom}}" class="img-fluid" style="width:600px ;">
+            </a>
+        </div>
+        <div class="detail-product-right">
+            <h5>{{produit.nom}}</h5>
+            <span class="product-subtitle">{{produit.ean}}</span>
+            {% if app.user and produit.stock > 0  %}
+            <span class="product-price">{{ produit.montantHt *(produit.tva /100 + 1)|number_format(3) }} €</span>
+            <form action="{{path('app_add', {produit: produit.id}) }}" method="POST">
+                <div class="input-button">
+                    <input type="number" name="quantite" id="quantite" min="1" max="{{produit.stock}}" step="1" placeholder="Quantité" value="1" class="input-quantite" required>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fa fa-shopping-cart " aria-hidden="true"></i>Ajouter
+                    </button>
                 </div>
-                <div class="detail-product-right">
-                    <h5>{{produit.nom}}</h5>
-                    <span class="product-subtitle">{{produit.ean}}</span>
-                    {% if app.user and produit.stock > 0  %}
-                    <span class="product-price">{{ produit.montantHt *(produit.tva /100 + 1)|number_format(2) }} €</span>
-                    <form action="{{path('app_add', {produit: produit.id}) }}" method="POST">
-                        <input type="number" name="quantite" id="quantite" min="1" max="{{produit.stock}}" step="1" placeholder="Quantité" value="1" class="input-quantite" required>
-                        <button type="submit" class="btn btn-primary">
-                            <i class="fa fa-shopping-cart " aria-hidden="true"></i>Ajouter
-                        </button>
-                        {% endif %}
-                </div>
-            </div>
+                {% endif %}
         </div>
     </div>
-    {% endblock %}
+</div>
+
+
+
+{% endblock %}

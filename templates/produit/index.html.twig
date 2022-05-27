@@ -122,7 +122,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <h5>
+                <h5 class="text-center">
                     Connectez-vous pour ajouter un produit au panier
                 </h5>
             </div>
@@ -140,6 +140,7 @@
             <span class="product-subtitle">{{produit.ean}}</span>
             <a href="{{path('app_produit_show', {'id': produit.id}) }}"> <img src="https://www.cdiscount.com/pdt2/1/1/1/1/1200x1200/auc5065010060111/rw/cire-de-soja-2kg-premium-sans-ogm-et-100-natu.jpg" alt="{{produit.nom}}" class="img-fluid my-picture">
             </a>
+            <img src="{{produit.image}}" alt="" style="width: 100px;">
             {% if app.user and produit.stock > 0  %}
 
             <span class="product-price">{{ produit.montantHt *(produit.tva /100 + 1)|number_format(2) }} €</span>
@@ -162,4 +163,5 @@
     </div>
     {% endfor %}
 </div>
+
 {% endblock %}

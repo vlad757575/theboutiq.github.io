@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Repository\AdresseLivraisonRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
@@ -39,8 +40,9 @@ class AdresseLivraisonController extends AbstractController
     /**
      * @Route("/new", name="app_adresse_livraison_new", methods={"GET", "POST"})
      */
-    public function new(Request $request, AdresseLivraisonRepository $adresseLivraisonRepository): Response
+    public function new(Request $request, AdresseLivraisonRepository $adresseLivraisonRepository, SessionInterface $session): Response
     {
+        $panier = $session->get('panier', []);
 
         $adresseLivraison = new AdresseLivraison();
         $form = $this->createForm(AdresseLivraisonType::class, $adresseLivraison);
@@ -52,7 +54,13 @@ class AdresseLivraisonController extends AbstractController
             $this->entityManager->persist($adresseLivraison);
             $this->entityManager->flush();
 
-            return $this->redirectToRoute('app_adresse_livraison_index', [], Response::HTTP_SEE_OTHER);
+            if (!$panier = $session->get('panier', [])) {
+
+                return $this->redirectToRoute('recapitulatif');
+            } else {
+
+                return $this->redirectToRoute('app_adresse_livraison_index', [], Response::HTTP_SEE_OTHER);
+            }
         }
 
         return $this->renderForm('adresse_livraison/new.html.twig', [

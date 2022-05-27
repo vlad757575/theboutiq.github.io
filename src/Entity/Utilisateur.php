@@ -61,12 +61,6 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
 
 
     /**
-     * @ORM\OneToMany(targetEntity=Panier::class, mappedBy="utilisateur")
-     */
-    private $panier;
-
-
-    /**
      * @ORM\OneToMany(targetEntity=Commande::class, mappedBy="utilisateur")
      */
     private $commande;
@@ -235,36 +229,6 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIsVerified(bool $isVerified): self
     {
         $this->isVerified = $isVerified;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Panier>
-     */
-    public function getPanier(): Collection
-    {
-        return $this->panier;
-    }
-
-    public function addPanier(Panier $panier): self
-    {
-        if (!$this->panier->contains($panier)) {
-            $this->panier[] = $panier;
-            $panier->setUtilisateur($this);
-        }
-
-        return $this;
-    }
-
-    public function removePanier(Panier $panier): self
-    {
-        if ($this->panier->removeElement($panier)) {
-            // set the owning side to null (unless already changed)
-            if ($panier->getUtilisateur() === $this) {
-                $panier->setUtilisateur(null);
-            }
-        }
 
         return $this;
     }
