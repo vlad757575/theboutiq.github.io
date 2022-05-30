@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}new account{% endblock %}
+{% block title %}Nouveau compte{% endblock %}
 
 {% block body %}
 {% for flash_error in app.flashes('verify_email_error') %}
@@ -19,8 +19,10 @@
             label: 'Password'
         }) }}
     {{ form_row(registrationForm.agreeTerms) }}
-
-    <button type="submit" class="btn btn-primary">Inscription</button>
-    {{ form_end(registrationForm) }}
+    <div class="d-flex">
+        <button type="submit" class="btn btn-primary" title="ps: nous ne transférons pas vos données personnelles à des tiers ">Inscription</button>
+        <p class="m-2">En cliquant sur envoyer je reconnais avoir lu et compris <a href="{{path('app_cguv')}}" title="ps: nous ne transférons pas vos données personnelles à des tiers ">les CGUV et je les accepte.</a></p>
+        {{ form_end(registrationForm) }}
+    </div>
 </div>
 {% endblock %}
