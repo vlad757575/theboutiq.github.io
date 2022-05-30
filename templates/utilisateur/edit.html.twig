@@ -1,16 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Modifier vos informationsr{% endblock %}
+{% block title %}Modifier vos informations {{utilisateur.getFullName}}{% endblock %}
 
 {% block body %}
 <div class="my-formular">
-    <h1 class="text-center">Modifier vos informations</h1>
+    <h1 class="text-center">Modifier vos informations </h1>
 
     {{ include('utilisateur/_form.html.twig',) }}
+    <div class="d-flex m-2">
+        <a class="btn btn-primary" href="{{ path('user', {id: app.user.id}) }}">Retour</a>
 
-    <a href="{{ path('user', {id: app.user.id}) }}">Retour</a>
-
-    {{ include('utilisateur/_delete_form.html.twig') }}
+        {{ include('utilisateur/_delete_form.html.twig') }}
+    </div>
 </div>
 
 

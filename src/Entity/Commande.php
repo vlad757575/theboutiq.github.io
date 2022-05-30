@@ -2,10 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\CommandeRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Entity\Produit;
+use App\Entity\Utilisateur;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\CommandeRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass=CommandeRepository::class)
@@ -81,8 +83,10 @@ class Commande
 
     public function __toString()
     {
-        return $this->getDateCommande();
+        return $this->getDateCommande() . '' . $this->getEtat() . '' . $this->totalPurchase() . '' . $this->getDateCommande();
     }
+
+
 
 
     public function getEtat(): ?Etat
@@ -95,6 +99,15 @@ class Commande
         $this->etat = $etat;
 
         return $this;
+    }
+
+    public function totalPurchase()
+    {
+        $total = null;
+        foreach ($this->getCommandeProduits()->getValues() as $commandeProduit) {
+            $total = $total + ($commandeProduit->getMontantHt() * $commandeProduit->getQuantite());
+        }
+        return $total;
     }
 
     public function getUtilisateur(): ?Utilisateur

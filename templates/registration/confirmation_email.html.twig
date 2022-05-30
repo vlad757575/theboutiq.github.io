@@ -1,9 +1,9 @@
-<h1>Hi! Please confirm your email!</h1>
+<h1>Bonjour ! Confirmez votre adresse email !</h1>
 
 <p>
-    Please confirm your email address by clicking the following link: <br><br>
-    <a href="{{ signedUrl }}">Confirm my Email</a>.
-    This link will expire in {{ expiresAtMessageKey|trans(expiresAtMessageData, 'VerifyEmailBundle') }}.
+    S'il vous plait confirmez votre adresse email en cliquant sur le lien ci-dessous: <br><br>
+    <a href="{{ signedUrl }}">Confirmer</a>.
+    Ce lien est valide 1 heure {{ expiresAtMessageKey|trans(expiresAtMessageData, 'VerifyEmailBundle') }}.
 </p>
 
 <p>

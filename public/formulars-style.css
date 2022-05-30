@@ -42,9 +42,9 @@
   }
   .my-navbar-bottom {
     display: block;
-    position: fixed;
+    position: relative;
     left: 0;
-    bottom: 0;
+    bottom:1;
     width: 100% !important;
 
   }
@@ -54,6 +54,7 @@
   }
   body {
     background-color: rgba(233, 120, 100, 0.05);
+    /* position: relative; */
   }
   .carousel-item img {
     object-fit: scale-down;

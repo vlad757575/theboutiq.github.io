@@ -142,9 +142,8 @@
             </a>
             <img src="{{produit.image}}" alt="" style="width: 100px;">
             {% if app.user and produit.stock > 0  %}
-
             <span class="product-price">{{ produit.montantHt *(produit.tva /100 + 1)|number_format(2) }} €</span>
-            <form action="{{path('app_add', {produit: produit.id}) }}" method="POST">
+            <form action="{{path('add_panier', {id: produit.id}) }}" method="POST">
                 <div class="input-button">
                     <input type="number" name="quantite" id="quantite" min="1" max="{{produit.stock}}" step="1" placeholder="Quantité" value="1" class="input-quantite" required>
                     <button type="submit" class="btn btn-primary">
@@ -152,16 +151,15 @@
                     </button>
                 </div>
             </form>
-
+            {% elseif app.user and produit.stock == 0 %}
+            <td class="text-danger">Rupture de stock</td>
             {% endif %}
             {% if is_granted('ROLE_ADMIN') %}
             <a href="{{ path('app_produit_show', {'id': produit.id}) }}">show</a>
             <a href="{{ path('app_produit_edit', {'id': produit.id}) }}">edit</a>
             {% endif %}
         </div>
-
     </div>
     {% endfor %}
 </div>
-
 {% endblock %}

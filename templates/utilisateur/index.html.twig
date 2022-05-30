@@ -1,12 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Mes informations{% endblock %}
+{% block title %}Mes informations {{utilisateur.getFullName}}{% endblock %}
 
 {% block body %}
 <h1>Mes informations</h1>
 
 <div class="my-formular">
-
     <table class="table">
         <tbody>
             <tr>
@@ -36,8 +35,4 @@
         <a href="{{ path('app_utilisateur_edit', {'id': utilisateur.id}) }}" class="btn btn-primary">Modifier vos informations</a>
     </div>
 </div>
-
-
-
-<!-- <a href="{{ path('app_utilisateur_new') }}">Create new</a> -->
 {% endblock %}

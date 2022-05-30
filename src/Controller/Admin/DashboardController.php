@@ -14,16 +14,18 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 
 class DashboardController extends AbstractDashboardController
 {
     /**
      * @Route("/admin", name="admin")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function index(): Response
     {
-        return parent::index();
+        return $this->render('bundle/views/welcome.html.twig', []);
     }
 
     //Menu admin config
@@ -33,11 +35,11 @@ class DashboardController extends AbstractDashboardController
             ->setTitle('Menu admin Theboutiq!');
     }
 
-    // public function menu()
-    // {
+    public function menu()
+    {
 
-    //     return $this->renderForm('commande/new.html.twig');
-    // }
+        return $this->renderForm('commande/new.html.twig');
+    }
 
 
     public function configureMenuItems(): iterable
@@ -46,7 +48,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToDashboard('Accueil', 'fa fa-home');
         yield MenuItem::linkToCrud('Utilisateur', 'fa fa-user', Utilisateur::class);
         yield MenuItem::linkToCrud('Produit', 'fas fa-list', Produit::class);
-        yield MenuItem::linkToCrud('Commande', 'fas fa-list', Commande::class);
+        yield MenuItem::linkToCrud('Commande', 'fas cart-shopping', Commande::class);
         yield MenuItem::linkToCrud('Livraison', 'fas fa-list', Transporteur::class);
         yield MenuItem::linkToCrud('Etat', 'fas fa-list', Etat::class);
         yield MenuItem::linkToCrud('Adresse-livraison', 'fas fa-list', AdresseLivraison::class);
