@@ -25,8 +25,7 @@ class Panier
         } else {
             $panier[$id] = 1;
         }
-        $this->session->set('panier', []);
-        dd($id);
+        $this->session->set('panier', $panier);
     }
 
     public function get()
@@ -37,5 +36,12 @@ class Panier
     public function remove()
     {
         return $this->session->remove('panier');
+    }
+
+    public function delete($id)
+    {
+        $panier = $this->session->get('panier', []);
+        unset($panier[$id]);
+        return $panier;
     }
 }

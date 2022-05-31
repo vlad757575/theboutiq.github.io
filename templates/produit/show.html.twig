@@ -15,7 +15,7 @@
             <span class="product-subtitle">{{produit.ean}}</span>
             {% if app.user and produit.stock > 0  %}
             <span class="product-price">{{ produit.montantHt *(produit.tva /100 + 1)|number_format(3) }} €</span>
-            <form action="{{path('app_add', {produit: produit.id}) }}" method="POST">
+            <form action="{{path(add_panier', {id: produit.id}) }}" method="POST">
                 <div class="input-button">
                     <input type="number" name="quantite" id="quantite" min="1" max="{{produit.stock}}" step="1" placeholder="Quantité" value="1" class="input-quantite" required>
                     <button type="submit" class="btn btn-primary">

@@ -71,6 +71,7 @@ class PanierController extends AbstractController
             $printablePanier[$id] = [
                 'quantite' => $quantite,
                 'produit' => $produit,
+
             ];
         }
 
