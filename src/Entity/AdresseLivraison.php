@@ -188,35 +188,35 @@ class AdresseLivraison
         return $this;
     }
 
-    /**
-     * @return Collection<int, Commande>
-     */
-    public function getCommandes(): Collection
-    {
-        return $this->commandes;
-    }
+    // /**
+    //  * @return Collection<int, Commande>
+    //  */
+    // public function getCommandes(): Collection
+    // {
+    //     return $this->commandes;
+    // }
 
-    public function addCommande(Commande $commande): self
-    {
-        if (!$this->commandes->contains($commande)) {
-            $this->commandes[] = $commande;
-            $commande->setAdresseLivraison($this);
-        }
+    // public function addCommande(Commande $commande): self
+    // {
+    //     if (!$this->commandes->contains($commande)) {
+    //         $this->commandes[] = $commande;
+    //         $commande->setAdresseLivraison($this);
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function removeCommande(Commande $commande): self
-    {
-        if ($this->commandes->removeElement($commande)) {
-            // set the owning side to null (unless already changed)
-            if ($commande->getAdresseLivraison() === $this) {
-                $commande->setAdresseLivraison(null);
-            }
-        }
+    // public function removeCommande(Commande $commande): self
+    // {
+    //     if ($this->commandes->removeElement($commande)) {
+    //         // set the owning side to null (unless already changed)
+    //         if ($commande->getAdresseLivraison() === $this) {
+    //             $commande->setAdresseLivraison(null);
+    //         }
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     public function getUtilisateur(): ?Utilisateur
     {

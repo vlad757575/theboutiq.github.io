@@ -164,62 +164,62 @@ class PanierController extends AbstractController
         return $this->redirectToRoute("app_panier");
     }
 
-    /**
-     * @Route("/choix", name="choix")
-     */
-    public function choix(SessionInterface $session, ProduitRepository $produit)
-    {
+    // /**
+    //  * @Route("/choix", name="choix")
+    //  */
+    // public function choix(SessionInterface $session, ProduitRepository $produit)
+    // {
 
 
-        $panier = $session->get('panier', []);
+    //     $panier = $session->get('panier', []);
 
-        $ids = array_keys($panier);
-        //Je recupere tout les produits
-        $produits = $produit->getAllProduits($ids);
-        //Je definis une valeur de base aux variables tva et total
-        $tva = 0;
-        $total = 0;
-        $printablePanier = []; // L'équivalent de l'ancien panier pour l'affichage
+    //     $ids = array_keys($panier);
+    //     //Je recupere tout les produits
+    //     $produits = $produit->getAllProduits($ids);
+    //     //Je definis une valeur de base aux variables tva et total
+    //     $tva = 0;
+    //     $total = 0;
+    //     $printablePanier = []; // L'équivalent de l'ancien panier pour l'affichage
 
-        //Je fais une boucle pour afficher les produits dans le panier
-        foreach ($panier as $id => $quantite) {
-            $produit = $produits[$id];
-            //Je set la tva
-            $tva += $produit->getMontantHt() * $quantite * $produit->getTva() / 100;
-            $total += $produit->getMontantHt() * $quantite;
-
-
-
-            $printablePanier[$id] = [
-                'quantite' => $quantite,
-                'produit' => $produit
-            ];
-        }
-        if (!$this->getUser()->getAdresseLivraison()->getValues()) {
-            return $this->redirectToRoute('app_adresse_livraison_new');
-        }
-        //Je recupere une form
-        $form = $this->createForm(RecapitulatifType::class, null, [
-            'user' => $this->getUser(),
-        ]);
+    //     //Je fais une boucle pour afficher les produits dans le panier
+    //     foreach ($panier as $id => $quantite) {
+    //         $produit = $produits[$id];
+    //         //Je set la tva
+    //         $tva += $produit->getMontantHt() * $quantite * $produit->getTva() / 100;
+    //         $total += $produit->getMontantHt() * $quantite;
 
 
 
-        // J'apelle la vue recapitulatif
-        return $this->render("panier/choix.html.twig", [
-            'form' => $form->createView(),
-            'panier' => $printablePanier,
-            'produit' => $produit,
+    //         $printablePanier[$id] = [
+    //             'quantite' => $quantite,
+    //             'produit' => $produit
+    //         ];
+    //     }
+    //     if (!$this->getUser()->getAdresseLivraison()->getValues()) {
+    //         return $this->redirectToRoute('app_adresse_livraison_new');
+    //     }
+    //     //Je recupere une form
+    //     $form = $this->createForm(RecapitulatifType::class, null, [
+    //         'user' => $this->getUser(),
+    //     ]);
 
 
-        ]);
-    }
 
-    /**
-     * @Route("/recapitulatif", name="recapitulatif")
-     */
-    public function recapitulatif()
-    {
-        return $this->render('panier/recapitulatif.html.twig');
-    }
+    //     // J'apelle la vue recapitulatif
+    //     return $this->render("panier/choix.html.twig", [
+    //         'form' => $form->createView(),
+    //         'panier' => $printablePanier,
+    //         'produit' => $produit,
+
+
+    //     ]);
+    // }
+
+    // /**
+    //  * @Route("/recapitulatif", name="recapitulatif")
+    //  */
+    // public function recapitulatif()
+    // {
+    //     return $this->render('panier/recapitulatif.html.twig');
+    // }
 }

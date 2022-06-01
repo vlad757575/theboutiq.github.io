@@ -27,10 +27,22 @@ class CommandeProduit
      */
     private $commande;
 
+
+
     /**
-     * @ORM\ManyToOne(targetEntity=Produit::class, inversedBy="commandeProduits")
+     * @ORM\Column(type="string", length=255)
      */
-    private $produit;
+    private $monProduit;
+
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $prix;
+
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $total;
 
     public function getId(): ?int
     {
@@ -61,14 +73,39 @@ class CommandeProduit
         return $this;
     }
 
-    public function getProduit(): ?Produit
+
+    public function getMonProduit(): ?string
     {
-        return $this->produit;
+        return $this->monProduit;
     }
 
-    public function setProduit(?Produit $produit): self
+    public function setMonProduit(string $monProduit): self
     {
-        $this->produit = $produit;
+        $this->monProduit = $monProduit;
+
+        return $this;
+    }
+
+    public function getPrix(): ?float
+    {
+        return $this->prix;
+    }
+
+    public function setPrix(float $prix): self
+    {
+        $this->prix = $prix;
+
+        return $this;
+    }
+
+    public function getTotal(): ?float
+    {
+        return $this->total;
+    }
+
+    public function setTotal(float $total): self
+    {
+        $this->total = $total;
 
         return $this;
     }

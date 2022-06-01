@@ -2,13 +2,15 @@
 
 namespace App\Form;
 
-use App\Entity\AdresseLivraison;
 use App\Entity\Commande;
 use App\Entity\Utilisateur;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use App\Entity\Transporteur;
+use App\Entity\AdresseLivraison;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class CommandeType extends AbstractType
 {
@@ -16,19 +18,43 @@ class CommandeType extends AbstractType
     {
         $user = $options['user'];
         $builder
-            ->add('mes commandes', EntityType::class, [
-                'class' => Utilisateur::class,
-                'choices' => $user->getCommande(),
-            ])
-            ->add('adresse livraison', EntityType::class, [
-                'class' => Utilisateur::class,
+            ->add('adresses', EntityType::class, [
+                'label' => 'Choisissez votre adresse de livraison',
+                'required' => true,
+                'class' => AdresseLivraison::class,
                 'choices' => $user->getAdresseLivraison(),
+                'multiple' => false,
+                'expanded' => true
+
+            ])
+
+            ->add('transporteur', EntityType::class, [
+                'label' => 'Choisissez votre livraison',
+                'required' => true,
+                'class' => Transporteur::class,
+                'multiple' => false,
+                'expanded' => true,
+            ])
+            ->add('submit', SubmitType::class, [
+                'label' => 'Valider ma commande',
+                'attr' => [
+                    'class' => 'btn btn-primary'
+                ]
             ]);
+        // ->add('mes commandes', EntityType::class, [
+        //     'class' => Utilisateur::class,
+        //     'choices' => $user->getCommande(),
+        // ])
+        // ->add('adresse livraison', EntityType::class, [
+        //     'class' => Utilisateur::class,
+        //     'choices' => $user->getAdresseLivraison(),
+        // ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
+            'user' => array(),
             'data_class' => Commande::class,
         ]);
     }

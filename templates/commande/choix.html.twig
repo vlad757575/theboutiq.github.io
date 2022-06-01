@@ -31,16 +31,16 @@
                 </thead>
                 <tbody>
                     {% set total = null %}
-                    {% for entree in panier %}
+                    {% for produit in panier %}
                     <tr>
 
-                        <td>{{entree.produit.nom}}</td>
-                        <td> {{entree.quantite}}</td>
-                        <td>{{entree.produit.MontantTtc}}€ </td>
-                        <td>{{ entree.produit.MontantTtc * entree.quantite}}€ </td>
+                        <td>{{produit.produit.nom}}</td>
+                        <td> {{produit.quantite}}</td>
+                        <td>{{produit.produit.MontantHt}}€ </td>
+                        <td>{{ produit.produit.MontantHt * produit.quantite}}€ </td>
 
                     </tr>
-                    {% set total = total + (produit.montantTtc * entree.quantite) %}
+                    {% set total = total + (produit.produit.montantHt * produit.quantite) %}
                     {% endfor %}
                 </tbody>
             </table>

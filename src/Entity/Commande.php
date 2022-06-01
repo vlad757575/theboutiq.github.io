@@ -48,11 +48,21 @@ class Commande
      */
     private $commandeProduits;
 
+
     /**
-     * @ORM\ManyToOne(targetEntity=AdresseLivraison::class, inversedBy="commandes")
-     * @ORM\JoinColumn(nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
-    private $adresseLivraison;
+    private $transporteurNom;
+
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $transporteurTarif;
+
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $livraisonAdresse;
 
 
 
@@ -164,14 +174,40 @@ class Commande
         return $this;
     }
 
-    public function getAdresseLivraison(): ?AdresseLivraison
+
+
+    public function getTransporteurNom(): ?string
     {
-        return $this->adresseLivraison;
+        return $this->transporteurNom;
     }
 
-    public function setAdresseLivraison(?AdresseLivraison $adresseLivraison): self
+    public function setTransporteurNom(string $transporteurNom): self
     {
-        $this->adresseLivraison = $adresseLivraison;
+        $this->transporteurNom = $transporteurNom;
+
+        return $this;
+    }
+
+    public function getTransporteurTarif(): ?float
+    {
+        return $this->transporteurTarif;
+    }
+
+    public function setTransporteurTarif(float $transporteurTarif): self
+    {
+        $this->transporteurTarif = $transporteurTarif;
+
+        return $this;
+    }
+
+    public function getLivraisonAdresse(): ?string
+    {
+        return $this->livraisonAdresse;
+    }
+
+    public function setLivraisonAdresse(string $livraisonAdresse): self
+    {
+        $this->livraisonAdresse = $livraisonAdresse;
 
         return $this;
     }

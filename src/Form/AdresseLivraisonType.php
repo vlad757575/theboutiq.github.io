@@ -75,6 +75,7 @@ class AdresseLivraisonType extends AbstractType
             ])
             ->add('infocomplementaire', TextType::class, [
                 'label' => 'Information complementaire',
+                'required' => false,
                 'attr' => [
                     'placeholder' => 'Batiment, interphone, code, etc.',
 

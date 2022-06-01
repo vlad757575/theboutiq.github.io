@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Classe\Panier;
 use App\Entity\Utilisateur;
 use App\Entity\AdresseLivraison;
 use App\Form\AdresseLivraisonType;
@@ -40,9 +41,9 @@ class AdresseLivraisonController extends AbstractController
     /**
      * @Route("/new", name="app_adresse_livraison_new", methods={"GET", "POST"})
      */
-    public function new(Request $request, AdresseLivraisonRepository $adresseLivraisonRepository, SessionInterface $session): Response
+    public function new(Request $request, AdresseLivraisonRepository $adresseLivraisonRepository, SessionInterface $session, Panier $panier): Response
     {
-        $panier = $session->get('panier', []);
+        // $panier = $session->get('panier', []);
 
         $adresseLivraison = new AdresseLivraison();
         $form = $this->createForm(AdresseLivraisonType::class, $adresseLivraison);
@@ -54,9 +55,9 @@ class AdresseLivraisonController extends AbstractController
             $this->entityManager->persist($adresseLivraison);
             $this->entityManager->flush();
 
-            if (!$panier = $session->get('panier', [])) {
+            if ($panier->get()) {
 
-                return $this->redirectToRoute('recapitulatif');
+                return $this->redirectToRoute('choix');
             } else {
 
                 return $this->redirectToRoute('app_adresse_livraison_index', [], Response::HTTP_SEE_OTHER);

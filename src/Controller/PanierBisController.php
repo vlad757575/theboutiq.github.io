@@ -26,35 +26,30 @@ class PanierBisController extends AbstractController
      */
     public function index(Panier $panier)
     {
-        // Je declare une variable qui va stocker tout mon panier
-        $fullPanier = [];
-        $tva = 0;
-        $total = 0;
-        // Je boucle sur mon panier 
-        foreach ($panier->get() as $id => $quantite) {
-
-            // $tva += $id->getMontantHt() * $quantite * $id->getTva() / 100;
-            // $total += $id->getMontantHt() * $quantite;
-
-            $fullPanier[] = [
-                // Je recupere les infos des produits
-                'produit' => $this->entityManager->getRepository(Produit::class)->findOneById($id),
-                'quantite' => $quantite,
-            ];
-        }
-
         return $this->render('panier/panierbis.html.twig', [
-            'panier' => $fullPanier,
+            'panier' => $panier->getMyPanier(),
+
         ]);
     }
 
     /**
      * @route("/panier/add/{id}", name="add_panier")
      */
-    public function ajout(Panier $panier, $id)
+    public function incremente(Panier $panier, $id)
     {
         // j'ajoute un produit grace à son id
         $panier->add($id);
+
+        return $this->redirectToRoute('app_mpanier');
+    }
+
+    /**
+     * @route("/panier/decremente/{id}", name="decremente_panier")
+     */
+    public function decremente(Panier $panier, $id)
+    {
+        // j'ajoute un produit grace à son id
+        $panier->decremente($id);
 
         return $this->redirectToRoute('app_mpanier');
     }
@@ -78,4 +73,24 @@ class PanierBisController extends AbstractController
         $panier->delete($id);
         return $this->redirectToRoute('app_mpanier');
     }
+
+    // /**
+    //  * @Route("/choix", name="choix")
+    //  */
+    // public function choix(Panier $panier)
+    // {
+
+    //     return $this->render('panier/panierbis.html.twig', [
+    //         'panier' => $panier->getMyPanier(),
+
+    //     ]);
+    // }
+
+    // /**
+    //  * @Route("/recapitulatif", name="recapitulatif")
+    //  */
+    // public function recapitulatif()
+    // {
+    //     return $this->render('panier/recapitulatif.html.twig');
+    // }
 }

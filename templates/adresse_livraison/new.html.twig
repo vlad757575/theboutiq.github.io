@@ -7,8 +7,8 @@
     <h1 class="text-center m-5">Nouvelle adresse de livraison</h1>
 
     {{ include('adresse_livraison/_form.html.twig') }}
-
+    <a class="btn btn-primary m-2" href="{{ path('app_adresse_livraison_index') }}">Retour</a>
 </div>
 
-<a href="{{ path('app_adresse_livraison_index') }}">Retour</a>
+
 {% endblock %}

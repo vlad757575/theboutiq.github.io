@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Classe\Panier;
 use App\Entity\Commande;
 use App\Form\CommandeType;
 use App\Repository\CommandeRepository;
@@ -21,10 +22,7 @@ class CommandeController extends AbstractController
      */
     public function index(CommandeRepository $commandeRepository): Response
     {
-        // if (!$this->getUser()->getAdresseLivraison()->getValues()) {
-        //     return $this->redirectToRoute('app_adresse_livraison_new');
 
-        // $form = $this->createForm(CommandeType::class, null, ['user' => $this->getUser()]);
         return $this->render('commande/index.html.twig', [
             'commandes' => $commandeRepository->findAll(),
 
@@ -93,5 +91,37 @@ class CommandeController extends AbstractController
         }
 
         return $this->redirectToRoute('app_commande_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    /**
+     * @Route("/commande/choix", name="choix")
+     */
+    public function choix(Panier $panier)
+    {
+        if (!$this->getUser()->getAdresseLivraison()->getValues()) {
+            return $this->redirectToRoute('app_adresse_livraison_new');
+        }
+
+
+
+
+        $form = $this->createForm(CommandeType::class, null, [
+            'user' => $this->getUser()
+        ]);
+
+        return $this->render('commande/choix.html.twig', [
+            'panier' => $panier->getMyPanier(),
+            'form' => $form->createView(),
+
+        ]);
+    }
+
+    /**
+     * @Route("/commande/recapitulatif", name="recapitulatif")
+     */
+    public function recapitulatif()
+    {
+
+        return $this->render('panier/recapitulatif.html.twig');
     }
 }
