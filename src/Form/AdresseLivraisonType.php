@@ -47,7 +47,7 @@ class AdresseLivraisonType extends AbstractType
                     'placeholder' => 'Saisissez votre numero de telephone'
                 ]
             ])
-            ->add('numeroRue', TextType::class, [
+            ->add('numeroRue', NumberType::class, [
                 'label' => 'Quel est votre numéro de rue',
                 'attr' => [
                     'placeholder' => 'Saisissez votre numéro de rue'

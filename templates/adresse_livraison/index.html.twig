@@ -21,7 +21,7 @@
                     <p class="card-text">{{adresse_livraison.numeroRue}} - {{adresse_livraison.rue}} <br> {{adresse_livraison.codepostal}} - {{adresse_livraison.ville}} <br>{{adresse_livraison.pays}}</p>
                     <a class="btn btn-info" href="{{ path('app_adresse_livraison_show', {'id': adresse_livraison.id}) }}">Details</a>
                     <a class="btn btn-info" href="{{ path('app_adresse_livraison_edit', {'id': adresse_livraison.id}) }}">Modifier</a>
-                    {{ include('adresse_livraison/_delete_form.html.twig') }}
+                    {{ include('adresse_livraison/_supprimer_form.html.twig') }}
                 </div>
             </div>
 

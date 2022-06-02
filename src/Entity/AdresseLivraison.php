@@ -2,10 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\AdresseLivraisonRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Entity\Utilisateur;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
+use App\Repository\AdresseLivraisonRepository;
+use Symfony\Component\Security\Core\User\User;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass=AdresseLivraisonRepository::class)
@@ -94,7 +96,7 @@ class AdresseLivraison
 
     public function __toString()
     {
-        return $this->getNom() . '[br]' . $this->getNumeroRue() . ' ' . $this->getRue() . '[br]' . $this->getCodepostal() . ' ' . $this->getVille() . '[br]' . $this->getPays();
+        return $this->getNom() . '[br]' . $this->gettelephone() . '[br]' . $this->getNumeroRue() . ' ' . $this->getRue() . '[br]' . $this->getCodepostal() . ' ' . $this->getVille() . '[br]' . $this->getPays();
     }
 
 
@@ -163,6 +165,7 @@ class AdresseLivraison
 
         return $this;
     }
+
 
     public function getPays(): ?string
     {

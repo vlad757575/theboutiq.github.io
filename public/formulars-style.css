@@ -210,10 +210,18 @@ margin-bottom: 150px;
    justify-content: center;
  }
  .confirm-section {
+    background-color: whitesmoke; 
+    padding: 5px;
+ }
+ .form-check {
    background-color: whitesmoke;
-   /* margin-left: 3px; */
+   padding: 10px;
+   margin-top: 10px;
  }
 
+ .col-form-label {
+   font-weight: bold;
+ }
  
 
 

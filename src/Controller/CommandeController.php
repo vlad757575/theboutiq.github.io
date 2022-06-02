@@ -2,8 +2,11 @@
 
 namespace App\Controller;
 
+
+use DateTime;
 use App\Classe\Panier;
 use App\Entity\Commande;
+use App\Form\MyOrderType;
 use App\Form\CommandeType;
 use App\Repository\CommandeRepository;
 use Symfony\Component\HttpFoundation\Request;
@@ -96,18 +99,21 @@ class CommandeController extends AbstractController
     /**
      * @Route("/commande/choix", name="choix")
      */
-    public function choix(Panier $panier)
+    public function choix(Panier $panier, Request $request)
     {
         if (!$this->getUser()->getAdresseLivraison()->getValues()) {
+
             return $this->redirectToRoute('app_adresse_livraison_new');
         }
 
-
-
-
-        $form = $this->createForm(CommandeType::class, null, [
+        $form = $this->createForm(MyOrderType::class, null, [
             'user' => $this->getUser()
         ]);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // dd($form->getData());
+        }
 
         return $this->render('commande/choix.html.twig', [
             'panier' => $panier->getMyPanier(),
@@ -119,9 +125,70 @@ class CommandeController extends AbstractController
     /**
      * @Route("/commande/recapitulatif", name="recapitulatif")
      */
-    public function recapitulatif()
+    public function recapitulatif(Panier $panier, Request $request)
     {
+        $form = $this->createForm(MyOrderType::class, null, [
+            'user' => $this->getUser()
+        ]);
 
-        return $this->render('panier/recapitulatif.html.twig');
+        $form->handleRequest($request);
+
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $dateCommande = new DateTime();
+            $transporteur = $form->get('transporteur')->getData();
+            $livraison = $form->get('livraisonAdresse')->getData();
+
+
+
+            $livraison_info = $livraison->getNomPrenom();
+            $livraison_info .= '<br/>' . $livraison->getTelephone();
+
+            if ($livraison->getSociete()) {
+
+                $livraison_info .= '<br/>' . $livraison->getSociete();
+            }
+            $livraison_info .= '<br/>' . $livraison->getNumeroRue();
+            $livraison_info .= '<br/>' .  $livraison->getRue();
+
+            if ($livraison->getInfoComplementaire()) {
+
+                $livraison_info .= '<br/>' . $livraison->getInfoComplementaire();
+            }
+
+
+            $livraison_info .= '<br/>' . $livraison->getCodepostal();
+            $livraison_info .= '<br/>' . $livraison->getVille();
+            $livraison_info .= '<br/>' . $livraison->getPays();
+
+
+            $commande = new Commande();
+            $commande->setUtilisateur($this->getUser());
+            $commande->setDateCommande($dateCommande);
+            $commande->setTransporteurNom($transporteur->getNom());
+            $commande->setTransporteurTarif($transporteur->getTarif());
+            $commande->setLivraisonAdresse($livraison_info);
+
+
+            foreach ($panier->getMyPanier() as $produit) {
+                // dd($produit);
+                dd($produit);
+            }
+
+
+
+
+            $form = $this->createForm(MyOrderType::class, $commande);
+            $form->handleRequest($request);
+        }
+
+        return $this->render('commande/choix.html.twig', [
+            'panier' => $panier->getMyPanier(),
+            'form' => $form->createView(),
+
+        ]);
+
+        return $this->render('commande/add.html.twig');
     }
 }

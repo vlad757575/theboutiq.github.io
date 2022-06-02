@@ -27,7 +27,7 @@ class Commande
     private $token;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="datetime")
      */
     private $dateCommande;
 
