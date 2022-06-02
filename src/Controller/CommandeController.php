@@ -4,11 +4,15 @@ namespace App\Controller;
 
 
 use DateTime;
+use App\Entity\Etat;
 use App\Classe\Panier;
 use App\Entity\Commande;
 use App\Form\MyOrderType;
 use App\Form\CommandeType;
+use App\Entity\CommandeProduit;
+use App\Repository\EtatRepository;
 use App\Repository\CommandeRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -20,6 +24,19 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
  */
 class CommandeController extends AbstractController
 {
+
+
+
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+
+
+        $this->entityManager = $entityManager;
+    }
+
+
+
+
     /**
      * @Route("/", name="app_commande_index", methods={"GET"})
      */
@@ -123,9 +140,9 @@ class CommandeController extends AbstractController
     }
 
     /**
-     * @Route("/commande/recapitulatif", name="recapitulatif")
+     * @Route("/commande/recapitulatif", name="recapitulatif", methods="POST")
      */
-    public function recapitulatif(Panier $panier, Request $request)
+    public function recapitulatif(Panier $panier, Request $request,  EtatRepository $er)
     {
         $form = $this->createForm(MyOrderType::class, null, [
             'user' => $this->getUser()
@@ -139,6 +156,7 @@ class CommandeController extends AbstractController
             $dateCommande = new DateTime();
             $transporteur = $form->get('transporteur')->getData();
             $livraison = $form->get('livraisonAdresse')->getData();
+            $etat = $er->find(3);
 
 
 
@@ -169,26 +187,38 @@ class CommandeController extends AbstractController
             $commande->setTransporteurNom($transporteur->getNom());
             $commande->setTransporteurTarif($transporteur->getTarif());
             $commande->setLivraisonAdresse($livraison_info);
+            $commande->setToken(hash('sha256', random_bytes(32)));
+            $commande->setEtat($etat);
+
+            $this->entityManager->persist($commande);
 
 
             foreach ($panier->getMyPanier() as $produit) {
-                // dd($produit);
-                dd($produit);
+                $commandeProduit = new CommandeProduit;
+                $commandeProduit->setCommande($commande);
+                $commandeProduit->setMonProduit($produit['produit']->getNom());
+                $commandeProduit->setQuantite($produit['quantite']);
+                $commandeProduit->setPrix($produit['produit']->getMontantHt());
+                $commandeProduit->setTotal($produit['produit']->getMontantHt() * $produit['quantite']);
+
+
+                $this->entityManager->persist($commandeProduit);
+
+                // dd($commandeProduit);
             }
 
+            $this->entityManager->flush();
+
+            return $this->render('commande/recapitulatif.html.twig', [
+                'transporteur' => $transporteur,
+                'livraison' => $livraison,
+                'panier' => $panier->getMyPanier(),
+                'form' => $form->createView(),
 
 
 
-            $form = $this->createForm(MyOrderType::class, $commande);
-            $form->handleRequest($request);
+            ]);
         }
-
-        return $this->render('commande/choix.html.twig', [
-            'panier' => $panier->getMyPanier(),
-            'form' => $form->createView(),
-
-        ]);
-
-        return $this->render('commande/add.html.twig');
+        return $this->redirectToRoute('app_mpanier');
     }
 }

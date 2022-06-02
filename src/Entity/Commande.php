@@ -93,7 +93,7 @@ class Commande
 
     public function __toString()
     {
-        return $this->getDateCommande() . '' . $this->getEtat() . '' . $this->totalPurchase() . '' . $this->getDateCommande();
+        return $this->getEtat() . '' . $this->totalPurchase();
     }
 
 
@@ -113,9 +113,10 @@ class Commande
 
     public function totalPurchase()
     {
+        // dd($this->getCommandeProduits()->getValues());
         $total = null;
         foreach ($this->getCommandeProduits()->getValues() as $commandeProduit) {
-            $total = $total + ($commandeProduit->getMontantHt() * $commandeProduit->getQuantite());
+            $total = $total + ($commandeProduit->getprix() * $commandeProduit->getQuantite());
         }
         return $total;
     }

@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Récapitulatif et paiement{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h2 class="text-center m-5">Recapitulatif de ma commande</h2>
+    <p class="text-center m-5">Verifiez les informations avant de cliquer sur Payer !</p>
+    <hr>
+    <div class="row">
+
+        <div class="col-md-12 ">
+            <h5 class="text-center">Récapitulatif de votre commande</h5><br>
+
+            <div class="d-flex">
+                <div class=" confirm-section">
+                    <h5>Votre choix de livraison</h5>
+                    <hr>
+                    <b>Societé : </b> {{transporteur.nom}}<br>
+                    <b>Tarif: </b>{{transporteur.tarif}} €<br>
+                    <b>Déscription : </b>{{transporteur.description}}<br>
+                </div>
+                <div class="confirm-section">
+                    <h5>Votre adresse de livraison</h5>
+                    <hr>
+                    <b> Votre nom et prénom : </b>{{livraison.nomPrenom}} <br>
+                    <b> Societé :</b> {{livraison.societe}}<br>
+                    <b> Télephone :</b> {{livraison.telephone}}<br>
+                    {{livraison.infocomplementaire}}<br>
+                    <b> Adresse :</b> {{livraison.numeroRue}} {{livraison.rue}}<br>
+
+                    {{livraison.ville}} {{livraison.codepostal}} <br>
+
+                    {{livraison.pays}}
+                </div>
+            </div>
+            <div class="confirm-section">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Produit</th>
+                            <th></th>
+                            <th scope="col">Quantité</th>
+                            <th scope="col">Prix</th>
+                            <th scope="col">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% set total = null %}
+                        {% for key,produit in panier %}
+
+                        <tr class="{% if key > 0 %} m-2 {% endif %}">
+                            <td><img src="/uploads/{{produit.produit.image}}" alt=" image du produit: {{produit.produit.nom}}" style="width:17px;"></td>
+                            <td>{{produit.produit.nom}}</td>
+                            <td> {{produit.quantite}}</td>
+                            <td>{{produit.produit.MontantHt}}€ </td>
+                            <td>{{ produit.produit.MontantHt * produit.quantite}}€ </td>
+
+                        </tr>
+                        {% set total = total + (produit.produit.montantHt * produit.quantite) %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+            </div>
+            <div class="m-3">
+                <hr>
+                <strong>Sous total : {{ total }} €</strong><br>
+                <strong>Livraison : {{transporteur.tarif}} €</strong><br>
+                <strong>Total TTC :{{ total + transporteur.tarif}} €</strong><br>
+                <strong>Dont TVA : {{ 0.20 *(total + transporteur.tarif)/(1+0.20)|round}} €</strong><br>
+
+                <a href="{{path('paiement')}}" class="btn btn-primary"> Payer {{ total + transporteur.tarif }} €</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
