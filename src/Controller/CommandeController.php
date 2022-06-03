@@ -4,11 +4,13 @@ namespace App\Controller;
 
 
 use DateTime;
+use Stripe\Stripe;
 use App\Entity\Etat;
 use App\Classe\Panier;
 use App\Entity\Commande;
 use App\Form\MyOrderType;
 use App\Form\CommandeType;
+use Stripe\Checkout\Session;
 use App\Entity\CommandeProduit;
 use App\Repository\EtatRepository;
 use App\Repository\CommandeRepository;
@@ -16,6 +18,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -192,6 +195,8 @@ class CommandeController extends AbstractController
 
             $this->entityManager->persist($commande);
 
+            // $for_stripe = [];
+            // $YOUR_DOMAIN = 'http://localhost:3000/public';
 
             foreach ($panier->getMyPanier() as $produit) {
                 $commandeProduit = new CommandeProduit;
@@ -204,10 +209,28 @@ class CommandeController extends AbstractController
 
                 $this->entityManager->persist($commandeProduit);
 
+                // $for_stripe[] = [
+                //     // 'mode' => 'payment',
+                //     'price_data' => [
+                //         'currency' => 'eur',
+                //         'product_data' => [
+                //             'name' => $produit['produit']->getNom(),
+                //             'images' => [$YOUR_DOMAIN . "/uploads/" . $produit['produit']->getImage()] // Lien ABSOLU
+                //         ],
+                //         'unit_amount' => $produit['produit']->getMontantHt() * 100, // Montant en centimes
+                //     ],
+                //     'quantity' => $produit['quantite'],
+                // ];
+
                 // dd($commandeProduit);
             }
 
-            $this->entityManager->flush();
+            // $this->entityManager->flush();
+
+
+
+            // dd($checkout_session);
+
 
             return $this->render('commande/recapitulatif.html.twig', [
                 'transporteur' => $transporteur,
@@ -217,8 +240,28 @@ class CommandeController extends AbstractController
 
 
 
+
             ]);
         }
         return $this->redirectToRoute('app_mpanier');
     }
 }
+    // $checkout = Session::create([
+    //     'line_items' => $line_items,
+    //     'mode' => 'payment',
+    //     'success_url' => $this->generateUrl('payment_success', ['token' => $commande->getToken()], UrlGeneratorInterface::ABSOLUTE_URL), // Lien ABSOLU
+    //     'cancel_url' => $this->generateUrl('payment_cancel', [], UrlGeneratorInterface::ABSOLUTE_URL), // Lien ABSOLU
+    // ]);
+
+    // dd($checkout);
+    // $line_items[] = [
+    //     // 'payment_method_types' => ['card'],
+    //     'price_data' => [
+    //         'currency' => 'eur',
+    //         'product_data' => [
+    //             'name' => $produit->getNom(),
+    //         ],
+    //         'unit_amount' => $produit->getMontantTtc() * 100 // Montant en centimes
+    //     ],
+    //     'quantity' => $quantite,
+    // ];

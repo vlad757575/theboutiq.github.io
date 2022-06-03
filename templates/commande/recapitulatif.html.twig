@@ -2,6 +2,11 @@
 
 {% block title %}Récapitulatif et paiement{% endblock %}
 
+{% block javascript %}
+<script src="https://js.stripe.com/v3/"></script>
+<script src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch"></script>
+{% endblock %}
+
 {% block body %}
 <div class="container">
     <h2 class="text-center m-5">Recapitulatif de ma commande</h2>
@@ -70,9 +75,13 @@
                 <strong>Total TTC :{{ total + transporteur.tarif}} €</strong><br>
                 <strong>Dont TVA : {{ 0.20 *(total + transporteur.tarif)/(1+0.20)|round}} €</strong><br>
 
-                <a href="{{path('paiement')}}" class="btn btn-primary"> Payer {{ total + transporteur.tarif }} €</a>
+                <a id="checkout-button" href="{{path('app_payment_stripe')}}" class="btn btn-primary"> Payer {{ total + transporteur.tarif }} €</a>
+                <form action="/create-checkout-session.php" method="POST">
+                    <button type="submit" id="checkout-button">Checkout</button>
+                </form>
             </div>
         </div>
     </div>
 </div>
+
 {% endblock %}
