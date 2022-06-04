@@ -93,7 +93,7 @@ class Commande
 
     public function __toString()
     {
-        return $this->getEtat() . '' . $this->totalPurchase();
+        return $this->getEtat() . '' . $this->totalPurchase() . ' ' . $this->getCommandeProduits();
     }
 
 

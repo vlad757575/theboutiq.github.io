@@ -6,112 +6,6 @@
 <div class="my-product">
 
 
-    <!-- <div class="picture-accordion">
-        <img src="https://picsum.photos/420" alt="image-produit">
-        {% for produit in produits %}
-        <div class="my-accordion">
-            <div class="accordion" id="accordionExample">
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingOne">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                            Decription
-                        </button>
-                    </h2>
-                    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                        <div>
-                            {{ produit.resume }}
-                        </div>
-                    </div>
-                </div>
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingTwo">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                            Livraison et retour
-                        </button>
-                    </h2>
-                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                        <div class="accordion-body">
-                            <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-                        </div>
-                    </div>
-                </div>
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingThree">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                            Déscription detaillée
-                        </button>
-                    </h2>
-                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-                        <div class="accordion-body">
-                            <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="my-product">
-        <h1>Produits</h1>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Nom</th>
-                    <th>MontantTtc</th>
-
-                </tr>
-            </thead>
-            <tbody>
-                {% for produit in produits %}
-                <tr>
-                    <td>{{ produit.nom }}</td>
-                    <td>{{ produit.montantHt *(produit.tva /100 + 1) }} €</td>
-                    {% if app.user and produit.stock > 0  %}
-                    <form action="{{path('app_add', {produit: produit.id}) }}" method="POST">
-                        <input type="number" name="quantite" id="quantite" min="1" max="{{produit.stock}}" step="1" placeholder="Quantité" value="1" class="input-quantite" required>
-                        <button type="submit" class="my-button">
-                            <i class="fa fa-shopping-cart " aria-hidden="true"></i>Ajouter
-                        </button>
-                    </form>
-                    <form action="">
-                        <div class="right__controllers">
-                            <div class="buttons">
-                                <span id="moins"><img src="images/icon-minus.svg" alt="moins logo"></span>
-                                <span id="counter">0</span>
-                                <span id="plus"><img src="images/icon-plus.svg" alt="plus logo"></span>
-                            </div>
-                            <input type="number" name="quantite" id="quantite" min="1" max="{{produit.stock}}" step="1" placeholder="Quantité" value="1" class="input-quantite" required>
-                            <button id="addArticle"><img src="images/icon-cart-white.svg" alt=""> Ajouter au panier</button>
-                        </div>
-                    </form>
-                    {% elseif app.user and produit.stock == 0 %}
-                    <td class="text-danger">Rupture de stock</td>
-                    {% else %}
-
-
-                    {% endif %}
-                    {% if is_granted('ROLE_ADMIN') %}
-                    <a href="{{ path('app_produit_show', {'id': produit.id}) }}">show</a>
-                    <a href="{{ path('app_produit_edit', {'id': produit.id}) }}">edit</a>
-                    {% endif %}
-                    </td>
-                </tr>
-                {% else %}
-                <tr>
-                    <td colspan="9">no records found</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
-    <form action="{{path('app_add', {produit: produit.id}) }}" method="$_POST">
-        <input type="number" name="quantite" id="quantite" min="1" max="{{produit.stock}}" step="1" placeholder="Quantité" class="input-quantite">
-        <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            <i class=" fa fa-shopping-cart disabled" aria-hidden="true"></i>Ajouter
-        </a>
-
-    </form>
-    {% endfor %} -->
 
 </div>
 <!-- //modal si un visiteur veut rajouter un produit au panier -->
@@ -142,8 +36,8 @@
             </a>
             <img src="{{produit.image}}" alt="" style="width: 100px;">
             {% if app.user and produit.stock > 0  %}
-            <span class="product-price">{{ produit.montantHt *(produit.tva /100 + 1)|number_format(2) }} €</span>
-            <form action="{{path('add_panier', {id: produit.id}) }}" method="POST">
+            <span class="product-price">{{ produit.montantHt|number_format(2) }} €</span>
+            <form action="{{path('add_panier', {'id': produit.id}) }}" method="POST">
                 <div class="input-button">
                     <input type="number" name="quantite" id="quantite" min="1" max="{{produit.stock}}" step="1" placeholder="Quantité" value="1" class="input-quantite" required>
                     <button type="submit" class="btn btn-primary">
@@ -154,10 +48,7 @@
             {% elseif app.user and produit.stock == 0 %}
             <td class="text-danger">Rupture de stock</td>
             {% endif %}
-            {% if is_granted('ROLE_ADMIN') %}
-            <a href="{{ path('app_produit_show', {'id': produit.id}) }}">show</a>
-            <a href="{{ path('app_produit_edit', {'id': produit.id}) }}">edit</a>
-            {% endif %}
+
         </div>
     </div>
     {% endfor %}

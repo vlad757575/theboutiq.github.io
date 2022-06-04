@@ -6,15 +6,12 @@
     border: white;
     box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.3);
     padding: 10px;
-    
-  
   }
   a {
     text-decoration: none;
-      }
+    }
   button {
     margin-top: 10px;
-    /* background-color:rgba(233, 120, 100, 1) !important;  */
   }
 
   .login-button {
@@ -35,26 +32,26 @@
   }
   .my-navbar {
     font-family: 'Source Sans Pro', sans-serif;
-    /* background-color: rgba(41, 210, 187,0.8) !important; */
     background-color: wheat !important;
     position: relative;
     width: 100% !important;
   }
   .my-navbar-bottom {
     display: block;
-    position: relative;
-    left: 0;
-    bottom:1;
+    /* position: absolute;  */
+    right: auto;
+   left: auto; 
+    bottom: 0 !important;
+    /* top: 1 !important; */
     width: 100% !important;
-
   }
    
   .my-navbar a {
     color: rgba(rgb(169,169,169,0,5)) !important;
   }
   body {
+    height: auto;
     background-color: rgba(233, 120, 100, 0.05);
-    /* position: relative; */
   }
   .carousel-item img {
     object-fit: scale-down;
@@ -67,15 +64,6 @@
   .my-product h5{
     text-transform: uppercase;
     font-size: 15px;
-    /* max-width: 1200px;
-    max-height: 800px;
-    margin: 3em auto 3em auto;
-background-color: white;
-border: 1px solid white;
-border-radius: 10px;
-display:flex;
-justify-content: space-around;
-align-items: center; */
   }
   .my-product .produict-subtitle {
     font-size: 14px;
@@ -88,8 +76,7 @@ align-items: center; */
      
    }
    .my-product-container {
-margin-bottom: 150px;
-
+    margin-bottom: 150px;
    }
 
    .my-product-detail{
@@ -97,12 +84,12 @@ margin-bottom: 150px;
     margin: 100px auto;
     align-items: center;
     justify-content: center;
-    
    }
 
    .detail-product-right {
     margin-left: 7%;
    }
+   
   .input-button {
     display: flex;
     align-items: center;
@@ -221,6 +208,18 @@ margin-bottom: 150px;
 
  .col-form-label {
    font-weight: bold;
+ }
+
+ .payment {
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+ }
+ .payment h2 {
+text-align: center;
+margin: 15px;
  }
  
 

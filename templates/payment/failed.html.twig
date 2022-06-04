@@ -1,1 +1,13 @@
-{% extends 'base.html.twig' %} {% block body %} Le paiement a été annulé. {% endblock %}
+{% extends 'base.html.twig' %}
+
+{% block title %} {% endblock %}
+
+
+{% block body %}
+<div class="payment">
+    <h2>
+        Le paiement a été annulé.
+    </h2>
+    <h5>Cher {{ commande.utilisateur.prenom}}, verifiez vos informations bancaires et <a href="{{path('app_mpanier')}}"> réessayz à nouveau !</a></h5>
+</div>
+{% endblock %}

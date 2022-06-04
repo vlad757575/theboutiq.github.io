@@ -24,7 +24,8 @@ class CommandeType extends AbstractType
                 'class' => AdresseLivraison::class,
                 'choices' => $user->getAdresseLivraison(),
                 'multiple' => false,
-                'expanded' => true
+                'expanded' => true,
+
 
             ])
 
@@ -38,7 +39,7 @@ class CommandeType extends AbstractType
             ->add('submit', SubmitType::class, [
                 'label' => 'Valider ma commande',
                 'attr' => [
-                    'class' => 'btn btn-primary m-3'
+                    'class' => 'btn btn-primary m-3 '
                 ]
             ]);
         // ->add('mes commandes', EntityType::class, [

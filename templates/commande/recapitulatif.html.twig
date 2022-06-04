@@ -75,10 +75,8 @@
                 <strong>Total TTC :{{ total + transporteur.tarif}} €</strong><br>
                 <strong>Dont TVA : {{ 0.20 *(total + transporteur.tarif)/(1+0.20)|round}} €</strong><br>
 
-                <a id="checkout-button" href="{{path('app_payment_stripe')}}" class="btn btn-primary"> Payer {{ total + transporteur.tarif }} €</a>
-                <form action="/create-checkout-session.php" method="POST">
-                    <button type="submit" id="checkout-button">Checkout</button>
-                </form>
+                <a id="checkout-button" href="{{path('app_payment_stripe',{'token': commande.token})}}" class="btn btn-primary"> Payer {{ total + transporteur.tarif }} €</a>
+
             </div>
         </div>
     </div>

@@ -42,13 +42,11 @@
                             <td> {{produit.quantite}}</td>
                             <td>{{produit.produit.MontantHt}}€ </td>
                             <td>{{ produit.produit.MontantHt * produit.quantite}}€ </td>
-
                         </tr>
                         {% set total = total + (produit.produit.montantHt * produit.quantite) %}
                         {% endfor %}
                     </tbody>
                 </table>
-                <a href="{{path('paiement')}}" class="btn btn-primary">Payer {{ total }} €</a>
             </div>
         </div>
     </div>

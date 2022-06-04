@@ -1,1 +1,12 @@
-{% extends 'base.html.twig' %} {% block body %} Merci pour votre achat. {% endblock %}
+{% extends 'base.html.twig' %}
+{% block title %} Paiement validé{% endblock %}
+
+{% block body %}
+<div class="payment">
+    <h2>Paiement accepté</h2> <br>
+    <h5 class=" text-center"> Cher {{ commande.utilisateur.prenom}}, votre commande n°{{commande.id}} est bien enregistrée </h5> <br>
+    <p class=" text-center"><b>Retrouvez la dans votre compte onglet <a href="{{path('app_commande_index')}}">mes commandes</a></b> </p>
+
+    <p class=" text-center"> <b> Vous allez recevoir un email de confirmation à l'adresse email suivante : {{commande.utilisateur.email}} </b></p>
+</div>
+{% endblock %}

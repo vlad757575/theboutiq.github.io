@@ -192,6 +192,7 @@ class CommandeController extends AbstractController
             $commande->setLivraisonAdresse($livraison_info);
             $commande->setToken(hash('sha256', random_bytes(32)));
             $commande->setEtat($etat);
+            // dd($commande);
 
             $this->entityManager->persist($commande);
 
@@ -208,24 +209,9 @@ class CommandeController extends AbstractController
 
 
                 $this->entityManager->persist($commandeProduit);
-
-                // $for_stripe[] = [
-                //     // 'mode' => 'payment',
-                //     'price_data' => [
-                //         'currency' => 'eur',
-                //         'product_data' => [
-                //             'name' => $produit['produit']->getNom(),
-                //             'images' => [$YOUR_DOMAIN . "/uploads/" . $produit['produit']->getImage()] // Lien ABSOLU
-                //         ],
-                //         'unit_amount' => $produit['produit']->getMontantHt() * 100, // Montant en centimes
-                //     ],
-                //     'quantity' => $produit['quantite'],
-                // ];
-
-                // dd($commandeProduit);
             }
 
-            // $this->entityManager->flush();
+            $this->entityManager->flush();
 
 
 
@@ -237,6 +223,8 @@ class CommandeController extends AbstractController
                 'livraison' => $livraison,
                 'panier' => $panier->getMyPanier(),
                 'form' => $form->createView(),
+                'commande' => $commande,
+
 
 
 
