@@ -46,6 +46,13 @@ class Etat
         return $this->getNom();
     }
 
+    public function getNumberEtat()
+    {
+
+        $getNumber = $this->getId();
+        return $getNumber;
+    }
+
 
     public function getNom(): ?string
     {
@@ -76,6 +83,13 @@ class Etat
 
         return $this;
     }
+
+    // public function setCommande(?Commande $commande): self
+    // {
+    //     $this->commande = $commande;
+
+    //     return $this;
+    // }
 
     public function removeCommande(Commande $commande): self
     {

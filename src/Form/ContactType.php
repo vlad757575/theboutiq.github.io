@@ -37,6 +37,10 @@ class ContactType extends AbstractType
                     new Email
                 ]
             ])
+            ->add('objet', TextType::class, [
+                'constraints' => [new Length(['max' => 70])]
+            ])
+
             ->add('message', TextareaType::class, [
                 'constraints' => [
                     new Length([

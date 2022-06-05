@@ -34,7 +34,9 @@ class ContactController extends AbstractController
                     'nom' => $data['nom'],
                     'prenom' => $data['prenom'],
                     'FromEmail' => $data['email'],
+                    'objet' => $data['objet'],
                     'message' => $data['message'],
+
                 ]);
             $mailer->send($email);
             $this->addFlash('bravo', 'Le message est envoyé !');

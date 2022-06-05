@@ -49,6 +49,11 @@ class CommandeProduit
         return $this->id;
     }
 
+    public function __toString()
+    {
+        return $this->getMonProduit() . ' X ' . $this->getQuantite();
+    }
+
     public function getQuantite(): ?int
     {
         return $this->quantite;

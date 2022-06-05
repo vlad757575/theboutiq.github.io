@@ -21,9 +21,9 @@ class TransporteurCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new('id'),
+            // IdField::new('id'),
             TextField::new('nom'),
-            NumberField::new('tarif'),
+            MoneyField::new('tarif')->setCurrency('EUR'),
             TextEditorField::new('description'),
         ];
     }

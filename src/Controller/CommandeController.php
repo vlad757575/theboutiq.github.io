@@ -45,9 +45,10 @@ class CommandeController extends AbstractController
      */
     public function index(CommandeRepository $commandeRepository): Response
     {
-
+        $commande = $this->entityManager->getRepository(Commande::class)->findMyOrders($this->getUser());
+        // dd($commande);
         return $this->render('commande/index.html.twig', [
-            'commandes' => $commandeRepository->findAll(),
+            'commandes' => $commande,
 
         ]);
     }
@@ -78,6 +79,10 @@ class CommandeController extends AbstractController
      */
     public function show(Commande $commande): Response
     {
+
+        if (!$commande || $commande->getUtilisateur() != $this->getUser()) {
+            return $this->render('app_commande_show');
+        }
         return $this->render('commande/show.html.twig', [
             'commande' => $commande,
         ]);
@@ -159,7 +164,7 @@ class CommandeController extends AbstractController
             $dateCommande = new DateTime();
             $transporteur = $form->get('transporteur')->getData();
             $livraison = $form->get('livraisonAdresse')->getData();
-            $etat = $er->find(3);
+            $etat = $er->find(1);
 
 
 

@@ -72,6 +72,8 @@ class Commande
     }
 
 
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -91,13 +93,17 @@ class Commande
         return $this;
     }
 
-    public function __toString()
+    // public function __toString()
+    // {
+    //     return   $this->transporteurNom();
+    // }
+
+
+    public function getOrderNumber()
     {
-        return $this->getEtat() . '' . $this->totalPurchase() . ' ' . $this->getCommandeProduits();
+        $numberOrder = $this->getId();
+        return $numberOrder;
     }
-
-
-
 
     public function getEtat(): ?Etat
     {
@@ -113,12 +119,17 @@ class Commande
 
     public function totalPurchase()
     {
-        // dd($this->getCommandeProduits()->getValues());
+
         $total = null;
-        foreach ($this->getCommandeProduits()->getValues() as $commandeProduit) {
-            $total = $total + ($commandeProduit->getprix() * $commandeProduit->getQuantite());
+
+
+        foreach ($this->getCommandeProduits()->getValues() as $commandeProduits) {
+            $total = $total + ($commandeProduits->getPrix() * $commandeProduits->getQuantite());
         }
+        // dump($commandeProduits);
+
         return $total;
+        die;
     }
 
     public function getUtilisateur(): ?Utilisateur

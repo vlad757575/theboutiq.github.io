@@ -1,31 +1,66 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Details de ma commande{% endblock %}
+{% block title %}Commande{% endblock %}
 
 {% block body %}
-<h1>Commande</h1>
+<div>
+    <div>
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{path('index')}}">Accueil</a></li>
+                <li class="breadcrumb-item current-page"> <a href="{{path('app_commande_index')}}"> Mon compte</a></li>
+                <li class="breadcrumb-item current-page"><a href="{{path('app_commande_index')}}"> Mes commandes</a></li>
+                <li class="breadcrumb-item current-page"><a href="{{path('app_commande_show',{'id': commande.id})}}"> Ma commande n° {{commande.id}}</a></li>
+            </ol>
+        </nav>
+    </div>
+</div>
+<h1 class="text-center m-5">Details de ma commande n°{{commande.id }} </h1>
+<div class="container">
+    <hr>
+    <strong> Date de commande : {{ commande.dateCommande ? commande.dateCommande|date('Y-m-d') : '' }}</strong> <br>
+    <strong> Référence : {{commande.id }} </strong><br>
+    <strong> Transporteur : {{commande.transporteurNom}}</strong> <br>
+    <hr>
+    <h5 class="text-center m-5"> Les details de votre commande </h5>
 
-<table class="table">
-    <tbody>
-        <tr>
-            <th>Id</th>
-            <td>{{ commande.id }}</td>
-        </tr>
-        <tr>
-            <th>Token</th>
-            <td>{{ commande.token }}</td>
-        </tr>
-        <tr>
-            <th>DateCommande</th>
-            <td>{{ commande.dateCommande ? commande.dateCommande|date('Y-m-d') : '' }}</td>
-        </tr>
-    </tbody>
-</table>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Produit</th>
+                <th scope="col">Quantité</th>
+                <th scope="col">Prix unitaire</th>
+                <th>TVA unitaire</th>
+                <th scope="col">Sous total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for  produit in commande.commandeProduits %}
+            <tr>
+                <th>{{produit.monProduit}}</th>
+                <td>{{produit.quantite}}</td>
+                <td>{{produit.prix|number_format(2)}} €</td>
+                <td>{{(0.20 * produit.prix)/(1 + 0.20)|round|number_format(2) }} €</td>
+                <td>{{ produit.total|number_format(2)}} €</td>
+            </tr>
+            {% endfor %}
 
+        </tbody>
+    </table>
+</div>
+<div class="text-center m-5">
+    <strong> Livraison : </strong>{{ commande.transporteurNom}} - {{ commande.transporteurTarif|number_format(2)}} € <br>
+    <strong> TVA : </strong>{{(0.20 * commande.totalPurchase)/(1 + 0.20)|round|number_format(2)}} €<br>
+    <strong> Total :</strong> {{ commande.totalPurchase|number_format(2)}} € <br>
+
+</div>
+<div class="text-center">
+    <p>Besoin d'une facture ? <a href="#">Cliquez ici et saisissez dans objet "Besoin d'une facture"</a></p>
+</div>
 <a href="{{ path('app_commande_index') }}">Retour</a>
 {% if is_granted('ROLE_ADMIN') %}
-<a href="{{ path('app_commande_edit', {'id': commande.id}) }}">edit</a>
+<a href="{{ path('app_commande_edit', {'id': commande.id}) }}">Modifier</a>
+{{ include('commande/_delete_form.html.twig') }}
 {% endif %}
 
-{{ include('commande/_delete_form.html.twig') }}
 {% endblock %}

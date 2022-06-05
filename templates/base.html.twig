@@ -80,7 +80,12 @@
             </div>
         </nav>
     </header>
+    {% for message in app.flashes('bravo') %}
+    <div class="alert alert-success">
+        {{message}}
 
+    </div>
+    {% endfor %}
     {% block body %}
     {% endblock %}
     <footer class="my-footer">

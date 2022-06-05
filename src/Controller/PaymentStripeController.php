@@ -140,4 +140,25 @@ class PaymentStripeController extends AbstractController
             'commande' => $commande,
         ]);
     }
+
+
+    // /**
+    //  * @Route("commande/commande/recapitulatif/shipped/{token}", name="shipped" )
+    //  */
+    // public function shipped(EntityManagerInterface $entityManager, $id)
+    // {
+
+    //     $commande = $entityManager->getRepository(Commande::class)->findOneBy(array('id' => $id));
+    //     $etat = $entityManager->getRepository(Etat::class)->find(4);
+
+    //     if (!$commande || $commande->getUtilisateur() != $this->getUser()) {
+    //         return $this->render('index');
+    //     }
+
+    //     $commande->setEtat($etat);
+
+    //     $entityManager->flush();
+
+    //     return $this->render('index');
+    // }
 }
