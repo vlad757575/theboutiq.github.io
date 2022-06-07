@@ -1,7 +1,7 @@
 
   .my-formular {
     max-width:60vw;
-    margin: 30vh auto;
+    margin: 11vh auto;
     background-color: white;
     border: white;
     box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.3);
@@ -38,11 +38,11 @@
   }
   .my-navbar-bottom {
     display: block;
-    /* position: absolute;  */
+    position: relative; 
     right: auto;
    left: auto; 
     bottom: 0 !important;
-    /* top: 1 !important; */
+    
     width: 100% !important;
   }
    
@@ -117,7 +117,7 @@
 .my-account {
   display: flex;
   flex-direction: column;
-  margin: 50px 10px 10px 50px ;
+  margin: 50px auto ;
 }
 
 .my-account a {
@@ -221,6 +221,22 @@
 text-align: center;
 margin: 15px;
  }
+
+ .error {
+   display: block;
+   align-items: center;
+   margin: 2vh auto;
+   color: #E97864;
+ }
+
+ .error img {
+   display: block;
+   margin:30px  auto;
+   width: 500px;
+   
+ }
+
+ 
  
 
 

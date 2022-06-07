@@ -21,6 +21,7 @@
     <strong> Date de commande : {{ commande.dateCommande ? commande.dateCommande|date('Y-m-d') : '' }}</strong> <br>
     <strong> Référence : {{commande.id }} </strong><br>
     <strong> Transporteur : {{commande.transporteurNom}}</strong> <br>
+    <strong> Etat : {{commande.etat}}</strong> <br>
     <hr>
     <h5 class="text-center m-5"> Les details de votre commande </h5>
 
@@ -57,10 +58,5 @@
 <div class="text-center">
     <p>Besoin d'une facture ? <a href="#">Cliquez ici et saisissez dans objet "Besoin d'une facture"</a></p>
 </div>
-<a href="{{ path('app_commande_index') }}">Retour</a>
-{% if is_granted('ROLE_ADMIN') %}
-<a href="{{ path('app_commande_edit', {'id': commande.id}) }}">Modifier</a>
-{{ include('commande/_delete_form.html.twig') }}
-{% endif %}
 
 {% endblock %}

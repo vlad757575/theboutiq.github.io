@@ -3,9 +3,9 @@
 {% block title %}Mes adresses de facturation{% endblock %}
 
 {% block body %}
-<div class="container my-formular">
-    <h1 class="text-center m-5">Mes adresses de facturation</h1>
-    {% if app.user.adresseLivraison|length == 0 %}
+<div class="my-formular">
+    <h1 class="text-center m-3">Mes adresses de facturation</h1>
+    {% if app.user.adresseFacturation is empty %}
     <p class="text-center"> Vous n'avez pas encore ajouté d'adresse de Facturation. Pour en ajouter une, veuillez <a href="{{path('app_adresse_facturation_new')}}">cliquer ici.</a></p>
     {% else %}
 
@@ -19,6 +19,9 @@
                     <p class="card-text">{{adresse_facturation.numeroRue}} - {{adresse_facturation.rue}} <br> {{adresse_facturation.codepostal}} - {{adresse_facturation.ville}} <br>{{adresse_facturation.pays}}</p>
                     <a class="btn btn-info" href="{{ path('app_adresse_facturation_show', {'id': adresse_facturation.id}) }}">Details</a>
                     <a class="btn btn-info" href="{{ path('app_adresse_facturation_edit', {'id': adresse_facturation.id}) }}">Modifier</a>
+                    <a class="btn btn-primary m-5" href="{{ path('app_adresse_facturation_new') }}">Créer une nouvelle adresse</a>
+
+                    {{ include('adresse_facturation/_delete_form.html.twig') }}
                 </div>
             </div>
 
@@ -27,6 +30,6 @@
 
         {% endfor %}
         {% endif %}
-        <a class="btn btn-info m-5" href="{{ path('app_adresse_facturation_new') }}">Créer une nouvelle</a>
+
     </div>
     {% endblock %}

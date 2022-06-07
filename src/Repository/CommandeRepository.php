@@ -46,17 +46,19 @@ class CommandeRepository extends ServiceEntityRepository
     }
 
     // public function findMyOrders($user)
-    // {
-    //     // dd($this->findOneBy('c.etat.id = :3'));
-    //     return $this->createQueryBuilder('c')
+    //  {
 
-    //         // ->andWhere('c.etat  )
-    //         // ->andWhere('c.utilisateur = :user')
-    //         // ->setParameter('user', $user)
-    //         ->orderBy('c.getOrderNumber', 'ASC')
+    //      return $this->createQueryBuilder('c') 
+    //      {
+    //          ->andWhere('c.etat  )
+    //         ->andWhere('c.utilisateur = :user')
+    //         ->setParameter('user', $user)
+    //         ->orderBy('c.id', 'DESC')
     //         ->getQuery()
     //         ->getResult();
-    //    }
+
+
+
 
     // /**
     //  * @return Commande[] Returns an array of Commande objects

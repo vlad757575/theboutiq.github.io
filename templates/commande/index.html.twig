@@ -23,8 +23,6 @@
 
 {% else %}
 <div class="container">
-
-
     <table class="table">
         <thead>
             <tr>
@@ -37,9 +35,7 @@
             </tr>
         </thead>
         <tbody>
-            {% for commande in app.user.commande %}
-
-
+            {% for commande in app.user.commande|reverse %}
             <tr>
                 <th scope="row">{{commande.id}}</th>
                 <td>{{commande.dateCommande|date('d-m-Y')}}</td>
@@ -47,7 +43,6 @@
                 <td>v</td>
                 <td>{{commande.transporteurTarif + commande.totalPurchase|number_format(2) }}€</td>
                 <td><a href="{{path('app_commande_show', {'id': commande.id})}}">Voir</a></td>
-
             </tr>
             {% endfor %}
 

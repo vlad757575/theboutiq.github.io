@@ -3,9 +3,9 @@
 {% block title %}Mes informations {{utilisateur.getFullName}}{% endblock %}
 
 {% block body %}
-<h1>Mes informations</h1>
 
 <div class="my-formular">
+    <h1 class="text-center m-4">Mes informations personnelles</h1>
     <table class="table">
         <tbody>
             <tr>
@@ -31,8 +31,8 @@
         </tbody>
     </table>
     <div class="account-helper m-3">
-        <a href=" {{ path('app_forgot_password_request') }}" class="btn btn-primary">Modifier votre mot de passe</a>
-        <a href="{{ path('app_utilisateur_edit', {'id': utilisateur.id}) }}" class="btn btn-primary">Modifier vos informations</a>
+        <a href=" {{ path('app_forgot_password_request') }}" class="btn btn-primary m-2">Modifier votre mot de passe</a>
+        <a href="{{ path('app_utilisateur_edit', {'id': utilisateur.id}) }}" class="btn btn-primary m-2">Modifier vos informations</a>
     </div>
 </div>
 {% endblock %}

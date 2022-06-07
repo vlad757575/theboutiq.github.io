@@ -100,13 +100,13 @@ class PaymentStripeController extends AbstractController
     {
 
         $commande = $entityManager->getRepository(Commande::class)->findOneBy(array('token' => $token));
-        $etat = $entityManager->getRepository(Etat::class)->find(1);
+        $etat = $entityManager->getRepository(Etat::class)->find(3);
         // $etat->$commande->FindOneById(1);
 
         if (!$commande || $commande->getUtilisateur() != $this->getUser()) {
             return $this->render('index');
         }
-        if ($commande->getEtat()->getId() == 3) {
+        if ($commande->getEtat()->getId() == 1) {
 
             $commande->setEtat($etat);
 

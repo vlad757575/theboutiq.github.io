@@ -126,10 +126,8 @@ class Commande
         foreach ($this->getCommandeProduits()->getValues() as $commandeProduits) {
             $total = $total + ($commandeProduits->getPrix() * $commandeProduits->getQuantite());
         }
-        // dump($commandeProduits);
 
         return $total;
-        die;
     }
 
     public function getUtilisateur(): ?Utilisateur

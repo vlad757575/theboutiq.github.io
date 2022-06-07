@@ -45,12 +45,9 @@ class CommandeController extends AbstractController
      */
     public function index(CommandeRepository $commandeRepository): Response
     {
-        $commande = $this->entityManager->getRepository(Commande::class)->findMyOrders($this->getUser());
+        // $commande = $commandeRepository->findMyOrders();
         // dd($commande);
-        return $this->render('commande/index.html.twig', [
-            'commandes' => $commande,
-
-        ]);
+        return $this->render('commande/index.html.twig');
     }
 
     /**
