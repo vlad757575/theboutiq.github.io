@@ -12,4 +12,49 @@
     </ol>
 </nav>
 
+
+<div class="text-center">
+    <h1>Mes commandes</h1>
+    <h4>Retrouvez toute vos commandes</h4>
+</div>
+{% if app.user.commande|length == 0 %}
+<p>Vous n'avez pas encore de commande</p>
+
+{% else %}
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Numéro</th>
+                <th scope="col">Date</th>
+                <th scope="col">Etat</th>
+                <th scope="col">Produit(s)</th>
+                <th scope="col">Total</th>
+                <th scope="col">Voir ma commande</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for commande in app.user.commande|reverse %}
+            <tr>
+                <th scope="row">{{commande.id}}</th>
+                <td>{{commande.dateCommande|date('d-m-Y')}}</td>
+                <td>{{commande.etat}}</td>
+                <td>v</td>
+                <td>{{commande.transporteurTarif + commande.totalPurchase|number_format(2) }}€</td>
+                <td><a href="{{path('app_commande_show', {'id': commande.id})}}">Voir</a></td>
+            </tr>
+            {% endfor %}
+
+
+
+
+
+
+        </tbody>
+    </table>
+</div>
+
+{% endif %}
+
+
 {% endblock %}

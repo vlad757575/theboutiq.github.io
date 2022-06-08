@@ -38,36 +38,12 @@ class MonCompteController extends AbstractController
         ]);
     }
 
-
-    // /**
-    //  * @Route("/mes/adresses", name="app_adresses")
-    //  */
-    // public function adresse(): Response
-    // {
-    //     return $this->render('mon_compte/adresses.html.twig', [
-    //         'controller_name' => 'MonCompteController',
-
-    //     ]);
-    // }
-
-
     /**
      * @Route("/mes/infos", name="app_adresses")
      */
     public function adresse(): Response
     {
         return $this->render('mon_compte/adresses.html.twig', [
-            'controller_name' => 'MonCompteController',
-
-        ]);
-    }
-
-    /**
-     * @Route("/mes/retours", name="app_retours")
-     */
-    public function retours(): Response
-    {
-        return $this->render('mon_compte/mes-retours.html.twig', [
             'controller_name' => 'MonCompteController',
 
         ]);

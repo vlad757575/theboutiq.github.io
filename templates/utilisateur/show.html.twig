@@ -46,9 +46,10 @@
     </tbody>
 </table>
 
-<a href="{{ path('user', {'id': utilisateur.id}) }}">Retour</a>
+<a class="btn btn-primary" href="{{ path('user', {'id': utilisateur.id}) }}">Retour</a>
 
-<a href="{{ path('app_utilisateur_edit', {'id': utilisateur.id}) }}">Modifier</a>
+<a class="btn btn-primary" href="{{ path('app_utilisateur_edit', {'id': utilisateur.id}) }}">Modifier</a>
+
 
 
 {% endblock %}

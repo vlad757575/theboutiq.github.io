@@ -1,0 +1,27 @@
+{% extends "facture.html.twig" %}
+
+{% block body %}
+<h2>Vos informations personnelles</h2>
+<div class="main">
+    <strong>{{ utilisateur.nom}} {{ utilisateur.prenom}}</strong><br>
+    <p>{{ utilisateur.telephone}}</p><br>
+    <p>{{ utilisateur.email}}</p><br>
+    <p>{{ utilisateur.dateNaissance|date('d-m-Y')}}</p>
+</div>
+{% endblock %}
+
+{% block css %}
+<style>
+    .main {
+        display: block;
+        margin: auto;
+    }
+
+    h2 {
+        color: red;
+        font-weight: bolder;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+</style>
+{% endblock %}

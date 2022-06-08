@@ -45,6 +45,19 @@ class CommandeRepository extends ServiceEntityRepository
         }
     }
 
+
+    // public function findByExampleField($user)
+    // {
+    //     return $this->createQueryBuilder('commande')
+    //         ->andWhere('commande.utilisateur = :val')
+    //         ->setParameter('val', $value)
+    //         ->orderBy('e.id', 'ASC')
+    //         ->setMaxResults(10)
+    //         ->getQuery()
+    //         ->getResult()
+    //     ;
+    // }
+
     // public function findMyOrders($user)
     //  {
 
@@ -57,6 +70,8 @@ class CommandeRepository extends ServiceEntityRepository
     //         ->getQuery()
     //         ->getResult();
 
+
+    //      }
 
 
 

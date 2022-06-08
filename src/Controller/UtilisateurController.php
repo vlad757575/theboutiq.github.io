@@ -2,8 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Commande;
+use Dompdf\Options;
+use Dompdf\Dompdf;
 use App\Entity\Utilisateur;
 use App\Form\UtilisateurType;
+use App\Repository\CommandeRepository;
 use App\Repository\UtilisateurRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -98,5 +102,32 @@ class UtilisateurController extends AbstractController
         }
 
         return $this->redirectToRoute('app_utilisateur_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    /**     
+     * @Route("/rgpd/{id}/", name="mes-infos", methods={"GET"})
+     */
+    public function rgpdPdf(UtilisateurRepository $utilisateurRepository, $id, Utilisateur $utilisateur)
+    {
+        // dd($utilisateur);
+        $options = new Options();
+        $options->set('defaultFont', 'Calibri');
+
+        $domPdf = new DomPdf($options);
+
+        $domPdf->setOptions($options);
+        $domPdf->setPaper('A4', 'protrait');
+
+        $html = $this->renderView('utilisateur/rgpd.html.twig', [
+            'utilisateur' => $utilisateurRepository->findOneBy(['id' => $id]),
+            // 'commande' => $utilisateur->getAdresseLivraison(),
+
+
+        ]);
+
+        $domPdf->loadHtml($html);
+
+        $domPdf->render();
+        $domPdf->stream("Vos informations");
     }
 }

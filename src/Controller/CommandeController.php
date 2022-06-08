@@ -4,11 +4,14 @@ namespace App\Controller;
 
 
 use DateTime;
+use Dompdf\Dompdf;
 use Stripe\Stripe;
+use Dompdf\Options;
 use App\Entity\Etat;
 use App\Classe\Panier;
 use App\Entity\Commande;
 use App\Form\MyOrderType;
+use App\Classe\PdfBuilder;
 use App\Form\CommandeType;
 use Stripe\Checkout\Session;
 use App\Entity\CommandeProduit;
@@ -226,15 +229,54 @@ class CommandeController extends AbstractController
                 'panier' => $panier->getMyPanier(),
                 'form' => $form->createView(),
                 'commande' => $commande,
-
-
-
-
-
             ]);
         }
         return $this->redirectToRoute('app_mpanier');
     }
+
+    /**     
+     * @Route("/commande/generatePdf/{id}/", name="facture", methods={"GET"})
+     */
+    public function getPdf(CommandeRepository $commandeRepository, $id)
+    {
+
+        $options = new Options();
+        $options->set('defaultFont', 'Calibri');
+
+        $domPdf = new DomPdf($options);
+
+        $domPdf->setOptions($options);
+        $domPdf->setPaper('A4', 'protrait');
+
+        $html = $this->renderView('commande/telechargement.html.twig', [
+            'facture' => $commandeRepository->findOneBy(['id' => $id]),
+
+
+        ]);
+
+        $domPdf->loadHtml($html);
+
+        $domPdf->render();
+        $domPdf->stream("Votre facture - theboutiq!");
+    }
+
+
+
+    // /**
+    //  * @Route("/commande/retour", name="retour", methods={"GET"})
+    //  */
+    // public function retour(CommandeRepository $commandeRepository, EtatRepository $er): Response
+    // {
+
+    //     $etat = $er->find(6);
+    //     $utilisateur = $this->getUser();
+    //     $commande =  $commandeRepository->findBy(['utilisateur' => $utilisateur->getId(), 'etat' =>  1], ['id' => 'DESC']);
+
+    //     // dd($commande);
+    //     return $this->render('mon_compte/mes-retours.html.twig', [
+    //         'commande' => $commande->$er->find(6),
+    //     ]);
+    // }
 }
     // $checkout = Session::create([
     //     'line_items' => $line_items,

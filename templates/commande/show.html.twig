@@ -33,6 +33,7 @@
                 <th scope="col">Prix unitaire</th>
                 <th>TVA unitaire</th>
                 <th scope="col">Sous total</th>
+                <th>Facture</th>
             </tr>
         </thead>
         <tbody>
@@ -43,6 +44,7 @@
                 <td>{{produit.prix|number_format(2)}} €</td>
                 <td>{{(0.20 * produit.prix)/(1 + 0.20)|round|number_format(2) }} €</td>
                 <td>{{ produit.total|number_format(2)}} €</td>
+                <td> <a href="{{path('facture', {'id': commande.id})}}"><img style="width: 25px;" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/PDF_file_icon.svg/1200px-PDF_file_icon.svg.png" alt=""></a></td>
             </tr>
             {% endfor %}
 
@@ -56,7 +58,7 @@
 
 </div>
 <div class="text-center">
-    <p>Besoin d'une facture ? <a href="#">Cliquez ici et saisissez dans objet "Besoin d'une facture"</a></p>
+    <p>Besoin d'une facture ? <a href="{{path('facture', {'id': commande.id})}}"><img style="width: 35px;" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/PDF_file_icon.svg/1200px-PDF_file_icon.svg.png" alt=""></a></p>
 </div>
 
 {% endblock %}
