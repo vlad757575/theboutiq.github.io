@@ -13,8 +13,6 @@ class TransporteurController extends AbstractController
      */
     public function index(): Response
     {
-        return $this->render('transporteur/index.html.twig', [
-            'controller_name' => 'TransporteurController',
-        ]);
+        return $this->render('transporteur/index.html.twig');
     }
 }

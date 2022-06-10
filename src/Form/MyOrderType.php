@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\Entity\Commande;
+use App\Entity\AdresseFacturation;
 use App\Entity\Transporteur;
 use App\Entity\AdresseLivraison;
 use Symfony\Component\Form\AbstractType;
@@ -18,7 +18,6 @@ class MyOrderType extends AbstractType
 
         $user = $options['user'];
 
-
         $builder
             ->add('livraisonAdresse', EntityType::class, [
                 'label' => 'Choisissez votre adresse de livraison',
@@ -27,10 +26,15 @@ class MyOrderType extends AbstractType
                 'choices' => $user->getAdresseLivraison(),
                 'multiple' => false,
                 'expanded' => true
-
             ])
-
-
+            ->add('facturationAdresse', EntityType::class, [
+                'label' => 'Choisissez votre adresse de facturation',
+                'required' => true,
+                'class' => AdresseFacturation::class,
+                // 'choices' => $user->getAdresseFacturation(),
+                'multiple' => false,
+                'expanded' => true,
+            ])
             ->add('transporteur', EntityType::class, [
                 'label' => 'Choisissez votre livraison',
                 'required' => true,
@@ -50,7 +54,6 @@ class MyOrderType extends AbstractType
     {
         $resolver->setDefaults([
             'user' => array(),
-            // 'data_class' => Commande::class,
         ]);
     }
 }

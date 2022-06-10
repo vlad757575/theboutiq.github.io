@@ -46,7 +46,7 @@
                             <a class="nav-link link-style" href="{{path('app_contact')}}">Contact</a>
                         </li>
 
-                        {% if is_granted('ROLE_USER') %}
+                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
 
                         <li class="nav-item">
                             <a href="{{path('mon_compte')}}" class="nav-link link-style">Mon compte {{ app.user.prenom }}</a>

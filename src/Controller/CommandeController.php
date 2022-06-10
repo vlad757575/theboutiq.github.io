@@ -5,23 +5,19 @@ namespace App\Controller;
 
 use DateTime;
 use Dompdf\Dompdf;
-use Stripe\Stripe;
 use Dompdf\Options;
-use App\Entity\Etat;
 use App\Classe\Panier;
 use App\Entity\Commande;
 use App\Form\MyOrderType;
-use App\Classe\PdfBuilder;
 use App\Form\CommandeType;
-use Stripe\Checkout\Session;
 use App\Entity\CommandeProduit;
 use App\Repository\EtatRepository;
 use App\Repository\CommandeRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Routing\Annotation\Route;;
+
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -48,8 +44,7 @@ class CommandeController extends AbstractController
      */
     public function index(CommandeRepository $commandeRepository): Response
     {
-        // $commande = $commandeRepository->findMyOrders();
-        // dd($commande);
+
         return $this->render('commande/index.html.twig');
     }
 
@@ -137,7 +132,6 @@ class CommandeController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // dd($form->getData());
         }
 
         return $this->render('commande/choix.html.twig', [
@@ -158,16 +152,16 @@ class CommandeController extends AbstractController
 
         $form->handleRequest($request);
 
-
         if ($form->isSubmitted() && $form->isValid()) {
 
             $dateCommande = new DateTime();
             $transporteur = $form->get('transporteur')->getData();
             $livraison = $form->get('livraisonAdresse')->getData();
+            $facturation = $form->get('facturationAdresse')->getData();
             $etat = $er->find(1);
 
 
-
+            // Je recupere les informations liés à la livraison
             $livraison_info = $livraison->getNomPrenom();
             $livraison_info .= '<br/>' . $livraison->getTelephone();
 
@@ -183,10 +177,28 @@ class CommandeController extends AbstractController
                 $livraison_info .= '<br/>' . $livraison->getInfoComplementaire();
             }
 
-
             $livraison_info .= '<br/>' . $livraison->getCodepostal();
             $livraison_info .= '<br/>' . $livraison->getVille();
             $livraison_info .= '<br/>' . $livraison->getPays();
+
+            //Je recupere toutes les information liés à la facturation
+
+            $facturation_info = $livraison->getNomPrenom();
+            $facturation_info .= '<br/>' . $facturation->getTelephone();
+
+            if ($facturation->getSociete()) {
+                $facturation_info .= '<br/>' . $facturation->getSociete();
+            }
+            $facturation_info .= '<br/>' . $facturation->getNumeroRue();
+            $facturation_info .= '<br/>' .  $facturation->getRue();
+
+            if ($facturation->getInfoComplementaire()) {
+
+                $facturation_info .= '<br/>' . $facturation->getInfoComplementaire();
+            }
+            $facturation_info .= '<br/>' . $facturation->getCodepostal();
+            $facturation_info .= '<br/>' . $facturation->getVille();
+            $facturation_info .= '<br/>' . $facturation->getPays();
 
 
             $commande = new Commande();
@@ -195,14 +207,12 @@ class CommandeController extends AbstractController
             $commande->setTransporteurNom($transporteur->getNom());
             $commande->setTransporteurTarif($transporteur->getTarif());
             $commande->setLivraisonAdresse($livraison_info);
+            $commande->setFacturationAdresse($facturation_info);
             $commande->setToken(hash('sha256', random_bytes(32)));
             $commande->setEtat($etat);
-            // dd($commande);
 
+            //Je fige les données de commande
             $this->entityManager->persist($commande);
-
-            // $for_stripe = [];
-            // $YOUR_DOMAIN = 'http://localhost:3000/public';
 
             foreach ($panier->getMyPanier() as $produit) {
                 $commandeProduit = new CommandeProduit;
@@ -212,16 +222,11 @@ class CommandeController extends AbstractController
                 $commandeProduit->setPrix($produit['produit']->getMontantHt());
                 $commandeProduit->setTotal($produit['produit']->getMontantHt() * $produit['quantite']);
 
-
+                // je fige les données de commandeProduit
                 $this->entityManager->persist($commandeProduit);
             }
-
+            // J'envoi tout en bdd
             $this->entityManager->flush();
-
-
-
-            // dd($checkout_session);
-
 
             return $this->render('commande/recapitulatif.html.twig', [
                 'transporteur' => $transporteur,
@@ -239,61 +244,24 @@ class CommandeController extends AbstractController
      */
     public function getPdf(CommandeRepository $commandeRepository, $id)
     {
-
+        //j'instancie les options et parametres
         $options = new Options();
         $options->set('defaultFont', 'Calibri');
-
+        //j'instancie un nouvel objet DomPdf
         $domPdf = new DomPdf($options);
 
         $domPdf->setOptions($options);
-        $domPdf->setPaper('A4', 'protrait');
+        $domPdf->setPaper('A4', 'portrait');
 
         $html = $this->renderView('commande/telechargement.html.twig', [
             'facture' => $commandeRepository->findOneBy(['id' => $id]),
 
-
         ]);
-
+        //j'injecte ma vue html
         $domPdf->loadHtml($html);
-
+        //Je crée le pdf
         $domPdf->render();
+        // Je lui donne un nom
         $domPdf->stream("Votre facture - theboutiq!");
     }
-
-
-
-    // /**
-    //  * @Route("/commande/retour", name="retour", methods={"GET"})
-    //  */
-    // public function retour(CommandeRepository $commandeRepository, EtatRepository $er): Response
-    // {
-
-    //     $etat = $er->find(6);
-    //     $utilisateur = $this->getUser();
-    //     $commande =  $commandeRepository->findBy(['utilisateur' => $utilisateur->getId(), 'etat' =>  1], ['id' => 'DESC']);
-
-    //     // dd($commande);
-    //     return $this->render('mon_compte/mes-retours.html.twig', [
-    //         'commande' => $commande->$er->find(6),
-    //     ]);
-    // }
 }
-    // $checkout = Session::create([
-    //     'line_items' => $line_items,
-    //     'mode' => 'payment',
-    //     'success_url' => $this->generateUrl('payment_success', ['token' => $commande->getToken()], UrlGeneratorInterface::ABSOLUTE_URL), // Lien ABSOLU
-    //     'cancel_url' => $this->generateUrl('payment_cancel', [], UrlGeneratorInterface::ABSOLUTE_URL), // Lien ABSOLU
-    // ]);
-
-    // dd($checkout);
-    // $line_items[] = [
-    //     // 'payment_method_types' => ['card'],
-    //     'price_data' => [
-    //         'currency' => 'eur',
-    //         'product_data' => [
-    //             'name' => $produit->getNom(),
-    //         ],
-    //         'unit_amount' => $produit->getMontantTtc() * 100 // Montant en centimes
-    //     ],
-    //     'quantity' => $quantite,
-    // ];

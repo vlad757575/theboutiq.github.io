@@ -34,9 +34,9 @@
             </tr>
         </thead>
         <tbody>
-            {% for commande in app.user.commande|reverse %}
+            {% for commande in commandes %}
             <tr>
-                <th scope="row">{{commande.id}}</th>
+                <th scope="row">{{commande.getOrderNumber}}</th>
                 <td>{{commande.dateCommande|date('d-m-Y')}}</td>
                 <td>{{commande.etat}}</td>
                 <td>v</td>

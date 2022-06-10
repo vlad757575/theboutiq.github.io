@@ -32,6 +32,16 @@ class Transporteur
      */
     private $tarif;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $suivi;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $numeroSuivi;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -73,6 +83,30 @@ class Transporteur
     public function setTarif(float $tarif): self
     {
         $this->tarif = $tarif;
+
+        return $this;
+    }
+
+    public function getSuivi(): ?string
+    {
+        return $this->suivi;
+    }
+
+    public function setSuivi(?string $suivi): self
+    {
+        $this->suivi = $suivi;
+
+        return $this;
+    }
+
+    public function getNumeroSuivi(): ?string
+    {
+        return $this->numeroSuivi;
+    }
+
+    public function setNumeroSuivi(?string $numeroSuivi): self
+    {
+        $this->numeroSuivi = $numeroSuivi;
 
         return $this;
     }

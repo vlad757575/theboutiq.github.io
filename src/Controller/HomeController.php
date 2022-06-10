@@ -2,13 +2,8 @@
 
 namespace App\Controller;
 
-use Symfony\Component\Mime\Address;
-use Symfony\Bridge\Twig\Mime\TemplatedEmail;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class HomeController extends AbstractController
@@ -62,28 +57,4 @@ class HomeController extends AbstractController
     {
         return $this->render('home/faq.html.twig');
     }
-
-    // /**
-    //  * @Route("/signin", name="signin")
-    //  */
-    // public function signin(): Response
-    // {
-    //     return $this->render('home/signin.html.twig', [
-    //         'controller_name' => 'HomeController',
-    //     ]);
-    // }
-
-    // /**
-    //  * @Route("/forgot-password", name="forgot-password")
-    //  */
-    // public function forgotpassword(): Response
-    // {
-    //     return $this->render('home/forgotpassword.html.twig', [
-    //         'controller_name' => 'HomeController',
-    //     ]);
-    // }
-
-    /**
-     * @Route("/informations", name="informations")
-     */
 }

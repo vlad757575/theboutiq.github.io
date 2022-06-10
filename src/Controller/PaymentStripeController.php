@@ -5,16 +5,9 @@ namespace App\Controller;
 use Stripe\Stripe;
 use App\Entity\Etat;
 use App\Classe\Panier;
-use App\Entity\Produit;
 use App\Entity\Commande;
-use App\Entity\Transporteur;
-use Doctrine\ORM\Mapping\Id;
 use Stripe\Checkout\Session;
-use App\Repository\EtatRepository;
-use App\Repository\CommandeRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bridge\Twig\Node\RenderBlockNode;
-use Symfony\Component\Console\Command\Command;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -27,43 +20,32 @@ class PaymentStripeController extends AbstractController
      * @Route("commande/commande/recapitulatif/create-session/{token}", name="app_payment_stripe" )
      */
     public function index($token, EntityManagerInterface $entityManager, Panier $panier)
-
     {
 
         $for_stripe = [];
         $YOUR_DOMAIN = 'http://localhost:3000/public';
 
-
-
-
-
-        // $commande = $entityManager->getRepository(Commande::class)->findOneBy(['token' => $token]);
         $commande = $entityManager->getRepository(Commande::class)->findOneBy(array('token' => $token));
 
-        // dd($commande->getCommandeProduits()->getValues());
-        // dd($commande->getCommandeProduits());
 
+        //Je boucle sur les entrées de mon panier
         foreach ($commande->getCommandeProduits()->getValues() as $produit) {
-            // $produit_objet = $entityManager->getRepository(Produit::class)->findOneBy($produit->getProduit());
+            // Je transmet la quantité et le prix des produits à stripe
             $for_stripe[] = [
-                // 'mode' => 'payment',
+
                 'price_data' => [
                     'currency' => 'eur',
                     'unit_amount' => $produit->getPrix() * 100,
                     'product_data' => [
                         'name' => $produit->getMonProduit(),
-                        // 'images' => $YOUR_DOMAIN . "/uploads/" . $produit->getImage(),
+
                     ],
                 ],
                 'quantity' => $produit->getQuantite(),
             ];
         }
-
-
-
-
+        // Je transmet le nom et le prix de la livraison
         $for_stripe[] = [
-            // 'mode' => 'payment',
             'price_data' => [
                 'currency' => 'eur',
                 'unit_amount' => $commande->getTransporteurTarif() * 100,
@@ -77,16 +59,17 @@ class PaymentStripeController extends AbstractController
         Stripe::setApiKey($this->getParameter('stripeSecretKey'));
 
         $checkout_session = Session::create([
+            // Je preremplis le champ email de l'utilisateur
             'customer_email' => $this->getUser()->getEmail(),
             'payment_method_types' => ['card'],
             'line_items' => [
                 $for_stripe
             ],
             'mode' => 'payment',
+            // Les redirections en cas de echec ou success de paiement
             'success_url' => $this->generateUrl('payment_success', ['token' => $commande->getToken()], UrlGeneratorInterface::ABSOLUTE_URL),
             'cancel_url' =>  $this->generateUrl('payment_failed', ['token' => $commande->getToken()], UrlGeneratorInterface::ABSOLUTE_URL),
-            // 'success_url' => $this->generateUrl('payment_success', ['token' => $commande->getToken()], UrlGeneratorInterface::ABSOLUTE_URL),
-            // 'cancel_url' => $this->generateUrl('payment_cancel', [], UrlGeneratorInterface::ABSOLUTE_URL),
+
         ]);
 
 
@@ -100,8 +83,8 @@ class PaymentStripeController extends AbstractController
     {
 
         $commande = $entityManager->getRepository(Commande::class)->findOneBy(array('token' => $token));
+        // Vue que le paiement est validé je passe l'id etat 1 => 3
         $etat = $entityManager->getRepository(Etat::class)->find(3);
-        // $etat->$commande->FindOneById(1);
 
         if (!$commande || $commande->getUtilisateur() != $this->getUser()) {
             return $this->render('index');
@@ -109,10 +92,10 @@ class PaymentStripeController extends AbstractController
         if ($commande->getEtat()->getId() == 1) {
 
             $commande->setEtat($etat);
-
+            //J'envoie en bdd
             $entityManager->flush();
         }
-
+        // Je vide le panier
         $session->set('panier', []);
 
 
@@ -130,35 +113,13 @@ class PaymentStripeController extends AbstractController
 
         $commande = $entityManager->getRepository(Commande::class)->findOneBy(array('token' => $token));
         $etat = $entityManager->getRepository(Etat::class)->find(1);
-        // $etat->$commande->FindOneById(1);
 
         if (!$commande || $commande->getUtilisateur() != $this->getUser()) {
             return $this->render('index');
         }
-
+        //PS: Le panier n'est pas vide 
         return $this->render('payment/failed.html.twig', [
             'commande' => $commande,
         ]);
     }
-
-
-    // /**
-    //  * @Route("commande/commande/recapitulatif/shipped/{token}", name="shipped" )
-    //  */
-    // public function shipped(EntityManagerInterface $entityManager, $id)
-    // {
-
-    //     $commande = $entityManager->getRepository(Commande::class)->findOneBy(array('id' => $id));
-    //     $etat = $entityManager->getRepository(Etat::class)->find(4);
-
-    //     if (!$commande || $commande->getUtilisateur() != $this->getUser()) {
-    //         return $this->render('index');
-    //     }
-
-    //     $commande->setEtat($etat);
-
-    //     $entityManager->flush();
-
-    //     return $this->render('index');
-    // }
 }

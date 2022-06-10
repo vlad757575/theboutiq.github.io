@@ -2,15 +2,12 @@
 
 namespace App\Controller;
 
-use App\Entity\Utilisateur;
-use App\Form\UtilisateurType;
-use App\Repository\UtilisateurRepository;
-use Symfony\Component\HttpFoundation\Request;
+use App\Repository\CommandeRepository;
+use App\Repository\EtatRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+
 
 
 
@@ -46,6 +43,18 @@ class MonCompteController extends AbstractController
         return $this->render('mon_compte/adresses.html.twig', [
             'controller_name' => 'MonCompteController',
 
+        ]);
+    }
+
+    /**
+     * @Route("/mes/retours", name="mes_retours")
+     */
+    public function mesRetours(EtatRepository $etatRepository, CommandeRepository $commandeRepository): Response
+    {
+        $etat = $etatRepository->findOneBy(['nom' => 'Retourné']);
+        $commandes = $commandeRepository->findBy(['etat' => $etat, 'utilisateur' => $this->getUser()]);
+        return $this->render('mon_compte/mes-retours.html.twig', [
+            'commandes' => $commandes
         ]);
     }
 }

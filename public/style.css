@@ -1,4 +1,7 @@
 
+
+
+
   .my-formular {
     max-width:60vw;
     margin: 11vh auto;
@@ -245,9 +248,16 @@ margin: 15px;
  }
  
  h1, h2, h3, h4{
+
+  font-family: 'Source Sans Pro', sans-serif;
    color:#29D2BB;
-   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
    
+
+   font-family: 'Playfair Display', serif;
+ }
+
+ p {
+font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
  }
 
  

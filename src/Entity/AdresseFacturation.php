@@ -67,6 +67,21 @@ class AdresseFacturation
      */
     private $societe;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $telephone;
+
+    /**
+     * @ORM\Column(type="string", length=20, nullable=true)
+     */
+    private $siret;
+
+    /**
+     * @ORM\Column(type="string", length=30, nullable=true)
+     */
+    private $numTva;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -76,10 +91,17 @@ class AdresseFacturation
     {
         return $this->nom;
     }
+
     public function __toString()
     {
-        return $this->getNom();
+        return $this->getNom() . '[br]' . $this->getTelephone() . '[br]' . $this->getNumeroRue() . ' ' . $this->getRue() . '[br]' . $this->getCodepostal() . ' ' . $this->getVille() . '[br]' . $this->getPays();;
     }
+
+    // public function fullAdresseFacturation()
+    // {
+
+    //     return $this->getNom() . '[br]' . $this->getTelephone() . '[br]' . $this->getNumeroRue() . ' ' . $this->getRue() . '[br]' . $this->getCodepostal() . ' ' . $this->getVille() . '[br]' . $this->getPays();
+    // }
 
     public function setNom(string $nom): self
     {
@@ -194,6 +216,42 @@ class AdresseFacturation
     public function setSociete(?string $societe): self
     {
         $this->societe = $societe;
+
+        return $this;
+    }
+
+    public function getTelephone(): ?string
+    {
+        return $this->telephone;
+    }
+
+    public function setTelephone(string $telephone): self
+    {
+        $this->telephone = $telephone;
+
+        return $this;
+    }
+
+    public function getSiret(): ?string
+    {
+        return $this->siret;
+    }
+
+    public function setSiret(?string $siret): self
+    {
+        $this->siret = $siret;
+
+        return $this;
+    }
+
+    public function getNumTva(): ?string
+    {
+        return $this->numTva;
+    }
+
+    public function setNumTva(?string $numTva): self
+    {
+        $this->numTva = $numTva;
 
         return $this;
     }

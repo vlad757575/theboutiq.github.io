@@ -39,6 +39,7 @@ class Commande
 
     /**
      * @ORM\ManyToOne(targetEntity=Utilisateur::class, inversedBy="commande")
+     * @ORM\JoinColumn(name="utilisateur_id", onDelete="SET NULL", nullable=true)
      */
     private $utilisateur;
 
@@ -63,6 +64,11 @@ class Commande
      * @ORM\Column(type="text")
      */
     private $livraisonAdresse;
+
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $facturationAdresse;
 
 
 
@@ -93,15 +99,16 @@ class Commande
         return $this;
     }
 
-    // public function __toString()
-    // {
-    //     return   $this->transporteurNom();
-    // }
+    public function __toString()
+    {
+        return $this->getDateCommande()->format('Ymd');
+    }
 
 
     public function getOrderNumber()
     {
-        $numberOrder = $this->getId();
+        $date = $this->getDateCommande();
+        $numberOrder = $this->getDateCommande()->format('Ymd') . '' . $this->getId();
         return $numberOrder;
     }
 
@@ -116,6 +123,10 @@ class Commande
 
         return $this;
     }
+
+
+
+
 
     public function totalPurchase()
     {
@@ -218,6 +229,18 @@ class Commande
     public function setLivraisonAdresse(string $livraisonAdresse): self
     {
         $this->livraisonAdresse = $livraisonAdresse;
+
+        return $this;
+    }
+
+    public function getFacturationAdresse(): ?string
+    {
+        return $this->facturationAdresse;
+    }
+
+    public function setFacturationAdresse(string $facturationAdresse): self
+    {
+        $this->facturationAdresse = $facturationAdresse;
 
         return $this;
     }

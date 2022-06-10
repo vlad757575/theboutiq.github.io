@@ -63,7 +63,7 @@ class AdresseLivraison
 
     /**
      * @ORM\ManyToOne(targetEntity=Utilisateur::class, inversedBy="adresseLivraison")
-     * @ORM\JoinColumn(nullable=true)
+     * @ORM\JoinColumn(name="utilisateur_id", onDelete="SET NULL", nullable=true)
      */
     private $utilisateur;
 
@@ -99,11 +99,11 @@ class AdresseLivraison
         return $this->getNom() . '[br]' . $this->getTelephone() . '[br]' . $this->getNumeroRue() . ' ' . $this->getRue() . '[br]' . $this->getCodepostal() . ' ' . $this->getVille() . '[br]' . $this->getPays();
     }
 
-    public function fullAdresse()
-    {
+    // public function fullAdresse()
+    // {
 
-        return $this->getNom() . '[br]' . $this->getTelephone() . '[br]' . $this->getNumeroRue() . ' ' . $this->getRue() . '[br]' . $this->getCodepostal() . ' ' . $this->getVille() . '[br]' . $this->getPays();
-    }
+    //     return $this->getNom() . '[br]' . $this->getTelephone() . '[br]' . $this->getNumeroRue() . ' ' . $this->getRue() . '[br]' . $this->getCodepostal() . ' ' . $this->getVille() . '[br]' . $this->getPays();
+    // }
 
 
 

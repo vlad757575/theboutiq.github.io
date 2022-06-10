@@ -15,16 +15,16 @@
         </nav>
     </div>
 </div>
-<h1 class="text-center m-5">Details de ma commande n°{{commande.id }} </h1>
+<h1 class="text-center m-5">Details de ma commande n°{{commande.getOrderNumber }} </h1>
 <div class="container">
     <hr>
-    <strong> Date de commande : {{ commande.dateCommande ? commande.dateCommande|date('Y-m-d') : '' }}</strong> <br>
-    <strong> Référence : {{commande.id }} </strong><br>
+    <strong> Date de commande : {{ commande.dateCommande ? commande.dateCommande|date('d m Y') : '' }}</strong> <br>
+    <strong> Référence : {{commande.getOrderNumber }} </strong><br>
     <strong> Transporteur : {{commande.transporteurNom}}</strong> <br>
+    <strong>Retrouve le suvi de ta commande : </strong> <br>
     <strong> Etat : {{commande.etat}}</strong> <br>
     <hr>
     <h5 class="text-center m-5"> Les details de votre commande </h5>
-
     <table class="table">
         <thead>
             <tr>
@@ -47,7 +47,6 @@
                 <td> <a href="{{path('facture', {'id': commande.id})}}"><img style="width: 25px;" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/PDF_file_icon.svg/1200px-PDF_file_icon.svg.png" alt=""></a></td>
             </tr>
             {% endfor %}
-
         </tbody>
     </table>
 </div>
@@ -55,7 +54,6 @@
     <strong> Livraison : </strong>{{ commande.transporteurNom}} - {{ commande.transporteurTarif|number_format(2)}} € <br>
     <strong> TVA : </strong>{{(0.20 * commande.totalPurchase)/(1 + 0.20)|round|number_format(2)}} €<br>
     <strong> Total :</strong> {{ commande.totalPurchase|number_format(2)}} € <br>
-
 </div>
 <div class="text-center">
     <p>Besoin d'une facture ? <a href="{{path('facture', {'id': commande.id})}}"><img style="width: 35px;" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/PDF_file_icon.svg/1200px-PDF_file_icon.svg.png" alt=""></a></p>

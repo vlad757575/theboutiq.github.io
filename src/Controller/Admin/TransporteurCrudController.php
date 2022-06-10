@@ -25,6 +25,8 @@ class TransporteurCrudController extends AbstractCrudController
             TextField::new('nom'),
             MoneyField::new('tarif')->setCurrency('EUR'),
             TextEditorField::new('description'),
+            TextField::new('suivi'),
+            TextField::new('numeroSuivi'),
         ];
     }
 }

@@ -2,18 +2,17 @@
 
 namespace App\Controller;
 
-use App\Entity\Commande;
 use Dompdf\Options;
 use Dompdf\Dompdf;
 use App\Entity\Utilisateur;
 use App\Form\UtilisateurType;
-use App\Repository\CommandeRepository;
 use App\Repository\UtilisateurRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 /**
  * * @IsGranted("ROLE_USER")
@@ -92,16 +91,17 @@ class UtilisateurController extends AbstractController
 
 
     /**
-     * @IsGranted("ROLE_ADMIN")
+     * 
      * @Route("/{id}", name="app_utilisateur_delete", methods={"POST"})
      */
     public function delete(Request $request, Utilisateur $utilisateur, UtilisateurRepository $utilisateurRepository): Response
     {
         if ($this->isCsrfTokenValid('delete' . $utilisateur->getId(), $request->request->get('_token'))) {
             $utilisateurRepository->remove($utilisateur);
+            $session = new Session();
         }
 
-        return $this->redirectToRoute('app_utilisateur_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('index', [], Response::HTTP_SEE_OTHER);
     }
 
     /**     
@@ -120,8 +120,6 @@ class UtilisateurController extends AbstractController
 
         $html = $this->renderView('utilisateur/rgpd.html.twig', [
             'utilisateur' => $utilisateurRepository->findOneBy(['id' => $id]),
-            // 'commande' => $utilisateur->getAdresseLivraison(),
-
 
         ]);
 

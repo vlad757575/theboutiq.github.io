@@ -1,24 +1,60 @@
 {% extends "facture.html.twig" %}
 
 {% block body %}
-<h2>Votre facture n°{{facture.id}}</h2>
+<h2>Votre facture n°{{facture.getOrderNumber}}</h2>
+<hr>
 
-<img src="C:/xampp/htdocs/projet_de_certification/public/img/logo-theboutiq.png" alt="">
 <div>
     <strong class="text-left">THEBOUTIQ! <br> 9 boulevard de la boissiere <br> 93130 Noisy-Le-Sec <br> FR </strong>
 </div>
 <div>
-    <strong class="text-right">{{ facture.id}}</strong>
-</div>
-{% endblock %}
+    <strong class="text-right">{{ facture.getOrderNumber}}</strong>
 
+    <p class="text-left">{{facture.livraisonAdresse|raw}}</p>
+    <p class="text-left">{{facture.facturationAdresse|raw}}</p>
+    <p class="text-left">{{facture.getOrderNumber}}</p>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Produit</th>
+            <th scope="col">Quantité</th>
+            <th scope="col">Prix unitaire</th>
+            <th>TVA unitaire</th>
+            <th scope="col">Sous total</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        {% for  produit in facture.commandeProduits %}
+        <tr>
+            <th>{{produit.monProduit}}</th>
+            <td>{{produit.quantite}}</td>
+            <td>{{produit.prix|number_format(2)}} €</td>
+            <td>{{(0.20 * produit.prix)/(1 + 0.20)|round|number_format(2) }} €</td>
+            <td>{{ produit.total|number_format(2)}} €</td>
+        </tr>
+    </tbody>
+</table>
+{% endfor %}
+<h3>Livraison :</h3>
+<p>{{facture.TransporteurNom}}</p>
+<p>{{facture.TransporteurTarif}}</p><br>
+<p> class="text-left">{{facture.livraisonAdresse|raw}}</p>
+
+
+{% endblock %}
 {% block css %}
 <style>
     h2 {
-        color: red;
+        color: brown;
         font-weight: bolder;
         text-align: center;
         margin-bottom: 20px;
+    }
+
+    p {
+        text-align: left;
     }
 </style>
 {% endblock %}
