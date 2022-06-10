@@ -47,7 +47,7 @@ class Produit
     /**
      * @ORM\Column(type="float")
      */
-    private $montantHt;
+    private $montant;
 
 
     /**
@@ -154,21 +154,21 @@ class Produit
         return $this;
     }
 
-    public function getMontantHt(): ?int
+    public function getMontant(): ?int
     {
-        return $this->montantHt;
+        return $this->montant;
     }
 
-    public function setMontantHt(int $montantHt): self
+    public function setMontant(int $montant): self
     {
-        $this->montantHt = $montantHt;
+        $this->montant = $montant;
 
         return $this;
     }
 
-    public function getMontantTtc()
+    public function getMontantt()
     {
-        return $this->montantHt * ($this->tva / 100 + 1);
+        return $this->montant * ($this->tva / 100 + 1);
     }
 
 

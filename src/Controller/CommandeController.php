@@ -219,8 +219,8 @@ class CommandeController extends AbstractController
                 $commandeProduit->setCommande($commande);
                 $commandeProduit->setMonProduit($produit['produit']->getNom());
                 $commandeProduit->setQuantite($produit['quantite']);
-                $commandeProduit->setPrix($produit['produit']->getMontantHt());
-                $commandeProduit->setTotal($produit['produit']->getMontantHt() * $produit['quantite']);
+                $commandeProduit->setPrix($produit['produit']->getMontant());
+                $commandeProduit->setTotal($produit['produit']->getMontant() * $produit['quantite']);
 
                 // je fige les données de commandeProduit
                 $this->entityManager->persist($commandeProduit);

@@ -1,16 +1,12 @@
 {% extends 'base.html.twig' %}
-
 {% block title %}Mon panier{% endblock %}
-
 {% block body %}
-
 <div class="text-center m-3">
     <h1>Mon panier</h1>
     <i> Les produits que vous avez ajouté à votre panier </i>
 </div>
 <hr>
 {% if panier|length > 0 %}
-
 <div class="container mt-5">
     <table class="table mt-4">
         <thead>
@@ -29,22 +25,18 @@
             <tr>
                 <th> <img src="/uploads/{{produit.produit.image}}" alt="image produit {{produit.produit.nom}}" style="width:35px;"></th>
                 <th>{{ produit.produit.nom}}</th>
-
                 <td>{{ produit.quantite}}</td>
-                <td>{{ produit.produit.montantHt|number_format(2) }} €</td>
-                {% set total = total + (produit.produit.montantHt * produit.quantite|number_format(2)) %}
+                <td>{{ produit.produit.montant|number_format(2) }} €</td>
+
+                {% set total = total + (produit.produit.montant * produit.quantite|number_format(2)) %}
+
                 <td>{{ (0.20 * total)/(1 + 0.20)|round|number_format(2) }} €</td>
-                <td>{{ (produit.produit.montantHt * produit.quantite|number_format(2))}} €</td>
-
+                <td>{{ (produit.produit.montant * produit.quantite|number_format(2))}} €</td>
                 <td><a href="{{path('add_panier', {'id' : produit.produit.id})}}"><img src="{{asset('icons/plus.png')}}" alt="ajout" style="width:18px ;"></a></td>
-
                 <td><a href="{{path('del_ligne-panier', {'id' : produit.produit.id})}}"><img src="{{asset('icons/trash.png')}}" alt="supprimer" style="width:18px ;"></a></td>
-
                 <td><a href="{{path('decremente_panier', {'id' : produit.produit.id})}}"><img src="{{asset('icons/minus.png')}}" alt="supprimer" style="width:18px ;"></a></td>
             </tr>
-
             {% endfor %}
-
         </tbody>
     </table>
     <div class="text-center">
@@ -53,7 +45,6 @@
     </div class="d-flex mb-5">
     <a href="{{path('choix')}}" class="btn btn-primary mt-4 mb-4"> Valider mon panier {{total|number_format(2)}} €</a>
     <a href="{{path('remove_panier')}}" class="btn btn-info mt-4 mb-4">Vider</a>
-
 </div>
 {% else %}
 <div class="my-formular">

@@ -36,7 +36,7 @@
             </a>
             <img src="{{produit.image}}" alt="" style="width: 100px;">
             {% if app.user and produit.stock > 0  %}
-            <span class="product-price">{{ produit.montantHt|number_format(2) }} €</span>
+            <span class="product-price">{{ produit.montant|number_format(2) }} €</span>
             <form action="{{path('add_panier', {'id': produit.id}) }}" method="POST">
                 <div class="input-button">
                     <input type="number" name="quantite" id="quantite" min="1" max="{{produit.stock}}" step="1" placeholder="Quantité" value="1" class="input-quantite" required>

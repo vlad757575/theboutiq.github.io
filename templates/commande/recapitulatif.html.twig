@@ -23,7 +23,7 @@
                     <hr>
                     <b>Societé : </b> {{transporteur.nom}}<br>
                     <b>Tarif: </b>{{transporteur.tarif}} €<br>
-                    <b>Déscription : </b>{{transporteur.description}}<br>
+                    <b>Déscription : </b>{{transporteur.description|raw}}<br>
                 </div>
                 <div class="confirm-section">
                     <h5>Votre adresse de livraison</h5>
@@ -58,11 +58,11 @@
                             <td><img src="/uploads/{{produit.produit.image}}" alt=" image du produit: {{produit.produit.nom}}" style="width:17px;"></td>
                             <td>{{produit.produit.nom}}</td>
                             <td> {{produit.quantite}}</td>
-                            <td>{{produit.produit.MontantHt}}€ </td>
-                            <td>{{ produit.produit.MontantHt * produit.quantite}}€ </td>
+                            <td>{{produit.produit.Montant}}€ </td>
+                            <td>{{ produit.produit.Montant * produit.quantite}}€ </td>
 
                         </tr>
-                        {% set total = total + (produit.produit.montantHt * produit.quantite) %}
+                        {% set total = total + (produit.produit.montant * produit.quantite) %}
                         {% endfor %}
                     </tbody>
                 </table>

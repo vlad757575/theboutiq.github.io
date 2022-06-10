@@ -37,10 +37,10 @@
                             <td><img src="/uploads/{{produit.produit.image}}" alt=" image du produit: {{produit.produit.nom}}" style="width:17px;"></td>
                             <td>{{produit.produit.nom}}</td>
                             <td> {{produit.quantite}}</td>
-                            <td>{{produit.produit.MontantHt}}€ </td>
-                            <td>{{ produit.produit.MontantHt * produit.quantite}}€ </td>
+                            <td>{{produit.produit.Montant}}€ </td>
+                            <td>{{ produit.produit.Montant * produit.quantite}}€ </td>
                         </tr>
-                        {% set total = total + (produit.produit.montantHt * produit.quantite) %}
+                        {% set total = total + (produit.produit.montant * produit.quantite) %}
                         {% endfor %}
                     </tbody>
                 </table>

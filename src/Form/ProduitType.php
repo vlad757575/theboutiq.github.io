@@ -20,7 +20,7 @@ class ProduitType extends AbstractType
             ->add('nom')
             ->add('description')
             ->add('stock')
-            ->add('montantHt')
+            ->add('montant')
             ->add('image', FileType::class, [
                 'constraints' => [
                     new File([
