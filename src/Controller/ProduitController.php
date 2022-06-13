@@ -50,6 +50,7 @@ class ProduitController extends AbstractController
 
                 try {
                     $image->move(
+                        // Tu me stocke ca dans le dossiere prevu pour
                         $this->getParameter('imageDirectory'),
                         $newName
                     );

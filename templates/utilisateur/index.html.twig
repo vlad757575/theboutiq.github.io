@@ -4,7 +4,7 @@
 
 {% block body %}
 
-<div class="my-formular">
+<div class="my-formular example-wrapper">
     <h1 class="text-center m-4">Mes informations personnelles</h1>
     <table class="table">
         <tbody>
@@ -27,6 +27,7 @@
             <tr>
                 <th>Nom</th>
                 <td>{{ utilisateur.email }}</td>
+
             </tr>
         </tbody>
     </table>
@@ -34,7 +35,7 @@
         <a href=" {{ path('app_forgot_password_request') }}" class="btn btn-primary m-2">Modifier votre mot de passe</a>
         <a href="{{ path('app_utilisateur_edit', {'id': utilisateur.id}) }}" class="btn btn-primary m-2">Modifier vos informations</a>
         <a href="{{path('mes-infos', {'id': utilisateur.id})}}" class="btn btn-primary m-2">Exporter mes données</a>
-        {{ include('utilisateur/_delete_form.html.twig') }}
+        <a class="btn btn-primary m-2"> {{ include('utilisateur/_delete_form.html.twig') }}</a>
     </div>
 </div>
 {% endblock %}

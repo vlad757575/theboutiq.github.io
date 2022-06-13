@@ -91,11 +91,6 @@ class RegistrationFormType extends AbstractType
                 ],
 
             ])
-            // ->add('passwordConfirm', PasswordType::class, [
-            //     'mapped' => false,
-            //     'label' => 'confirmez votre mot de passe',
-            //     'attr' => ['placeholder' => 'Confirmez votre mot de passe'],
-            // ])
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
                 'constraints' => [
@@ -103,6 +98,8 @@ class RegistrationFormType extends AbstractType
                         'message' => 'Vous devez accepter les conditions générales.',
                     ]),
                 ],
+                'attr' => ['class' => 'm-1'],
+                'label' => 'J\'accepte les conditions générales',
             ]);
     }
 

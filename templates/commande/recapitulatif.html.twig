@@ -6,17 +6,14 @@
 <script src="https://js.stripe.com/v3/"></script>
 <script src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch"></script>
 {% endblock %}
-
 {% block body %}
 <div class="container">
-    <h2 class="text-center m-5">Recapitulatif de ma commande</h2>
+    <h1 class="text-center m-5">Recapitulatif de ma commande</h1>
     <p class="text-center m-5">Verifiez les informations avant de cliquer sur Payer !</p>
     <hr>
     <div class="row">
-
         <div class="col-md-12 ">
             <h5 class="text-center">Récapitulatif de votre commande</h5><br>
-
             <div class="d-flex">
                 <div class=" confirm-section">
                     <h5>Votre choix de livraison</h5>
@@ -33,9 +30,7 @@
                     <b> Télephone :</b> {{livraison.telephone}}<br>
                     {{livraison.infocomplementaire}}<br>
                     <b> Adresse :</b> {{livraison.numeroRue}} {{livraison.rue}}<br>
-
                     {{livraison.ville}} {{livraison.codepostal}} <br>
-
                     {{livraison.pays}}
                 </div>
             </div>
@@ -53,20 +48,17 @@
                     <tbody>
                         {% set total = null %}
                         {% for key,produit in panier %}
-
                         <tr class="{% if key > 0 %} m-2 {% endif %}">
                             <td><img src="/uploads/{{produit.produit.image}}" alt=" image du produit: {{produit.produit.nom}}" style="width:17px;"></td>
                             <td>{{produit.produit.nom}}</td>
                             <td> {{produit.quantite}}</td>
                             <td>{{produit.produit.Montant}}€ </td>
                             <td>{{ produit.produit.Montant * produit.quantite}}€ </td>
-
                         </tr>
                         {% set total = total + (produit.produit.montant * produit.quantite) %}
                         {% endfor %}
                     </tbody>
                 </table>
-
             </div>
             <div class="m-3">
                 <hr>
@@ -74,12 +66,9 @@
                 <strong>Livraison : {{transporteur.tarif}} €</strong><br>
                 <strong>Total TTC :{{ total + transporteur.tarif}} €</strong><br>
                 <strong>Dont TVA : {{ 0.20 *(total + transporteur.tarif)/(1+0.20)|round}} €</strong><br>
-
                 <a id="checkout-button" href="{{path('app_payment_stripe',{'token': commande.token})}}" class="btn btn-primary"> Payer {{ total + transporteur.tarif }} €</a>
-
             </div>
         </div>
     </div>
 </div>
-
 {% endblock %}

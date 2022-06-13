@@ -14,10 +14,10 @@
         </nav>
     </div>
 </div>
-<div>
-    <h1 class="my-heading m-5">Bonjour <strong> {{ app.user.prenom }}!</strong> <br> Bienvenue sur ton espace personnel </h1>
-</div>
 
+<div>
+    <h1 class="my-heading mt-5">Bonjour <strong> {{ app.user.prenom }}!</strong> <br> Bienvenue sur ton espace personnel </h1>
+</div>
 <div class="my-account">
     <a href="{{path('app_commande_index')}}" class=" nav-link link-style">HISTORIQUE ET DÉTAILS DE MES COMMANDES</a>
     <a href=" {{path('app_adresse_facturation_index')}}" class=" nav-link link-style">MES ADRESSES FACTURATION</a>

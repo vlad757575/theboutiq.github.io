@@ -69,24 +69,4 @@ class PanierBisController extends AbstractController
         $panier->delete($id);
         return $this->redirectToRoute('app_mpanier');
     }
-
-    // /**
-    //  * @Route("/choix", name="choix")
-    //  */
-    // public function choix(Panier $panier)
-    // {
-
-    //     return $this->render('panier/panierbis.html.twig', [
-    //         'panier' => $panier->getMyPanier(),
-
-    //     ]);
-    // }
-
-    // /**
-    //  * @Route("/recapitulatif", name="recapitulatif")
-    //  */
-    // public function recapitulatif()
-    // {
-    //     return $this->render('panier/recapitulatif.html.twig');
-    // }
 }

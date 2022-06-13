@@ -7,6 +7,7 @@ use Dompdf\Dompdf;
 use App\Entity\Utilisateur;
 use App\Form\UtilisateurType;
 use App\Repository\UtilisateurRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -15,7 +16,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Session\Session;
 
 /**
- * * @IsGranted("ROLE_USER")
+ * @IsGranted("ROLE_USER")
  * @Route("/user")
  */
 class UtilisateurController extends AbstractController
@@ -40,7 +41,9 @@ class UtilisateurController extends AbstractController
      */
     public function new(Request $request, UtilisateurRepository $utilisateurRepository): Response
     {
+        // Création d'un nouvel utilisateur
         $utilisateur = new Utilisateur();
+        //Il va chercher le fomulaire 
         $form = $this->createForm(UtilisateurType::class, $this->getUser());
         $form->handleRequest($request);
 
@@ -77,7 +80,7 @@ class UtilisateurController extends AbstractController
         $user = $this->getUser();
         $form = $this->createForm(UtilisateurType::class, $utilisateur);
         $form->handleRequest($request);
-
+        //Tu m'nvoies ca si le formulaire est valide et est soumit 
         if ($form->isSubmitted() && $form->isValid()) {
             $utilisateurRepository->add($utilisateur);
             return $this->redirectToRoute('mon_compte', [], Response::HTTP_SEE_OTHER);
@@ -98,6 +101,7 @@ class UtilisateurController extends AbstractController
     {
         if ($this->isCsrfTokenValid('delete' . $utilisateur->getId(), $request->request->get('_token'))) {
             $utilisateurRepository->remove($utilisateur);
+            //Très important si l'utilisateur a une session en cours
             $session = new Session();
         }
 
@@ -127,5 +131,23 @@ class UtilisateurController extends AbstractController
 
         $domPdf->render();
         $domPdf->stream("Vos informations");
+    }
+
+    /**     
+     * @IsGranted("ROLE_ADMIN")
+     * @Route("/notverified", name="delete_not_verified")
+     */
+    public function notVerified(UtilisateurRepository $utilisateurRepository, EntityManagerInterface $entityManager): Response
+    {
+
+        // Je vais chercher les utilisateurs non verifiés
+        $utilisateurs = $utilisateurRepository->notVerifiedUser();
+        // Le temps limite est de 2 heures, je boucle sur les utilisateurs non verifiés et je les supprime de la bdd
+        foreach ($utilisateurs as $timelimit) {
+            $entityManager->remove($timelimit);
+            $entityManager->flush();
+        }
+        $this->addFlash('success', 'Les utilisateurs non vérifiés ont bien étés supprimés');
+        return $this->redirectToRoute('admin');
     }
 }

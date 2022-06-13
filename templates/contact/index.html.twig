@@ -3,34 +3,7 @@
 {% block title %}Contact{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper {
-        position: relative;
-        margin: 10em auto;
-        max-width: 700px;
-        max-height: 700px;
-        width: 95%;
-        font: 18px/1.5 sans-serif;
-        display: block;
-        justify-content: center;
-        align-items: center;
-
-    }
-
-    .title {
-
-        text-align: center;
-
-    }
-
-    .example-wrapper code {
-        background: #F5F5F5;
-        padding: 2px 6px;
-    }
-</style>
-
 <div class="example-wrapper my-formular">
-
     <h3 class="title">Formulaire de contact</h3>
     {{ form_start(form) }}
     {{ form_widget(form) }}
@@ -38,7 +11,6 @@
         <input type="submit" class="btn btn-primary" value="Envoyer" title="ps: nous ne transférons pas vos données personnelles à des tiers ">
         <p class="m-2">En cliquant sur envoyer je reconnais avoir lu et compris <a href="{{path('app_cguv')}}" title="ps: nous ne transférons pas vos données personnelles à des tiers ">les CGUV et je les accepte.</a></p>
     </div>
-
     {{ form_end(form) }}
 </div>
 </div>

@@ -3,23 +3,30 @@
 {% block title %}Mes adresses de facturation{% endblock %}
 
 {% block body %}
-<div class="my-formular">
+<div>
+    <div>
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{path('index')}}">Accueil</a></li>
+                <li class="breadcrumb-item current-page"> <a href="{{path('index')}}">Mes adresses de facturation</a> </li>
+            </ol>
+        </nav>
+    </div>
+</div>
+<div class="my-formular example-wrapper">
     <h1 class="text-center m-3">Mes adresses de facturation</h1>
     {% if app.user.adresseFacturation is empty %}
     <p class="text-center"> Vous n'avez pas encore ajouté d'adresse de Facturation. Pour en ajouter une, veuillez <a href="{{path('app_adresse_facturation_new')}}">cliquer ici.</a></p>
     {% else %}
-
     <div class="row">
         {% for adresse_facturation in app.user.adresseFacturation %}
         <div class="col-md-4">
             <div class="card" style="width: 18rem;">
-
                 <div class="card-body">
                     <h5 class="card-title">{{ adresse_facturation.nom }}</h5>
                     <p class="card-text">{{adresse_facturation.numeroRue}} - {{adresse_facturation.rue}} <br> {{adresse_facturation.codepostal}} - {{adresse_facturation.ville}} <br>{{adresse_facturation.pays}}</p>
                     <a class="btn btn-info" href="{{ path('app_adresse_facturation_show', {'id': adresse_facturation.id}) }}">Details</a>
                     <a class="btn btn-info" href="{{ path('app_adresse_facturation_edit', {'id': adresse_facturation.id}) }}">Modifier</a>
-                    <a class="btn btn-primary m-5" href="{{ path('app_adresse_facturation_new') }}">Créer une nouvelle adresse</a>
 
                     {{ include('adresse_facturation/_delete_form.html.twig') }}
                 </div>
@@ -30,6 +37,7 @@
 
         {% endfor %}
         {% endif %}
-
     </div>
-    {% endblock %}
+    <a class="btn btn-primary m-3" href="{{ path('app_adresse_facturation_new') }}">Créer une nouvelle adresse</a>
+</div>
+{% endblock %}

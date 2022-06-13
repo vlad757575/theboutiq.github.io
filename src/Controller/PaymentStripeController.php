@@ -6,6 +6,7 @@ use Stripe\Stripe;
 use App\Entity\Etat;
 use App\Classe\Panier;
 use App\Entity\Commande;
+use App\Entity\Utilisateur;
 use Stripe\Checkout\Session;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,6 +17,14 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class PaymentStripeController extends AbstractController
 {
+
+    // private $entityManager;
+
+    // public function __construct(EntityManagerInterface $entityManager)
+    // {
+    //     $this->entityManager->$entityManager;
+    // }
+
     /**
      * @Route("commande/commande/recapitulatif/create-session/{token}", name="app_payment_stripe" )
      */
@@ -79,10 +88,12 @@ class PaymentStripeController extends AbstractController
     /**
      * @Route("commande/commande/recapitulatif/success/{token}", name="payment_success" )
      */
-    public function success(EntityManagerInterface $entityManager, $token, SessionInterface $session): Response
+    public function success(EntityManagerInterface $entityManager, $token, SessionInterface $session, $email): Response
     {
 
         $commande = $entityManager->getRepository(Commande::class)->findOneBy(array('token' => $token));
+        dd($commande);
+        $customerEmail = $entityManager->getRepository(Utilisateur::class)->findOneBy(array('email' => $email));
         // Vue que le paiement est validé je passe l'id etat 1 => 3
         $etat = $entityManager->getRepository(Etat::class)->find(3);
 
@@ -97,8 +108,6 @@ class PaymentStripeController extends AbstractController
         }
         // Je vide le panier
         $session->set('panier', []);
-
-
 
         return $this->render('payment/success.html.twig',  [
             'commande' => $commande,

@@ -53,7 +53,7 @@
 <div class="text-center m-5">
     <strong> Livraison : </strong>{{ commande.transporteurNom}} - {{ commande.transporteurTarif|number_format(2)}} € <br>
     <strong> TVA : </strong>{{(0.20 * commande.totalPurchase)/(1 + 0.20)|round|number_format(2)}} €<br>
-    <strong> Total :</strong> {{ commande.totalPurchase|number_format(2)}} € <br>
+    <strong> Total :</strong> {{ commande.totalPurchase|number_format(2) + commande.transporteurTarif|number_format(2)}} € <br>
 </div>
 <div class="text-center">
     <p>Besoin d'une facture ? <a href="{{path('facture', {'id': commande.id})}}"><img style="width: 35px;" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/PDF_file_icon.svg/1200px-PDF_file_icon.svg.png" alt=""></a></p>

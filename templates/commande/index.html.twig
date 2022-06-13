@@ -7,9 +7,9 @@
     <div>
         <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{path('index')}}">Accueil</a></li>
-                <li class="breadcrumb-item current-page"> <a href="{{path('mon_compte')}}"> Mon compte</a></li>
-                <li class="breadcrumb-item current-page"><a href="{{path('app_commande_index')}}"> Mes commandes </a></li>
+                <li class="breadcrumb-item"><a href="{{path('index')}}" class="nav-links">Accueil</a></li>
+                <li class="breadcrumb-item current-page"> <a href="{{path('mon_compte')}}" class="nav-links"> Mon compte</a></li>
+                <li class="breadcrumb-item current-page "><a href="{{path('app_commande_index')}}" class="nav-links"> Mes commandes </a></li>
             </ol>
         </nav>
     </div>
@@ -42,12 +42,6 @@
                 <td><a href="{{path('app_commande_show', {'id': commande.id})}}">Voir</a></td>
             </tr>
             {% endfor %}
-
-
-
-
-
-
         </tbody>
     </table>
 </div>

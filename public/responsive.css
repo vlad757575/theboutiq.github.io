@@ -10,3 +10,12 @@
     justify-content: space-around;
     align-items: center;
   }}
+
+
+
+  @media all and (max-width: 1000px) {
+  .account-helper {
+    display: block;
+    justify-content: center;
+  }
+}

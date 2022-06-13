@@ -10,6 +10,9 @@ use App\Entity\Transporteur;
 use App\Entity\CommandeProduit;
 use App\Entity\AdresseLivraison;
 use App\Entity\AdresseFacturation;
+use App\Repository\CommandeRepository;
+use App\Repository\ProduitRepository;
+use App\Repository\UtilisateurRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -19,6 +22,23 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 
 class DashboardController extends AbstractDashboardController
 {
+
+    protected $utilisateurRepository;
+    protected $commadeRepository;
+    protected $produitRepository;
+
+    public function __construct(
+        UtilisateurRepository $utilisateurRepository,
+        CommandeRepository $commadeRepository,
+        ProduitRepository $produitRepository
+    ) {
+        $this->utilisateurRepository = $utilisateurRepository;
+        $this->commadeRepository = $commadeRepository;
+        $this->produitRepository = $produitRepository;
+    }
+
+
+
     /**
      * @Route("/admin", name="admin")
      * @IsGranted("ROLE_ADMIN")
@@ -53,8 +73,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Etat', 'fas fa-list', Etat::class);
         yield MenuItem::linkToCrud('Adresse-livraison', 'fas fa-list', AdresseLivraison::class);
         yield MenuItem::linkToCrud('Adresse-facturation', 'fas fa-list', AdresseFacturation::class);
-        // yield MenuItem::linkToCrud('Commande produit', 'fas fa-list', CommandeProduit::class);
         yield MenuItem::linkToLogout('Logout', 'fas fa-list');
-        yield MenuItem::linkToRoute('back to the site', 'fa fa-home', 'index');
+        yield MenuItem::linkToRoute('revenir sur le site', 'fa fa-home', 'index');
     }
 }

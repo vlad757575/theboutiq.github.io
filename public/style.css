@@ -1,14 +1,11 @@
 
-
-
-
   .my-formular {
-    max-width:60vw;
-    margin: 11vh auto;
+    display: block;
     background-color: white;
     border: white;
     box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.3);
     padding: 10px;
+    border-radius: 5px;
   }
   a {
     text-decoration: none;
@@ -79,7 +76,7 @@
      
    }
    .my-product-container {
-    margin-bottom: 150px;
+    margin-bottom: 60px;
    }
 
    .my-product-detail{
@@ -118,9 +115,11 @@
   margin-bottom: 2%;
 }
 .my-account {
-  display: flex;
-  flex-direction: column;
-  margin: 100px auto ;
+  position: relative;
+  margin: 7em auto;
+  max-width: 500px;
+  justify-content: center;
+  align-items: center;
 }
 
 .my-account a {
@@ -243,8 +242,7 @@ margin: 15px;
  }
 
  main {
-
-  min-height: calc(100vh - 62.24px - 109px );
+  min-height: calc(100vh - 170px );
  }
  
  h1, h2, h3, h4{
@@ -253,7 +251,7 @@ margin: 15px;
    color:#29D2BB;
    
 
-   font-family: 'Playfair Display', serif;
+   font-family: 'Playfair Display', sans-serif;
  }
 
  p {
@@ -261,7 +259,38 @@ font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
  }
 
  
- 
+ .example-wrapper {
+  position: relative;
+  margin: 10em auto;
+  max-width: 700px;
+  max-height: 700px;
+  width: 95%;
+  font: 18px/1.5 sans-serif;
+  display: block;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.title {
+
+  text-align: center;
+
+}
+
+.example-wrapper code {
+  background: #F5F5F5;
+  padding: 2px 6px;
+}
+
+.nav-links {
+  display: flex;
+  color: #E97864;
+  text-decoration: none;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+}
+
+
 
 
 

@@ -40,26 +40,29 @@
                             <a class="nav-link active link-style" aria-current="page" href="{{path('index')}}">Accueil</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link link-style" href="{{path('app_produit_index')}}">Produit</a>
+                            <a class="nav-link active link-style" href="{{path('app_produit_index')}}">Produit</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link link-style" href="{{path('app_contact')}}">Contact</a>
+                            <a class="nav-link active link-style" href="{{path('app_contact')}}">Contact</a>
                         </li>
 
                         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
 
                         <li class="nav-item">
-                            <a href="{{path('mon_compte')}}" class="nav-link link-style">Mon compte {{ app.user.prenom }}</a>
+                            <a href="{{path('mon_compte')}}" class="nav-link active link-style">Mon compte {{ app.user.prenom }}</a>
                         </li>
 
-                        <li><a class="nav-link link-style" href="{{path('app_mpanier')}}">Panier</a></li>
+                        <li><a class="nav-link active link-style" href="{{path('app_mpanier')}}">Panier</a></li>
 
                         <li class=" nav-item">
-                            <a href="{{ path('app_logout') }}" class="nav-link link-style">Déconnexion</a>
+                            <a href="{{ path('app_logout') }}" class="nav-link active link-style">Déconnexion</a>
                         </li>
                         {% if is_granted('ROLE_ADMIN') %}
                         <li class="nav-item">
-                            <a href="{{path('admin')}}" class="nav-link link-style">Administrateur</a>
+                            <a href="{{path('admin')}}" class="nav-link active link-style">Administrateur</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{path('delete_not_verified')}}" class="nav-link active link-style">Not verified</a>
                         </li>
 
                         {% endif %}
@@ -67,10 +70,10 @@
                         {% else %}
 
                         <li class="nav-item">
-                            <a class="nav-link link-style" href="{{path('login')}}">Connexion</a>
+                            <a class="nav-link active link-style" href="{{path('login')}}">Connexion</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link link-style" href="{{path('register')}}">Inscription</a>
+                            <a class="nav-link active link-style" href="{{path('register')}}">Inscription</a>
                         </li>
 
                         {% endif %}

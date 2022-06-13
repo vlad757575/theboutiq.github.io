@@ -34,6 +34,9 @@ class MyOrderType extends AbstractType
                 // 'choices' => $user->getAdresseFacturation(),
                 'multiple' => false,
                 'expanded' => true,
+                'attr' => [
+                    'label_html' => 'br'
+                ]
             ])
             ->add('transporteur', EntityType::class, [
                 'label' => 'Choisissez votre livraison',
@@ -45,7 +48,7 @@ class MyOrderType extends AbstractType
             ->add('submit', SubmitType::class, [
                 'label' => 'Valider ma commande',
                 'attr' => [
-                    'class' => 'btn btn-primary m-3'
+                    'class' => 'btn btn-primary m-3',
                 ]
             ]);
     }

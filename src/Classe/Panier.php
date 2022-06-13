@@ -79,8 +79,6 @@ class Panier
                     // On peut ajouter les produits existants
                     continue;
                 }
-
-
                 $fullPanier[] = [
                     // Je recupere les infos des produits
                     'produit' => $produit_class,

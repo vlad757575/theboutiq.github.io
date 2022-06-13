@@ -90,4 +90,16 @@ class UtilisateurRepository extends ServiceEntityRepository implements PasswordU
         ;
     }
     */
+
+    public function notVerifiedUser()
+    {
+        $timelimit = date('Y-m-d H:i:s', strtotime('-2 seconds'));
+
+        return $this->createQueryBuilder('utilisateur')
+            ->andWhere('utilisateur.isVerified = 0')
+            ->andWhere('utilisateur.createdAt <= :val')
+            ->setParameter('val', $timelimit)
+            ->getQuery()
+            ->getResult();
+    }
 }
