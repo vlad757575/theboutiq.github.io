@@ -76,8 +76,14 @@ class AdresseFacturationController extends AbstractController
     /**
      * @Route("/{id}/edit", name="app_adresse_facturation_edit", methods={"GET", "POST"})
      */
-    public function edit(Request $request, AdresseFacturation $adresseFacturation, AdresseFacturationRepository $adresseFacturationRepository): Response
+    public function edit($id, Request $request, AdresseFacturation $adresseFacturation, AdresseFacturationRepository $adresseFacturationRepository): Response
     {
+        $addresse = $this->entityManager->getRepository(AdresseFacturation::class)->findOneById($id);
+
+        if (!$addresse || $addresse->getUtilisateur()  != $this->getUser()) {
+            return $this->redirectToRoute('index');
+        }
+
         $form = $this->createForm(AdresseFacturationType::class, $adresseFacturation);
         $form->handleRequest($request);
 

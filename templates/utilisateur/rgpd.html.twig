@@ -8,20 +8,51 @@
     <p>{{ utilisateur.email}}</p><br>
     <p>{{ utilisateur.dateNaissance|date('d-m-Y')}}</p>
 </div>
-{% endblock %}
+<h3 class="center">Vos adresses de livraison</h3>
+<hr>
+{% for adresse_facturation in app.user.adresseFacturation %}
+<div class="col-md-4">
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <p class="card-title">{{ adresse_facturation.nom }}</p>
+            <p class="card-text">{{adresse_facturation.numeroRue}} - {{adresse_facturation.rue}} <br> {{adresse_facturation.codepostal}} - {{adresse_facturation.ville}} <br>{{adresse_facturation.pays}}</p>
+        </div>
+    </div>
+</div>
+{% endfor %}
+<h3 class="center">Vos adresses de livraison</h3>
+<hr>
+<div class="row">
+    {% for adresse_livraison in app.user.adresseLivraison %}
+    <div class="col-md-4">
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <strong class="card-title">{{ adresse_livraison.nom }}</strong>
+                <p class="card-text">{{adresse_livraison.numeroRue}} - {{adresse_livraison.rue}} <br> {{adresse_livraison.codepostal}} - {{adresse_livraison.ville}} <br>{{adresse_livraison.pays}}</p>
+            </div>
+        </div>
+    </div>
 
-{% block css %}
-<style>
-    .main {
-        display: block;
-        margin: auto;
-    }
 
-    h2 {
-        color: red;
-        font-weight: bolder;
-        text-align: center;
-        margin-bottom: 20px;
-    }
-</style>
-{% endblock %}
+    {% endfor %}
+    {% endblock %}
+
+    {% block css %}
+    <style>
+        .main {
+            display: block;
+            margin: auto;
+        }
+
+        h2 {
+            color: red;
+            font-weight: bolder;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .center {
+            text-align: center;
+        }
+    </style>
+    {% endblock %}

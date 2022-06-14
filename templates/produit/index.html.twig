@@ -30,16 +30,17 @@
     {% for produit in produits %}
     <div class="col-md-4">
         <div class="my-product text-center">
+
             <h4>{{produit.nom}}</h4>
-            <!-- <span class="product-subtitle">{{produit.ean}}</span> -->
-            <a href="{{path('app_produit_show', {'id': produit.id}) }}"> <img src="https://www.cdiscount.com/pdt2/1/1/1/1/1200x1200/auc5065010060111/rw/cire-de-soja-2kg-premium-sans-ogm-et-100-natu.jpg" alt="{{produit.nom}}" class="img-fluid my-picture">
-            </a>
-            <img src="{{produit.image}}" alt="" style="width: 100px;">
+            <div>
+                <a href="{{path('app_produit_show', {'id': produit.id}) }}"> <img src="{{ asset('uploads/') ~ produit.image  }}" alt="{{produit.nom}}" class="img-fluid my-picture" style="width: 250px;">
+                </a>
+            </div>
             {% if  produit.stock > 0  %}
             <span class="product-price">{{ produit.montant|number_format(2) }} €</span>
             <form action="{{path('add_panier', {'id': produit.id}) }}" method="POST">
                 <div class="input-button">
-                    <input type="number" name="quantite" id="quantite" min="1" max="{{produit.stock}}" step="1" placeholder="Quantité" value="1" class="input-quantite" required>
+                    <!-- <input type="number" name="quantite" id="quantite" min="1" max="{{produit.stock}}" step="1" placeholder="Quantité" value="1" class="input-quantite" required> -->
                     <button type="submit" class="btn btn-primary">
                         <i class="fa fa-shopping-cart " aria-hidden="true"></i>Ajouter
                     </button>

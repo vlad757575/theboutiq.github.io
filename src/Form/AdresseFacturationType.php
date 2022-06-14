@@ -6,6 +6,7 @@ use App\Entity\AdresseFacturation;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -41,6 +42,12 @@ class AdresseFacturationType extends AbstractType
                     'placeholder' => 'Saisissez votre numéro de rue'
                 ]
 
+            ])
+            ->add('telephone', TelType::class, [
+                'label' => 'Votre numéro de telephone',
+                'attr' => [
+                    'placeholder' => 'Saisissez votre numero de telephone'
+                ]
             ])
             ->add('rue', TextType::class, [
                 'label' => 'Numéro et nom de rue',

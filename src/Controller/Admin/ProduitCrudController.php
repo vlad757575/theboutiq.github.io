@@ -27,7 +27,7 @@ class ProduitCrudController extends AbstractCrudController
             TextField::new('nom'),
             TextField::new('description'),
             IntegerField::new('stock'),
-            NumberField::new('montant_ht'),
+            NumberField::new('montant'),
             NumberField::new('tva'),
             ImageField::new('image')
                 ->setBasePath('uploads/')

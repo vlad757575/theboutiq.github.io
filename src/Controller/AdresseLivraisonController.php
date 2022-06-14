@@ -43,7 +43,7 @@ class AdresseLivraisonController extends AbstractController
      */
     public function new(Request $request, AdresseLivraisonRepository $adresseLivraisonRepository, SessionInterface $session, Panier $panier): Response
     {
-        // $panier = $session->get('panier', []);
+
 
         $adresseLivraison = new AdresseLivraison();
         $form = $this->createForm(AdresseLivraisonType::class, $adresseLivraison);
@@ -83,8 +83,15 @@ class AdresseLivraisonController extends AbstractController
     /**
      * @Route("/{id}/edit", name="app_adresse_livraison_edit", methods={"GET", "POST"})
      */
-    public function edit(Request $request, AdresseLivraison $adresseLivraison, AdresseLivraisonRepository $adresseLivraisonRepository): Response
+    public function edit(Request $request, AdresseLivraison $adresseLivraison, AdresseLivraisonRepository $adresseLivraisonRepository, $id): Response
     {
+        $adresse = $this->entityManager->getRepository(AdresseLivraison::class)->findOneById($id);
+
+        if (!$adresse || $adresse->getUtilisateur()  != $this->getUser()) {
+            return $this->redirectToRoute('index');
+        }
+
+
         $form = $this->createForm(AdresseLivraisonType::class, $adresseLivraison);
         $form->handleRequest($request);
 

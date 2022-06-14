@@ -73,11 +73,16 @@ class UtilisateurController extends AbstractController
 
 
     /**
-     * @Route("/{id}/edit", name="app_utilisateur_edit", methods={"GET", "POST"})
+     * @Route("/{id}/edit", name="app_utilisateur_edit", methods={"GET"})
      */
-    public function edit(Request $request, Utilisateur $utilisateur, UtilisateurRepository $utilisateurRepository): Response
+    public function edit(Request $request, Utilisateur $utilisateur, UtilisateurRepository $utilisateurRepository, $id): Response
     {
-        $user = $this->getUser();
+        $user = $utilisateurRepository->find($id);
+
+        if (!$this->getUser() || !$user || $user != $this->getUser()) {
+            return $this->redirectToRoute('index');
+        }
+
         $form = $this->createForm(UtilisateurType::class, $utilisateur);
         $form->handleRequest($request);
         //Tu m'nvoies ca si le formulaire est valide et est soumit 

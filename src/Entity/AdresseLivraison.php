@@ -99,14 +99,6 @@ class AdresseLivraison
         return $this->getNom() . '[br]' . $this->getTelephone() . '[br]' . $this->getNumeroRue() . ' ' . $this->getRue() . '[br]' . $this->getCodepostal() . ' ' . $this->getVille() . '[br]' . $this->getPays();
     }
 
-    // public function fullAdresse()
-    // {
-
-    //     return $this->getNom() . '[br]' . $this->getTelephone() . '[br]' . $this->getNumeroRue() . ' ' . $this->getRue() . '[br]' . $this->getCodepostal() . ' ' . $this->getVille() . '[br]' . $this->getPays();
-    // }
-
-
-
     public function getId(): ?int
     {
         return $this->id;

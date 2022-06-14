@@ -31,7 +31,7 @@ class MyOrderType extends AbstractType
                 'label' => 'Choisissez votre adresse de facturation',
                 'required' => true,
                 'class' => AdresseFacturation::class,
-                // 'choices' => $user->getAdresseFacturation(),
+                'choices' => $user->getAdresseFacturation(),
                 'multiple' => false,
                 'expanded' => true,
                 'attr' => [

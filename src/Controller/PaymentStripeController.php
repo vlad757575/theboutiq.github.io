@@ -47,7 +47,6 @@ class PaymentStripeController extends AbstractController
                     'unit_amount' => $produit->getPrix() * 100,
                     'product_data' => [
                         'name' => $produit->getMonProduit(),
-
                     ],
                 ],
                 'quantity' => $produit->getQuantite(),
@@ -88,12 +87,12 @@ class PaymentStripeController extends AbstractController
     /**
      * @Route("commande/commande/recapitulatif/success/{token}", name="payment_success" )
      */
-    public function success(EntityManagerInterface $entityManager, $token, SessionInterface $session, $email): Response
+    public function success(EntityManagerInterface $entityManager, $token, SessionInterface $session): Response
     {
 
         $commande = $entityManager->getRepository(Commande::class)->findOneBy(array('token' => $token));
-        dd($commande);
-        $customerEmail = $entityManager->getRepository(Utilisateur::class)->findOneBy(array('email' => $email));
+        // dd($commande);
+        // $customerEmail = $entityManager->getRepository(Utilisateur::class)->findOneBy(array('email' => $email));
         // Vue que le paiement est validé je passe l'id etat 1 => 3
         $etat = $entityManager->getRepository(Etat::class)->find(3);
 

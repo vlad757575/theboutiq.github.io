@@ -89,6 +89,7 @@ class CommandeController extends AbstractController
      */
     public function edit(Request $request, Commande $commande, CommandeRepository $commandeRepository): Response
     {
+
         $form = $this->createForm(CommandeType::class, $commande);
         $form->handleRequest($request);
 
@@ -121,6 +122,9 @@ class CommandeController extends AbstractController
      */
     public function choix(Panier $panier, Request $request)
     {
+        if (!$this->getUser()->isVerified()) {
+            return $this->redirectToRoute('index');
+        }
         if (!$this->getUser()->getAdresseLivraison()->getValues()) {
 
             return $this->redirectToRoute('app_adresse_livraison_new');

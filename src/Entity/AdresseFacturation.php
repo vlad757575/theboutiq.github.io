@@ -97,11 +97,6 @@ class AdresseFacturation
         return $this->getNom() . '[br]' . $this->getTelephone() . '[br]' . $this->getNumeroRue() . ' ' . $this->getRue() . '[br]' . $this->getCodepostal() . ' ' . $this->getVille() . '[br]' . $this->getPays();;
     }
 
-    // public function fullAdresseFacturation()
-    // {
-
-    //     return $this->getNom() . '[br]' . $this->getTelephone() . '[br]' . $this->getNumeroRue() . ' ' . $this->getRue() . '[br]' . $this->getCodepostal() . ' ' . $this->getVille() . '[br]' . $this->getPays();
-    // }
 
     public function setNom(string $nom): self
     {

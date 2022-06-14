@@ -3,12 +3,14 @@
 {% block title %}Modifier vos informations {{utilisateur.getFullName}}{% endblock %}
 
 {% block body %}
+{% if app.user %}
 <div class="my-formular">
     <h1 class="text-center">Modifier vos informations </h1>
     {{ include('utilisateur/_form.html.twig',) }}
     <div class="d-flex m-2">
     </div>
 </div>
+{% endif %}
 
 
 {% endblock %}
