@@ -60,34 +60,51 @@
  .my-product  {
    margin-top: 45px;
  }
+ .my-picture {
+   padding:10px;
+   border-top-right-radius: 15%;
+   border-top-left-radius: 15%;
+ }
 
   .my-product h5{
     text-transform: uppercase;
-    font-size: 15px;
+    font-size: 20px;
   }
   .my-product .produict-subtitle {
     font-size: 14px;
     display: block;
     margin-bottom: 9px;
   }
-   .my-product .product-price {
-     font-size:14px ;
-     font-weight: bold;
-     
+   .product-price {
+     padding-top: 5px;
+     margin-right: 15px;
+    font-size:30px ;
+    font-weight: bold;
    }
+
+.description {
+  margin-top: 20px;
+}
+
+.description p {
+text-align: justify;
+max-width: 300px;
+}
+
    .my-product-container {
-    margin-bottom: 60px;
+    margin: 60px;
    }
 
    .my-product-detail{
     display: flex;
-    margin: 100px auto;
+    margin: auto;
     align-items: center;
     justify-content: center;
    }
 
    .detail-product-right {
     margin-left: 7%;
+    margin-top: 50px;
    }
    
   .input-button {

@@ -18,4 +18,19 @@
     display: block;
     justify-content: center;
   }
+  .my-product-detail{
+    display: block;
+    margin: 30px auto;
+    align-items: center;
+    justify-content: center;
+   }
+   .detail-product-right {
+    /* margin-left: 7%; */
+    /* margin-top: 30px; */
+    /* margin: 100px auto; */
+    max-width: 600px;
+    display: block;
+    justify-content: center;
+    align-items: center;
+   }
 }

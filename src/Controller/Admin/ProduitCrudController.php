@@ -25,6 +25,7 @@ class ProduitCrudController extends AbstractCrudController
             IntegerField::new('asin'),
             IntegerField::new('ean'),
             TextField::new('nom'),
+            TextField::new('title'),
             TextField::new('description'),
             IntegerField::new('stock'),
             NumberField::new('montant'),

@@ -3,11 +3,10 @@
 {% block title %}Votre adresse de livraison{% endblock %}
 
 {% block body %}
-<h1>Modifier votre adresse de livraison</h1>
+<div class=" my-formular  example-wrapper">
+    <h1>Modifier votre adresse de livraison</h1>
 
-{{ include('adresse_livraison/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('adresse_livraison/_form.html.twig', {'button_label': 'Update'}) }}
 
-<a href="{{ path('app_adresse_livraison_index') }}">Retour</a>
-
-{{ include('adresse_livraison/_supprimer_form.html.twig') }}
+</div>
 {% endblock %}
