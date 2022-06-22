@@ -7,15 +7,18 @@ use DateTime;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 use App\Classe\Panier;
+use App\Entity\Produit;
 use App\Entity\Commande;
 use App\Form\MyOrderType;
 use App\Form\CommandeType;
 use App\Entity\CommandeProduit;
 use App\Repository\EtatRepository;
 use App\Repository\CommandeRepository;
+use App\Repository\ProduitRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+
 use Symfony\Component\Routing\Annotation\Route;;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -26,26 +29,19 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
  */
 class CommandeController extends AbstractController
 {
-
-
-
     public function __construct(EntityManagerInterface $entityManager)
     {
-
-
         $this->entityManager = $entityManager;
     }
-
-
-
 
     /**
      * @Route("/", name="app_commande_index", methods={"GET"})
      */
     public function index(CommandeRepository $commandeRepository): Response
     {
-
-        return $this->render('commande/index.html.twig');
+        return $this->render(
+            'commande/index.html.twig'
+        );
     }
 
     /**
@@ -76,7 +72,7 @@ class CommandeController extends AbstractController
     {
 
         if (!$commande || $commande->getUtilisateur() != $this->getUser()) {
-            return $this->render('app_commande_show');
+            return $this->render('commande/show.html.twig');
         }
         return $this->render('commande/show.html.twig', [
             'commande' => $commande,
@@ -148,7 +144,7 @@ class CommandeController extends AbstractController
     /**
      * @Route("/commande/recapitulatif", name="recapitulatif", methods="POST")
      */
-    public function recapitulatif(Panier $panier, Request $request,  EtatRepository $er)
+    public function recapitulatif(Panier $panier, Request $request,  EtatRepository $er, ProduitRepository $produitRepository)
     {
         $form = $this->createForm(MyOrderType::class, null, [
             'user' => $this->getUser()
@@ -226,9 +222,18 @@ class CommandeController extends AbstractController
                 $commandeProduit->setPrix($produit['produit']->getMontant());
                 $commandeProduit->setTotal($produit['produit']->getMontant() * $produit['quantite']);
 
+
+
                 // je fige les données de commandeProduit
                 $this->entityManager->persist($commandeProduit);
             }
+            // $produit = $produitRepository->find();
+            // foreach ($panier as $id => $quantite) {
+            //     $stock = $produit->getNom();
+            //     dd($stock);
+
+            //     $produit->setStock($stock - $produit['quantite']);
+
             // J'envoi tout en bdd
             $this->entityManager->flush();
 
@@ -244,9 +249,9 @@ class CommandeController extends AbstractController
     }
 
     /**     
-     * @Route("/commande/generatePdf/{id}/", name="facture", methods={"GET"})
+     * @Route("/commande/generatePdf/{id}", name="facture", methods={"GET"})
      */
-    public function getPdf(CommandeRepository $commandeRepository, $id)
+    public function getPdf(CommandeRepository $commandeRepository, $id, Request $request)
     {
         //j'instancie les options et parametres
         $options = new Options();
@@ -264,6 +269,8 @@ class CommandeController extends AbstractController
         //j'injecte ma vue html
         $domPdf->loadHtml($html);
         //Je crée le pdf
+        // $domPdf->output();
+        $domPdf->setBasePath($request->getSchemeAndHttpHost());
         $domPdf->render();
         // Je lui donne un nom
         $domPdf->stream("Votre facture - theboutiq!");

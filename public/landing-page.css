@@ -1,19 +1,23 @@
+.decouvrir {
+    display: none;
+}
 .landing-page{
     background-image: url("../../logos/background.jpg")!important;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+   height: 83vh;
   }
   
   section {
     width: 100vw;
-    height: 80vh;
+    height: 88vh;
   }
   
   .landing-img {
     display: block;
     position: absolute;
-    top: 50%;
+    top: 43%;
     left: 50%;
     transform: translate(-50%, -50%);
    }

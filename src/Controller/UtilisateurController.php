@@ -107,18 +107,19 @@ class UtilisateurController extends AbstractController
         if ($this->isCsrfTokenValid('delete' . $utilisateur->getId(), $request->request->get('_token'))) {
             $utilisateurRepository->remove($utilisateur);
             //Très important si l'utilisateur a une session en cours
-            $session = new Session();
+            // $session = new Session();
+            // $this->get('session')->invalidate();
         }
 
         return $this->redirectToRoute('index', [], Response::HTTP_SEE_OTHER);
     }
 
     /**     
-     * @Route("/rgpd/{id}/", name="mes-infos", methods={"GET"})
+     * @Route("/rgpd/{id}", name="mes-infos", methods={"GET"})
      */
-    public function rgpdPdf(UtilisateurRepository $utilisateurRepository, $id, Utilisateur $utilisateur)
+    public function rgpdPdf(UtilisateurRepository $utilisateurRepository, $id, Request $request)
     {
-        // dd($utilisateur);
+
         $options = new Options();
         $options->set('defaultFont', 'Calibri');
 
@@ -126,16 +127,17 @@ class UtilisateurController extends AbstractController
 
         $domPdf->setOptions($options);
         $domPdf->setPaper('A4', 'protrait');
-
         $html = $this->renderView('utilisateur/rgpd.html.twig', [
             'utilisateur' => $utilisateurRepository->findOneBy(['id' => $id]),
 
         ]);
 
         $domPdf->loadHtml($html);
-
+        $domPdf->setBasePath($request->getSchemeAndHttpHost());
         $domPdf->render();
-        $domPdf->stream("Vos informations");
+        $domPdf->stream(
+            "Votre facture - theboutiq!"
+        );
     }
 
     /**     

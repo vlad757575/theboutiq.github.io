@@ -9,7 +9,28 @@
     display:block;
     justify-content: space-around;
     align-items: center;
-  }}
+  }
+  
+  main {
+    min-height: calc(100vh - 180px);
+   }
+   .landing-page{
+   height:85vh !important;
+   width: 100vw;
+  }
+  .my-navbar-bottom {
+    margin-top: 0px !important;
+    padding-bottom: 22px;
+  }
+  /* .decouvrir {
+    display: block;
+    position: relative;
+    top: 43%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 400px;
+  } */
+  }
 
 
 
@@ -18,6 +39,23 @@
     display: block;
     justify-content: center;
   }
+
+  .decouvrir {
+    display: block;
+    position: relative;
+    top: 43%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 400px;
+  } 
+  .landing-img a {
+    display: none;
+    position: relative;
+    top: 43%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 400px;
+   }
   .my-product-detail{
     display: block;
     margin: 30px auto;
@@ -25,12 +63,84 @@
     justify-content: center;
    }
    .detail-product-right {
-    /* margin-left: 7%; */
-    /* margin-top: 30px; */
-    /* margin: 100px auto; */
     max-width: 600px;
     display: block;
     justify-content: center;
     align-items: center;
    }
+   .choix {
+     display: block;
+     flex-direction: column-reverse;
+   }
+   .my-navbar-bottom {
+    display: block;
+    position: relative; 
+    right: auto;
+   left: auto; 
+    bottom: 0 !important;
+    width: 100% !important;
+    padding-bottom: 100px !important;
+  }
+  section {
+    width: 100vw;
+    height: 90vh !important;
+  }
+  .landing-page{
+    height:84vh !important;
+    width: auto;
+   }
+}
+@media all and (max-width: 1000px) {
+  
+ main {
+  min-height: calc(100vh - 16px);
+ }
+
+}
+@media all and (max-width: 990px) {
+  section {
+   width: 100vw;
+   height: 90vh !important;
+ }
+
+}
+
+@media all and (max-width: 1900px) {
+  section {
+   width: 100vw;
+   height: 79vh;
+ }
+}
+@media all and (max-width: 1700px) {
+  section {
+   width: 100vw;
+   height: 75vh;
+ }
+ .landing-page{
+  height:84vh !important;
+  width: auto;
+ }
+}
+
+@media all and (max-width: 1550px) {
+  section {
+   width: 100vw;
+   height:70vh !important;
+ }
+ main {
+  min-height: calc(100vh - 170px);
+ }
+ 
+}
+
+@media all and (max-width: 1550px) {
+  section {
+   width: 100vw;
+   height:79vh !important;
+ }
+ main {
+  min-height: calc(100vh - 170px);
+ }
+ 
+ 
 }

@@ -3,18 +3,13 @@
 {% block body %}
 <h2>Votre facture n°{{facture.getOrderNumber}}</h2>
 <hr>
-
 <div>
-    <strong class="text-left">THEBOUTIQ! <br> 9 boulevard de la boissiere <br> 93130 Noisy-Le-Sec <br> FR </strong>
+    <strong class="text-left">THEBOUTIQ! <br> 9 boulevard de la boissiere <br> 93130 Noisy-Le-Sec <br> FR <br> TVA: FR87898258728 <br> SIRET: 89825872800028 <br> Capital social : 4500 euros </strong>
 </div>
-
-<h5>Votre adresse de livraison :</h5>
+<h3>Votre adresse de livraison :</h3>
 <p>{{facture.livraisonAdresse|raw}}</p>
-
-<h5 class="right">Votre adresse de facturation :</h5>
+<h3 class="right">Votre adresse de facturation :</h3>
 <p class="right">{{facture.facturationAdresse|raw}}</p>
-
-
 <div class="produit">
     <table class="table">
         <thead>
@@ -39,9 +34,13 @@
     </table>
     {% endfor %}
 </div>
-<h5>Les informations de livraison</h5>
+<h3>Les informations de livraison : </h3>
 <p>{{facture.TransporteurNom}}</p>
 <p>{{facture.TransporteurTarif}}</p>
+<hr>
+<div>
+    <H2 style="color: red;"><strong>{{facture.etat}}</strong></H2>
+</div>
 {% endblock %}
 
 {% block css %}

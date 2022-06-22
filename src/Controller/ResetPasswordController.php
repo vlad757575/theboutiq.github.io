@@ -32,6 +32,7 @@ class ResetPasswordController extends AbstractController
 
     public function __construct(ResetPasswordHelperInterface $resetPasswordHelper, EntityManagerInterface $entityManager)
     {
+        // J'importe les classes EntityManagerInterface et resetPasswordInterface
         $this->resetPasswordHelper = $resetPasswordHelper;
         $this->entityManager = $entityManager;
     }
@@ -44,9 +45,10 @@ class ResetPasswordController extends AbstractController
      */
     public function request(Request $request, MailerInterface $mailer, TranslatorInterface $translator): Response
     {
+        // Création du formulaire
         $form = $this->createForm(ResetPasswordRequestFormType::class);
         $form->handleRequest($request);
-
+        // Verification
         if ($form->isSubmitted() && $form->isValid()) {
             return $this->processSendingPasswordResetEmail(
                 $form->get('email')->getData(),
@@ -70,6 +72,7 @@ class ResetPasswordController extends AbstractController
         // Generate a fake token if the user does not exist or someone hit this page directly.
         // This prevents exposing whether or not a user was found with the given email address or not
         if (null === ($resetToken = $this->getTokenObjectFromSession())) {
+            //Création d'au faux token
             $resetToken = $this->resetPasswordHelper->generateFakeResetToken();
         }
 
@@ -168,7 +171,7 @@ class ResetPasswordController extends AbstractController
         }
 
         $email = (new TemplatedEmail())
-            ->from(new Address('vld.lavrentiev@outlook.fr', 'MyMailer'))
+            ->from(new Address('contact@theboutiq.fr', 'noreply theboutiq'))
             ->to($user->getEmail())
             ->subject('Your password reset request')
             ->htmlTemplate('reset_password/email.html.twig')

@@ -3925,12 +3925,19 @@ textarea.form-control-lg {
   text-decoration: none;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
 }
+
+.nav-linkBis {
+  display: block;
+  color: #E97864;
+  text-decoration: none;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+}
 @media (prefers-reduced-motion: reduce) {
-  .nav-link {
+  .nav-link + .nav-linkBis {
     transition: none;
   }
 }
-.nav-link:hover, .nav-link:focus {
+.nav-link:hover, .nav-link:focus .nav-linkBis:hover  .nav-linkBis:focus{
   color: #E97864;
 }
 .nav-link.disabled {
@@ -11266,4 +11273,4 @@ textarea.form-control-lg {
   }
 }
 
-/*# sourceMappingURL=bootstrap.css.map */
+# sourceMappingURL=bootstrap.css.map

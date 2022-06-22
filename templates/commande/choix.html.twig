@@ -8,15 +8,6 @@
     <p class="text-center m-5">Choisissez votre adresse de livraison et le mode de livraison.</p>
     <hr>
     <div class="row">
-        <div class="col-md-6">
-            {% set formHtml %}
-            {{form_start(form, {action: path('recapitulatif')})}}
-            <a href="{{path('app_adresse_livraison_new')}}">Créer une nouvelle adresse de livraison</a> <br>
-            <a href="{{path('app_adresse_facturation_new')}}">Créer une nouvelle adresse de facturation</a>
-            {{form_end(form)}}
-            {% endset %}
-            {{ formHtml|replace({'[br]' : '<br/>', '[€]' : '€'})|raw }}
-        </div>
         <div class="col-md-6 ">
             <h5 class="text-center">Récapitulatif de mon panier</h5><br>
             <div class="confirm-section">
@@ -46,6 +37,16 @@
                 </table>
             </div>
         </div>
+        <div class="col-md-6">
+            {% set formHtml %}
+            {{form_start(form, {action: path('recapitulatif')})}}
+            <a href="{{path('app_adresse_livraison_new')}}" class="nav-linkBis">Créer une nouvelle adresse de livraison</a> <br>
+            <a href="{{path('app_adresse_facturation_new')}}" class="nav-linkBis">Créer une nouvelle adresse de facturation</a>
+            {{form_end(form)}}
+            {% endset %}
+            {{ formHtml|replace({'[br]' : '<br/>', '[€]' : '€'})|raw }}
+        </div>
+
     </div>
 </div>
 {% endblock %}

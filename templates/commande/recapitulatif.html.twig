@@ -14,7 +14,7 @@
     <div class="row">
         <div class="col-md-12 ">
             <h5 class="text-center">Récapitulatif de votre commande</h5><br>
-            <div class="d-flex">
+            <div>
                 <div class=" confirm-section">
                     <h5>Votre choix de livraison</h5>
                     <hr>
@@ -60,13 +60,13 @@
                     </tbody>
                 </table>
             </div>
-            <div class="m-3">
+            <div class="m-3 text-center">
                 <hr>
                 <strong>Sous total : {{ total }} €</strong><br>
                 <strong>Livraison : {{transporteur.tarif}} €</strong><br>
                 <strong>Total TTC :{{ total + transporteur.tarif}} €</strong><br>
                 <strong>Dont TVA : {{ 0.20 *(total + transporteur.tarif)/(1+0.20)|round}} €</strong><br>
-                <a id="checkout-button" href="{{path('app_payment_stripe',{'token': commande.token})}}" class="btn btn-primary"> Payer {{ total + transporteur.tarif }} €</a>
+                <a id="checkout-button" href="{{path('app_payment_stripe',{'token': commande.token})}}" class="btn btn-primary mt-3"> Payer {{ total + transporteur.tarif }} €</a>
             </div>
         </div>
     </div>

@@ -19,9 +19,7 @@ class MonCompteController extends AbstractController
      */
     public function index(): Response
     {
-        return $this->render('mon_compte/index.html.twig', [
-            'controller_name' => 'MonCompteController',
-        ]);
+        return $this->render('mon_compte/index.html.twig');
     }
 
     /**

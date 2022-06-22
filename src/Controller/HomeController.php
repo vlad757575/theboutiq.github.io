@@ -13,9 +13,7 @@ class HomeController extends AbstractController
      */
     public function index(): Response
     {
-        return $this->render('home/index.html.twig', [
-            'controller_name' => 'HomeController',
-        ]);
+        return $this->render('home/index.html.twig');
     }
 
     /**
@@ -23,9 +21,7 @@ class HomeController extends AbstractController
      */
     public function contact(): Response
     {
-        return $this->render('home/contact.html.twig', [
-            'controller_name' => 'HomeController',
-        ]);
+        return $this->render('home/contact.html.twig');
     }
 
     /**
@@ -33,9 +29,7 @@ class HomeController extends AbstractController
      */
     public function mentions(): Response
     {
-        return $this->render('home/mentions-legales.html.twig', [
-            'controller_name' => 'HomeController',
-        ]);
+        return $this->render('home/mentions-legales.html.twig');
     }
 
     /**
@@ -43,9 +37,7 @@ class HomeController extends AbstractController
      */
     public function cgv(): Response
     {
-        return $this->render('home/cguv.html.twig', [
-            'controller_name' => 'HomeController',
-        ]);
+        return $this->render('home/cguv.html.twig');
     }
 
 

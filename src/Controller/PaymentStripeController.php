@@ -5,15 +5,17 @@ namespace App\Controller;
 use Stripe\Stripe;
 use App\Entity\Etat;
 use App\Classe\Panier;
+use App\Entity\Produit;
 use App\Entity\Commande;
 use App\Entity\Utilisateur;
+use App\Repository\ProduitRepository;
 use Stripe\Checkout\Session;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class PaymentStripeController extends AbstractController
 {
@@ -90,6 +92,8 @@ class PaymentStripeController extends AbstractController
     public function success(EntityManagerInterface $entityManager, $token, SessionInterface $session): Response
     {
 
+        // $produit = $produitRepository->findOneBy($id);
+        // dd($produit);
         $commande = $entityManager->getRepository(Commande::class)->findOneBy(array('token' => $token));
         // dd($commande);
         // $customerEmail = $entityManager->getRepository(Utilisateur::class)->findOneBy(array('email' => $email));

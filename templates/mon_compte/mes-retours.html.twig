@@ -11,15 +11,12 @@
         <li class="breadcrumb-item current-page" aria-current="page">Mes Retours</li>
     </ol>
 </nav>
-
-
 <div class="text-center">
     <h1>Mes commandes</h1>
     <h4>Retrouvez toute vos commandes</h4>
 </div>
 {% if app.user.commande|length == 0 %}
 <p>Vous n'avez pas encore de commande</p>
-
 {% else %}
 <div class="container">
     <table class="table">
@@ -44,17 +41,9 @@
                 <td><a href="{{path('app_commande_show', {'id': commande.id})}}">Voir</a></td>
             </tr>
             {% endfor %}
-
-
-
-
-
-
         </tbody>
     </table>
 </div>
 
 {% endif %}
-
-
 {% endblock %}
