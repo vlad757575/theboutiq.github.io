@@ -216,24 +216,21 @@ class CommandeController extends AbstractController
             $this->entityManager->persist($commande);
 
             foreach ($panier->getMyPanier() as $produit) {
+                // dd($produit);
                 $commandeProduit = new CommandeProduit;
                 $commandeProduit->setCommande($commande);
                 $commandeProduit->setMonProduit($produit['produit']->getNom());
                 $commandeProduit->setQuantite($produit['quantite']);
-                $commandeProduit->setPrix($produit['produit']->getMontant());
+                $commandeProduit->setProduit($produit['produit']);
+
                 $commandeProduit->setTotal($produit['produit']->getMontant() * $produit['quantite']);
+                $commandeProduit->setPrix($produit['produit']->getMontant());
 
 
 
                 // je fige les données de commandeProduit
                 $this->entityManager->persist($commandeProduit);
             }
-            // $produit = $produitRepository->find();
-            // foreach ($panier as $id => $quantite) {
-            //     $stock = $produit->getNom();
-            //     dd($stock);
-
-            //     $produit->setStock($stock - $produit['quantite']);
 
             // J'envoi tout en bdd
             $this->entityManager->flush();

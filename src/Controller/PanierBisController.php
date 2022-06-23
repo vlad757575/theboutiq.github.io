@@ -22,6 +22,7 @@ class PanierBisController extends AbstractController
      */
     public function index(Panier $panier)
     {
+
         return $this->render('panier/panierbis.html.twig', [
             'panier' => $panier->getMyPanier(),
 
@@ -35,7 +36,7 @@ class PanierBisController extends AbstractController
     {
         // j'ajoute un produit grace à son id
         $panier->add($id);
-        return $this->redirectToRoute('app_mpanier');
+        return $this->redirectToRoute('app_produit_index');
     }
 
     /**

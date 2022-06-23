@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CommandeProduitRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -27,8 +29,6 @@ class CommandeProduit
      */
     private $commande;
 
-
-
     /**
      * @ORM\Column(type="string", length=255)
      */
@@ -43,6 +43,26 @@ class CommandeProduit
      * @ORM\Column(type="float")
      */
     private $total;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Produit::class, inversedBy="commandeProduits")
+     */
+    private $produit;
+
+    // /**
+    //  * @ORM\ManyToOne(targetEntity=Produit::class)
+    //  * @ORM\JoinColumn(nullable=true)
+    //  */
+    // private $product;
+
+
+
+    public function __construct()
+    {
+        $this->product = new ArrayCollection();
+    }
+
+
 
     public function getId(): ?int
     {
@@ -111,6 +131,30 @@ class CommandeProduit
     public function setTotal(float $total): self
     {
         $this->total = $total;
+
+        return $this;
+    }
+
+    // public function getProduct(): ?Produit
+    // {
+    //     return $this->product;
+    // }
+
+    // public function setProduct(?Produit $product): self
+    // {
+    //     $this->product = $product;
+
+    //     return $this;
+    // }
+
+    public function getProduit(): ?Produit
+    {
+        return $this->produit;
+    }
+
+    public function setProduit(?Produit $produit): self
+    {
+        $this->produit = $produit;
 
         return $this;
     }

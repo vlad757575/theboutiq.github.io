@@ -49,16 +49,10 @@ class Produit
      */
     private $montant;
 
-
-    /**
-     * @ORM\Column(type="float")
-     */
-    private $tva;
-
-    /**
-     * @ORM\OneToMany(targetEntity=CommandeProduit::class, mappedBy="produit")
-     */
-    private $commandeProduits;
+    // /**
+    //  * @ORM\OneToMany(targetEntity=CommandeProduit::class, mappedBy="produit")
+    //  */
+    // private $commandeProduits;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -69,6 +63,11 @@ class Produit
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $title;
+
+    /**
+     * @ORM\OneToMany(targetEntity=CommandeProduit::class, mappedBy="produit")
+     */
+    private $commandeProduits;
 
 
     public function __construct()
@@ -172,14 +171,68 @@ class Produit
     }
 
 
-    public function getTva(): ?float
+    // public function getTva(): ?float
+    // {
+    //     return $this->tva;
+    // }
+
+    // public function setTva(int $tva): self
+    // {
+    //     $this->tva = $tva;
+
+    //     return $this;
+    // }
+
+    // /**
+    //  * @return Collection<int, CommandeProduit>
+    //  */
+    // public function getCommandeProduits(): Collection
+    // {
+    //     return $this->commandeProduits;
+    // }
+
+    // public function addCommandeProduit(CommandeProduit $commandeProduit): self
+    // {
+    //     if (!$this->commandeProduits->contains($commandeProduit)) {
+    //         $this->commandeProduits[] = $commandeProduit;
+    //         $commandeProduit->setProduit($this);
+    //     }
+
+    //     return $this;
+    // }
+
+    // public function removeCommandeProduit(CommandeProduit $commandeProduit): self
+    // {
+    //     if ($this->commandeProduits->removeElement($commandeProduit)) {
+    //         // set the owning side to null (unless already changed)
+    //         if ($commandeProduit->getProduit() === $this) {
+    //             $commandeProduit->setProduit(null);
+    //         }
+    //     }
+
+    //     return $this;
+    // }
+
+    public function getImage(): ?string
     {
-        return $this->tva;
+        return $this->image;
     }
 
-    public function setTva(int $tva): self
+    public function setImage(string $image): self
     {
-        $this->tva = $tva;
+        $this->image = $image;
+
+        return $this;
+    }
+
+    public function getTitle(): ?string
+    {
+        return $this->title;
+    }
+
+    public function setTitle(?string $title): self
+    {
+        $this->title = $title;
 
         return $this;
     }
@@ -210,30 +263,6 @@ class Produit
                 $commandeProduit->setProduit(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getImage(): ?string
-    {
-        return $this->image;
-    }
-
-    public function setImage(string $image): self
-    {
-        $this->image = $image;
-
-        return $this;
-    }
-
-    public function getTitle(): ?string
-    {
-        return $this->title;
-    }
-
-    public function setTitle(?string $title): self
-    {
-        $this->title = $title;
 
         return $this;
     }
