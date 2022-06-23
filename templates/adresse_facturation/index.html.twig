@@ -21,7 +21,7 @@
     <div class="row">
         {% for adresse_facturation in app.user.adresseFacturation %}
         <div class="col-md-4">
-            <div class="card" style="width: 18rem;">
+            <div class="card" style="width: 20rem;">
                 <div class="card-body">
                     <h5 class="card-title">{{ adresse_facturation.nom }}</h5>
                     <p class="card-text">{{adresse_facturation.numeroRue}} - {{adresse_facturation.rue}} <br> {{adresse_facturation.codepostal}} - {{adresse_facturation.ville}} <br>{{adresse_facturation.pays}}</p>

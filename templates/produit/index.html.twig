@@ -26,13 +26,13 @@
         </div>
     </div>
 </div>
-<div class="row my-product-container">
+<div class="row">
     {% for produit in produits %}
     <div class="col-md-4">
         <div class="my-product text-center">
             <h4>{{produit.nom}}</h4>
             <div>
-                <a href="{{path('app_produit_show', {'id': produit.id}) }}"> <img src="{{ asset('uploads/') ~ produit.image  }}" alt="{{produit.nom}}" class="img-fluid my-picture" style="width: 250px;">
+                <a href="{{path('app_produit_show', {'id': produit.id}) }}"> <img src="{{ asset('uploads/') ~ produit.image  }}" alt="{{produit.nom}}" class="img-fluid my-picture" style="width: 300px;">
                 </a>
             </div>
             {% if  produit.stock > 0  %}

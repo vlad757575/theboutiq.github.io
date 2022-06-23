@@ -1,125 +1,144 @@
+/* ---------------------GENERAL CSS--------------------- */
 
-  .my-formular {
-    display: block;
-    background-color: white;
-    border: white;
-    box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.3);
-    padding: 20px;
-    border-radius: 5px;
-  }
-  a {
-    text-decoration: none;
-    }
-  button {
-    margin-top: 10px;
-  }
-  a-hover:hover{
-    border-bottom: 1px solid #E97864; 
-   font-size: larger;
-    color: #E97864 !important;
-  }
-  .my-navbar {
-    font-family: 'Source Sans Pro', sans-serif;
-    background-color: wheat !important;
-    position: relative;
-    width: 100% !important;
-  }
-  .my-navbar-bottom {
-    font-family: 'Source Sans Pro', sans-serif;
-    display: block;
-    position: relative; 
-    right: auto;
-   left: auto; 
-    bottom: 0 !important;
-    width: 100% !important;
-    /* margin-top: -11px; */
-  }
-   
-  .my-navbar a {
-    color: rgba(rgb(169,169,169,0,5)) !important;
-  }
-  body {
-    height: auto;
-    background-color: rgba(233, 120, 100, 0.05);
-  }
-  .carousel-item img {
-    object-fit: scale-down;
-  }
+.my-formular {
+  display: block;
+  background-color: white;
+  border: white;
+  box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.3);
+  padding: 20px;
+  border-radius: 5px;
+}
 
- .my-product  {
-   margin-top: 45px;
- }
- .my-picture {
-   padding:10px;
-   border-top-right-radius: 15%;
-   border-top-left-radius: 15%;
- }
+body {
+  height: auto;
+  background-color: rgba(233, 120, 100, 0.05);
+}
 
-  .my-product h5{
-    text-transform: uppercase;
-    font-size: 20px;
-  }
-  .my-product .produict-subtitle {
-    font-size: 14px;
-    display: block;
-    margin-bottom: 9px;
-  }
-   .product-price {
-     padding-top: 5px;
-     margin-right: 15px;
-    font-size:30px ;
-    font-weight: bold;
-   }
+main {
+  min-height: calc(100vh - 176px);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: "Source Sans Pro", sans-serif;
+  color: #29d2bb;
+
+  font-family: "Playfair Display", sans-serif;
+}
+
+p {
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+/* ---------------------NAVBARs CSS--------------------- */
+.logo {
+  margin: -10px;
+  margin-left: 5%;
+}
+a {
+  text-decoration: none;
+}
+button {
+  margin-top: 10px;
+}
+a-hover:hover {
+  border-bottom: 1px solid #e97864;
+  font-size: larger;
+  color: #e97864 !important;
+}
+.my-navbar {
+  font-family: "Source Sans Pro", sans-serif;
+  background-color: wheat !important;
+  position: relative;
+  width: 100% !important;
+}
+.my-navbar-bottom {
+  font-family: "Source Sans Pro", sans-serif;
+  display: block;
+  position: relative;
+  right: auto;
+  left: auto;
+  bottom: 0 !important;
+  width: 100% !important;
+  /* margin-top: -11px; */
+}
+
+.my-navbar a {
+  color: rgba(rgb(169, 169, 169, 0, 5)) !important;
+}
+
+/* .carousel-item img {
+  object-fit: scale-down;
+} */
+/* ---------------------PRODUCT CSS--------------------- */
+.my-product {
+  margin-top: 10px;
+  margin-bottom: 35px;
+  padding: 20px;
+}
+.my-picture {
+  padding: 10px;
+  border-top-right-radius: 15%;
+  border-top-left-radius: 15%;
+}
+
+.my-product h5 {
+  text-transform: uppercase;
+  font-size: 20px;
+}
+.my-product .produict-subtitle {
+  font-size: 14px;
+  display: block;
+  margin-bottom: 9px;
+}
+.product-price {
+  padding-top: 5px;
+  margin-right: 15px;
+  font-size: 30px;
+  font-weight: bold;
+}
 
 .description {
   margin-top: 20px;
 }
 
 .description p {
-text-align: justify;
-max-width: 300px;
+  text-align: justify;
+  max-width: 300px;
 }
 
-   .my-product-container {
-    margin: 60px;
-   }
+.my-product-detail {
+  display: flex;
+  margin: auto;
+  align-items: center;
+  justify-content: center;
+  padding-top: 5vh;
+}
 
-   .my-product-detail{
-    display: flex;
-    margin: auto;
-    align-items: center;
-    justify-content: center;
-   }
+.detail-product-right {
+  margin-left: 7%;
+  margin-top: 50px;
+  padding-bottom: 3vh;
+}
 
-   .detail-product-right {
-    margin-left: 7%;
-    margin-top: 50px;
-   }
-   
-  .input-button {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-  }
+.input-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
 
-  .input-button input {
-    margin-top: 9px;
-    margin-right: 5px;
-  }
-  .picture-accordion {
-    display: block;
-    margin: 1em 0px 1em 1em;
-  }
-
-  .my-accordion{
-    max-width: 420px;
-  }
+.input-button input {
+  margin-top: 9px;
+  margin-right: 5px;
+}
 
 .my-heading {
   text-align: center;
   margin-top: 2%;
   margin-bottom: 2%;
 }
+/* ---------------------ACCOUNT CSS--------------------- */
 .my-account {
   position: relative;
   margin: 7em auto;
@@ -131,26 +150,19 @@ max-width: 300px;
 .my-account a {
   padding: 10px;
   margin: 4px;
-  background-color:rgba(233, 120, 100, 0.3);
+  background-color: rgba(233, 120, 100, 0.3);
   max-width: 450px;
 }
 
-.my-account :hover{
-  background-color:rgba(41, 210, 187, 0.3);
+.my-account :hover {
+  background-color: rgba(41, 210, 187, 0.3);
 }
 
 .current-page {
-  color: #E97864;
+  color: #e97864;
 }
 .my-breadcrumb {
   margin: 3px 3px 3px 50px;
-}
-
-.my-social-navbar {
-  display: flex;
-    left: 0;
-    bottom: 0;
-    width: 100%; 
 }
 
 .mentions {
@@ -158,117 +170,93 @@ max-width: 300px;
   background-color: white;
   max-width: 80%;
   padding: 1.5rem;
-  border:4px solid white;
+  border: 4px solid white;
   border-radius: 10px;
-  
 }
 .mentions p {
   justify-content: center;
   text-align: justify;
   margin-top: 2%;
-
 }
 .mentions h2 {
   text-align: center;
-  color: #E97864
+  color: #e97864;
 }
 .mentions h3 {
-  color:rgb(41, 210, 187) ;
+  color: rgb(41, 210, 187);
 }
 .my-button {
-  color: #E97864 !important;
+  color: #e97864 !important;
 }
-.logo {
-  margin: -10px;
-  margin-left: 5%;
-}
+
 .adresses {
   margin: auto;
 }
 
-.panier{
+.panier {
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
   margin: 230px auto;
 }
- .produits {
-   display: flex;
-   justify-content: space-between;
-   align-items: center;
+.produits {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+i {
+  font-size: 25px;
+}
 
- }
- i {
-   font-size: 25px;
- }
+.account-helper {
+  display: flex;
+  justify-content: center;
+}
+.confirm-section {
+  background-color: whitesmoke;
+  padding: 10px;
+  margin: 5px;
+}
+.form-check {
+  background-color: whitesmoke;
+  padding: 10px;
+  margin-top: 10px;
+}
 
- .account-helper {
-   display: flex;
-   justify-content: center;
- }
- .confirm-section {
-    background-color: whitesmoke; 
-    padding: 10px;
-    margin: 5px;
- }
- .form-check {
-   background-color: whitesmoke;
-   padding: 10px;
-   margin-top: 10px;
- }
+.col-form-label {
+  font-weight: bold;
+}
 
- .col-form-label {
-   font-weight: bold;
- }
-
- .payment {
+.payment {
   display: block;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
- }
- .payment h2 {
-text-align: center;
-margin: 15px;
- }
+}
+.payment h2 {
+  text-align: center;
+  margin: 15px;
+}
 
- .error {
-   display: block;
-   align-items: center;
-   margin: 2vh auto;
-   color: #E97864;
- }
+.error {
+  display: block;
+  align-items: center;
+  margin: 2vh auto;
+  color: #e97864;
+}
 
- .error img {
-   display: block;
-   margin:30px  auto;
-   width: 500px;
-   
- }
- a .main-logo {
+.error img {
+  display: block;
+  margin: 30px auto;
+  width: 500px;
+}
+a .main-logo {
   max-width: 480px !important;
 }
- main {
-  min-height: calc(100vh - 176px );
- }
- 
- h1, h2, h3, h4{
 
-  font-family: 'Source Sans Pro', sans-serif;
-   color:#29D2BB;
-   
-
-   font-family: 'Playfair Display', sans-serif;
- }
-
- p {
-font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
- }
-
- 
- .example-wrapper {
+.example-wrapper {
   position: relative;
   margin: 10em auto;
   max-width: 700px;
@@ -278,28 +266,21 @@ font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   display: block;
   justify-content: center;
   align-items: center;
-
 }
 
 .title {
-
   text-align: center;
-
 }
 
 .example-wrapper code {
-  background: #F5F5F5;
+  background: #f5f5f5;
   padding: 2px 6px;
 }
 
 .nav-links {
   display: flex;
-  color: #E97864;
+  color: #e97864;
   text-decoration: none;
-  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out;
 }
-
-
-
-
-
