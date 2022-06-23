@@ -35,7 +35,6 @@ class PanierBisController extends AbstractController
     {
         // j'ajoute un produit grace à son id
         $panier->add($id);
-
         return $this->redirectToRoute('app_mpanier');
     }
 
@@ -67,6 +66,7 @@ class PanierBisController extends AbstractController
     {
         // Je vide le panier
         $panier->delete($id);
+
         return $this->redirectToRoute('app_mpanier');
     }
 }

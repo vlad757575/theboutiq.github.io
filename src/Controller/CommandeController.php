@@ -116,9 +116,10 @@ class CommandeController extends AbstractController
     /**
      * @Route("/commande/choix", name="choix")
      */
-    public function choix(Panier $panier, Request $request)
+    public function choix(Panier $panier, Request $request): Response
     {
         if (!$this->getUser()->isVerified()) {
+
             return $this->redirectToRoute('index');
         }
         if (!$this->getUser()->getAdresseLivraison()->getValues()) {

@@ -5,7 +5,7 @@ namespace App\Classe;
 use App\Entity\Produit;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+
 
 
 
@@ -22,6 +22,7 @@ class Panier
 
     public function add($id)
     {
+
         $panier = $this->session->get('panier', []);
 
         if (!empty($panier[$id])) {
@@ -29,13 +30,13 @@ class Panier
         } else {
             $panier[$id] = 1;
         }
+
+
         $this->session->set('panier', $panier);
     }
 
     public function get()
     {
-
-
         return $this->session->get('panier');
     }
 

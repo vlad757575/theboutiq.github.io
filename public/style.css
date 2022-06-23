@@ -13,18 +13,6 @@
   button {
     margin-top: 10px;
   }
-
-  /* .login-button {
-    width: 300px;
-    height: 300px;
-  } */
-  /* .my-carrousel{
-    justify-content: center;
-    align-items: center;
-    max-width: 750px;
-    max-height: 750px;
-    margin: 150px auto 150px auto;
-  } */
   a-hover:hover{
     border-bottom: 1px solid #E97864; 
    font-size: larger;
@@ -263,7 +251,7 @@ margin: 15px;
   max-width: 480px !important;
 }
  main {
-  min-height: calc(100vh - 175px );
+  min-height: calc(100vh - 176px );
  }
  
  h1, h2, h3, h4{

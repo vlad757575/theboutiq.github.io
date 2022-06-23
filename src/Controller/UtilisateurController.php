@@ -77,6 +77,7 @@ class UtilisateurController extends AbstractController
      */
     public function edit(Request $request, Utilisateur $utilisateur, UtilisateurRepository $utilisateurRepository, $id): Response
     {
+
         $user = $utilisateurRepository->find($id);
 
         if (!$this->getUser() || !$user || $user != $this->getUser()) {
@@ -90,6 +91,8 @@ class UtilisateurController extends AbstractController
             $utilisateurRepository->add($utilisateur);
             return $this->redirectToRoute('mon_compte', [], Response::HTTP_SEE_OTHER);
         }
+
+
 
         return $this->renderForm('utilisateur/edit.html.twig', [
             'utilisateur' => $utilisateur,
@@ -107,7 +110,7 @@ class UtilisateurController extends AbstractController
         if ($this->isCsrfTokenValid('delete' . $utilisateur->getId(), $request->request->get('_token'))) {
             $utilisateurRepository->remove($utilisateur);
             //Très important si l'utilisateur a une session en cours
-            // $session = new Session();
+            $session = new Session();
             // $this->get('session')->invalidate();
         }
 

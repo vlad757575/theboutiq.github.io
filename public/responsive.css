@@ -22,17 +22,7 @@
     margin-top: 0px !important;
     padding-bottom: 22px;
   }
-  /* .decouvrir {
-    display: block;
-    position: relative;
-    top: 43%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    max-width: 400px;
-  } */
   }
-
-
 
   @media all and (max-width: 1000px) {
   .account-helper {
@@ -107,7 +97,7 @@
 
 @media all and (max-width: 1900px) {
   section {
-   width: 100vw;
+   width: 99.9vw;
    height: 79vh;
  }
 }

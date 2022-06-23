@@ -8,14 +8,17 @@ use App\Classe\Panier;
 use App\Entity\Produit;
 use App\Entity\Commande;
 use App\Entity\Utilisateur;
-use App\Repository\ProduitRepository;
 use Stripe\Checkout\Session;
+use Symfony\Component\Mime\Address;
+use App\Repository\ProduitRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Mailer\MailerInterface;
 
 class PaymentStripeController extends AbstractController
 {
@@ -89,9 +92,17 @@ class PaymentStripeController extends AbstractController
     /**
      * @Route("commande/commande/recapitulatif/success/{token}", name="payment_success" )
      */
-    public function success(EntityManagerInterface $entityManager, $token, SessionInterface $session): Response
+    public function success(EntityManagerInterface $entityManager, $token, SessionInterface $session, MailerInterface $mailer): Response
     {
+        $commande = $entityManager->getRepository(Commande::class)->findOneBy(array('token' => $token));
 
+
+        //Je boucle sur les entrées de mon panier
+        // foreach ($commande->getCommandeProduits()->getValues() as $produit) {
+        //     $produit = $produit->getMonProduit();
+        //     $quantite = $produit->getQuantite();
+        //     dd($quantite);
+        // }
         // $produit = $produitRepository->findOneBy($id);
         // dd($produit);
         $commande = $entityManager->getRepository(Commande::class)->findOneBy(array('token' => $token));
@@ -111,6 +122,14 @@ class PaymentStripeController extends AbstractController
         }
         // Je vide le panier
         $session->set('panier', []);
+        $user = $this->getUser();
+        $email = (new TemplatedEmail())
+            ->from(new Address('contact@theboutiq.fr', 'noreply theboutiq'))
+            ->to($user->getEmail())
+            ->subject('Confirmation de commande')
+            ->htmlTemplate('payment/confirmation-email.html.twig');
+        // envoi de l'email
+        $mailer->send($email);
 
         return $this->render('payment/success.html.twig',  [
             'commande' => $commande,
