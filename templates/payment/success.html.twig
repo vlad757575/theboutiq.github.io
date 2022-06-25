@@ -3,6 +3,10 @@
 
 {% block body %}
 <div class="payment">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <script>
+        confetti()
+    </script>
     <h2>Paiement accepté</h2> <br>
     <h5 class=" text-center"> Cher {{ commande.utilisateur.prenom}}, votre commande n°{{commande.getOrderNumber}} est bien enregistrée </h5> <br>
     <p class=" text-center"><b>Retrouvez la dans votre compte onglet <a href="https://theboutiq.vladimir-lavrentiev.com/commande/">mes commandes</a></b> </p>

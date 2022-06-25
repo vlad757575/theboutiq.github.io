@@ -8,7 +8,7 @@
     <p>{{ utilisateur.email}}</p><br>
     <p>{{ utilisateur.dateNaissance|date('d-m-Y')}}</p>
 </div>
-<h3 class="center">Vos adresses de livraison</h3>
+<h3 class="center">Vos adresses de facturation</h3>
 <hr>
 {% for adresse_facturation in app.user.adresseFacturation %}
 <div class="col-md-4">
@@ -32,7 +32,6 @@
             </div>
         </div>
     </div>
-
 
     {% endfor %}
     {% endblock %}

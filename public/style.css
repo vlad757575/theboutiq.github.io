@@ -257,8 +257,10 @@ a .main-logo {
 }
 
 .example-wrapper {
-  position: relative;
-  margin: 10em auto;
+  position: absolute;
+  top: 47%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   max-width: 700px;
   max-height: 700px;
   width: 95%;

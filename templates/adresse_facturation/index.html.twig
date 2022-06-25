@@ -16,7 +16,9 @@
 <div class="my-formular example-wrapper">
     <h1 class="text-center m-3">Mes adresses de facturation</h1>
     {% if app.user.adresseFacturation is empty %}
-    <p class="text-center"> Vous n'avez pas encore ajouté d'adresse de Facturation. Pour en ajouter une, veuillez <a href="{{path('app_adresse_facturation_new')}}">cliquer ici.</a></p>
+    <p class="text-center"> Vous n'avez pas encore ajouté d'adresse de Facturation. Pour en ajouter une, veuillez
+        <a href="{{path('app_adresse_facturation_new')}}">cliquer ici.</a>
+    </p>
     {% else %}
     <div class="row">
         {% for adresse_facturation in app.user.adresseFacturation %}
@@ -24,7 +26,9 @@
             <div class="card" style="width: 20rem;">
                 <div class="card-body">
                     <h5 class="card-title">{{ adresse_facturation.nom }}</h5>
-                    <p class="card-text">{{adresse_facturation.numeroRue}} - {{adresse_facturation.rue}} <br> {{adresse_facturation.codepostal}} - {{adresse_facturation.ville}} <br>{{adresse_facturation.pays}}</p>
+                    <p class="card-text">{{adresse_facturation.numeroRue}} - {{adresse_facturation.rue}} <br>
+                        {{adresse_facturation.codepostal}} - {{adresse_facturation.ville}} <br>{{adresse_facturation.pays}}
+                    </p>
                     <a class="btn btn-info" href="{{ path('app_adresse_facturation_show', {'id': adresse_facturation.id}) }}">Details</a>
                     <a class="btn btn-info" href="{{ path('app_adresse_facturation_edit', {'id': adresse_facturation.id}) }}">Modifier</a>
 
@@ -32,9 +36,8 @@
                 </div>
             </div>
         </div>
-
-
         {% endfor %}
+
         {% endif %}
     </div>
     <a class="btn btn-primary m-3" href="{{ path('app_adresse_facturation_new') }}">Créer une nouvelle adresse</a>

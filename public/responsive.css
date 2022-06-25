@@ -1,15 +1,4 @@
 @media all and (max-width: 600px) {
-  .my-product {
-    max-width: 1200px;
-    max-height: 800px;
-    margin: 3em auto 3em auto;
-    background-color: white;
-    border: 1px solid white;
-    border-radius: 10px;
-    display: block;
-    justify-content: space-around;
-    align-items: center;
-  }
   main {
     min-height: calc(100vh - 180px);
   }

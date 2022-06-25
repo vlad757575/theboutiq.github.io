@@ -2,18 +2,21 @@
 
 namespace App\Controller;
 
-use Dompdf\Options;
 use Dompdf\Dompdf;
+use Dompdf\Options;
 use App\Entity\Utilisateur;
 use App\Form\UtilisateurType;
-use App\Repository\UtilisateurRepository;
+use Symfony\Component\Mime\Address;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\UtilisateurRepository;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Session\Session;
 
 /**
  * @IsGranted("ROLE_USER")
@@ -25,13 +28,16 @@ class UtilisateurController extends AbstractController
     /**
      * @Route("/index/{id}", name="user")
      */
-    public function index($id, UtilisateurRepository $ur): Response
+    public function index($id, UtilisateurRepository $utilisateurRepository): Response
     {
-
+        $user = $utilisateurRepository->find($id);
+        if (!$this->getUser() || !$user || $user != $this->getUser()) {
+            return $this->redirectToRoute('index');
+        }
         return $this->render(
             'utilisateur/index.html.twig',
             [
-                'utilisateur' => $ur->find($id)
+                'utilisateur' => $utilisateurRepository->find($id)
             ]
         );
     }
@@ -77,9 +83,9 @@ class UtilisateurController extends AbstractController
      */
     public function edit(Request $request, Utilisateur $utilisateur, UtilisateurRepository $utilisateurRepository, $id): Response
     {
-
+        // Je déclare la variable user et je place l'utilisateur dedans
         $user = $utilisateurRepository->find($id);
-
+        // Verification que c'est le meme utilisateur, si c'est pas le meme redirection à l'accueil
         if (!$this->getUser() || !$user || $user != $this->getUser()) {
             return $this->redirectToRoute('index');
         }
@@ -105,13 +111,26 @@ class UtilisateurController extends AbstractController
      * 
      * @Route("/{id}", name="app_utilisateur_delete", methods={"POST"})
      */
-    public function delete(Request $request, Utilisateur $utilisateur, UtilisateurRepository $utilisateurRepository): Response
+    public function delete(Request $request, Utilisateur $utilisateur, UtilisateurRepository $utilisateurRepository, MailerInterface $mailer): Response
     {
         if ($this->isCsrfTokenValid('delete' . $utilisateur->getId(), $request->request->get('_token'))) {
+            // Je recupere le l'utilisateur actuel
+            $utilisateur = $this->getUser();
+            $email = (new TemplatedEmail())
+                ->from(new Address('contact@theboutiq.fr', 'Theboutiq!'))
+                ->to($utilisateur->getEmail())
+                ->subject('Confirmation de suppression de votre compte')
+                ->htmlTemplate('utilisateur/confirmation-suppression.html.twig');
+            // envoi de l'email
+            $mailer->send($email);
+
             $utilisateurRepository->remove($utilisateur);
-            //Très important si l'utilisateur a une session en cours
+
+            //je crée une nouvelle session
             $session = new Session();
-            // $this->get('session')->invalidate();
+
+            // Je ferme la session de l'utilisateur
+            $session->invalidate();
         }
 
         return $this->redirectToRoute('index', [], Response::HTTP_SEE_OTHER);
