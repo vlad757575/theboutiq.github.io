@@ -166,7 +166,7 @@ class UtilisateurController extends AbstractController
      * @IsGranted("ROLE_ADMIN")
      * @Route("/notverified", name="delete_not_verified")
      */
-    public function notVerified(UtilisateurRepository $utilisateurRepository, EntityManagerInterface $entityManager): Response
+    public function notVerified(UtilisateurRepository $utilisateurRepository, EntityManagerInterface $entityManager, MailerInterface $mailer): Response
     {
 
         // Je vais chercher les utilisateurs non verifiés
@@ -174,6 +174,18 @@ class UtilisateurController extends AbstractController
         // Le temps limite est de 2 heures, je boucle sur les utilisateurs non verifiés et je les supprime de la bdd
         foreach ($utilisateurs as $timelimit) {
             $entityManager->remove($timelimit);
+
+            // J'envoi un email à l'utilisateur pour l'informer de la suppression de son compte
+
+            $utilisateur = $this->getUser();
+            $email = (new TemplatedEmail())
+                ->from(new Address('contact@theboutiq.fr', 'Theboutiq!'))
+                ->to($utilisateur->getEmail())
+                ->subject('Suppression de votre compte')
+                ->htmlTemplate('utilisateur/confirmation-suppression-dead-line.html.twig');
+            // envoi de l'email
+            $mailer->send($email);
+
             $entityManager->flush();
         }
         $this->addFlash('success', 'Les utilisateurs non vérifiés ont bien étés supprimés');

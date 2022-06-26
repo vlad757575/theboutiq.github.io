@@ -3,7 +3,6 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Produit;
-use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
@@ -21,7 +20,6 @@ class ProduitCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            // IdField::new('id'),
             IntegerField::new('asin'),
             IntegerField::new('ean'),
             TextField::new('nom'),
@@ -29,7 +27,6 @@ class ProduitCrudController extends AbstractCrudController
             TextField::new('description'),
             IntegerField::new('stock'),
             NumberField::new('montant'),
-            NumberField::new('tva'),
             ImageField::new('image')
                 ->setBasePath('uploads/')
                 ->setUploadDir('public/uploads')

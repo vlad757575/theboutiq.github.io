@@ -76,6 +76,8 @@ a-hover:hover {
   margin-top: 10px;
   margin-bottom: 35px;
   padding: 20px;
+  border: #f5f5f5 solid 2px;
+  box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.3);
 }
 .my-picture {
   padding: 10px;

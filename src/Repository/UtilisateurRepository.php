@@ -93,7 +93,7 @@ class UtilisateurRepository extends ServiceEntityRepository implements PasswordU
 
     public function notVerifiedUser()
     {
-        $timelimit = date('Y-m-d H:i:s', strtotime('-2 seconds'));
+        $timelimit = date('Y-m-d H:i:s', strtotime('-1 hours'));
 
         return $this->createQueryBuilder('utilisateur')
             ->andWhere('utilisateur.isVerified = 0')
