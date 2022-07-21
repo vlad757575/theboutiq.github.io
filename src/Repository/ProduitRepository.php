@@ -59,6 +59,14 @@ class ProduitRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function countItems()
+    {
+        $queryBuilder = $this->createQueryBuilder('a');
+        $queryBuilder->select('COUNT(a.id) as value');
+
+        return $queryBuilder->getQuery()->getOneOrNullResult();
+    }
+
     // /**
     //  * @return Produit[] Returns an array of Produit objects
     //  */

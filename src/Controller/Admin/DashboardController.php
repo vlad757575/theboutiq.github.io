@@ -45,7 +45,11 @@ class DashboardController extends AbstractDashboardController
      */
     public function index(): Response
     {
-        return $this->render('bundle/views/welcome.html.twig', []);
+        return $this->render('bundle/views/welcome.html.twig', [
+            'countUser' => $this->utilisateurRepository->countUser(),
+            'countOrders' => $this->commadeRepository->countOrders(),
+            'countItems' => $this->produitRepository->countItems()
+        ]);
     }
 
     //Menu admin config

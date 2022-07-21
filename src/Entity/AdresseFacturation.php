@@ -54,7 +54,7 @@ class AdresseFacturation
 
     /**
      * @ORM\ManyToOne(targetEntity=Utilisateur::class, inversedBy="Adressefacturation")
-     * @ORM\JoinColumn(name="utilisateur_id", onDelete="SET NULL", nullable=true)
+     * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private $utilisateur;
 

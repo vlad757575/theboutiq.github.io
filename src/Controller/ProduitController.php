@@ -18,13 +18,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class ProduitController extends AbstractController
 {
 
-
-
     /**
      * @Route("/", name="app_produit_index", methods={"GET"})
      */
     public function index(ProduitRepository $produitRepository): Response
     {
+        // J'affiche les produits
         return $this->render('produit/index.html.twig', [
             'produits' => $produitRepository->findAll(),
         ]);
@@ -36,12 +35,13 @@ class ProduitController extends AbstractController
      */
     public function new(Request $request, ProduitRepository $produitRepository): Response
     {
+        // Je crée un nouveau produit
         $produit = new Produit();
         $form = $this->createForm(ProduitType::class, $produit);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
+            // Upload image
             $image = $form->get('image')->getdata();
             $ok = true;;
 
@@ -79,6 +79,7 @@ class ProduitController extends AbstractController
      */
     public function show(Produit $produit): Response
     {
+        // Detail produit
         return $this->render('produit/show.html.twig', [
             'produit' => $produit,
         ]);
@@ -90,6 +91,7 @@ class ProduitController extends AbstractController
      */
     public function edit(Request $request, Produit $produit, ProduitRepository $produitRepository): Response
     {
+        // Modification produit
         $form = $this->createForm(ProduitType::class, $produit);
         $form->handleRequest($request);
 
@@ -111,7 +113,9 @@ class ProduitController extends AbstractController
     public function delete(Request $request, Produit $produit, ProduitRepository $produitRepository): Response
     {
         //si le token est valide
+
         if ($this->isCsrfTokenValid('delete' . $produit->getId(), $request->request->get('_token'))) {
+            // Alors tu me supprime le produit
             $produitRepository->remove($produit);
         }
 

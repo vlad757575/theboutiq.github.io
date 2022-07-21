@@ -24,7 +24,7 @@ class PaymentStripeController extends AbstractController
      */
     public function index($token, EntityManagerInterface $entityManager)
     {
-
+        // Je declare une variable qui servira a stocker des infos et les trasmettre à Stripe
         $for_stripe = [];
         $YOUR_DOMAIN = 'http://localhost:3000/public';
 
@@ -58,7 +58,7 @@ class PaymentStripeController extends AbstractController
             ],
             'quantity' => 1,
         ];
-
+        // Clé personelle Stripe
         Stripe::setApiKey($this->getParameter('stripeSecretKey'));
 
         $checkout_session = Session::create([

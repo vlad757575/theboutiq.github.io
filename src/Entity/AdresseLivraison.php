@@ -63,7 +63,7 @@ class AdresseLivraison
 
     /**
      * @ORM\ManyToOne(targetEntity=Utilisateur::class, inversedBy="adresseLivraison")
-     * @ORM\JoinColumn(name="utilisateur_id", onDelete="SET NULL", nullable=true)
+     * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private $utilisateur;
 
@@ -78,7 +78,7 @@ class AdresseLivraison
     private $nomPrenom;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=false)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $societe;
 

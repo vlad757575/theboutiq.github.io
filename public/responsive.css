@@ -22,7 +22,15 @@
     display: block;
     justify-content: center;
   }
-
+  /* .landing-btn a {
+    position: relative;
+    text-decoration: none !important;
+    width: auto;
+    height: 50px;
+    line-height: 50px;
+    color: whitesmoke !important;
+    padding: 50px;
+  } */
   .decouvrir {
     display: block;
     position: relative;
@@ -30,6 +38,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     max-width: 400px;
+    text-decoration: none !important;
   }
   .landing-img a {
     display: none;

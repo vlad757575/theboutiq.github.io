@@ -288,3 +288,33 @@ a .main-logo {
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
     border-color 0.15s ease-in-out;
 }
+
+/* Modal */
+
+.mon-modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.mon-modal-content {
+  background-color: #e97864 !important;
+  margin: 20% auto;
+  max-width: 70%;
+  box-shadow: 0 5px 5px à rgba(0, 0, 0, 0.5);
+}
+
+.close {
+  float: right !important;
+  color: gray;
+  font-size: 40px;
+}
+.modal-picture {
+  max-width: 80vw;
+}

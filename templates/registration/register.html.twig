@@ -6,7 +6,7 @@
 {% for flash_error in app.flashes('verify_email_error') %}
 <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
 {% endfor %}
-<div class="my-formular example-wrapper">
+<div class="my-formular container">
     <h1 class="text-center">Création de compte</h1>
 
     {{ form_start(registrationForm) }}

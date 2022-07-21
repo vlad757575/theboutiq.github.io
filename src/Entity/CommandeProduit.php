@@ -26,6 +26,7 @@ class CommandeProduit
 
     /**
      * @ORM\ManyToOne(targetEntity=Commande::class, inversedBy="commandeProduits")
+     * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private $commande;
 

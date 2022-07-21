@@ -98,7 +98,7 @@ class RegistrationFormType extends AbstractType
                         'message' => 'Vous devez accepter les conditions générales.',
                     ]),
                 ],
-                'attr' => ['class' => 'm-1'],
+                'attr' => ['class' => 'mr-3'],
                 'label' => 'J\'accepte les conditions générales',
             ]);
     }

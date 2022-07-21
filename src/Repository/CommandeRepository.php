@@ -44,7 +44,13 @@ class CommandeRepository extends ServiceEntityRepository
             $this->_em->flush();
         }
     }
+    public function countOrders()
+    {
+        $queryBuilder = $this->createQueryBuilder('a');
+        $queryBuilder->select('COUNT(a.id) as value');
 
+        return $queryBuilder->getQuery()->getOneOrNullResult();
+    }
 
     // public function findByExampleField($user)
     // {

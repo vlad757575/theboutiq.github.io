@@ -171,7 +171,7 @@ class UtilisateurController extends AbstractController
 
         // Je vais chercher les utilisateurs non verifiés
         $utilisateurs = $utilisateurRepository->notVerifiedUser();
-        // Le temps limite est de 2 heures, je boucle sur les utilisateurs non verifiés et je les supprime de la bdd
+        // Le temps limite est de 5 heures, je boucle sur les utilisateurs non verifiés et je les supprime de la bdd
         foreach ($utilisateurs as $timelimit) {
             $entityManager->remove($timelimit);
 
