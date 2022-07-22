@@ -1,8 +1,20 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Votre adresse de livraison{% endblock %}
+{% block title %}Modifier votre adresse de livraison{% endblock %}
 
 {% block body %}
+<div>
+    <div>
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{path('mon_compte')}}" class="nav-links">Mon compte</a></li>
+                <li class="breadcrumb-item"> <a href="{{path('app_adresse_livraison_index')}}" class="nav-links">Mes adresses de livraison</a> </li>
+                <li class="breadcrumb-item current-page"> <a href="{{path('app_adresse_livraison_edit' , { 'id': adresse_livraison.id })}}" class="nav-links">Modifier adresse de livraison</a> </li>
+            </ol>
+        </nav>
+    </div>
+</div>
+
 <div class=" my-formular container">
     <h1 class="text-center">Modifier votre adresse de livraison</h1>
 

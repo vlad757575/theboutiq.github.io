@@ -3,16 +3,24 @@
 {% block title %}AdresseLivraison{% endblock %}
 
 {% block body %}
+<div>
+    <div>
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{path('mon_compte')}}" class="nav-links">Accueil</a></li>
+                <li class="breadcrumb-item"> <a href="{{path('app_adresse_livraison_index')}}" class="nav-links">Mes adresses de livraison</a> </li>
+                <li class="breadcrumb-item"> <a href="{{path('app_adresse_livraison_show', {'id': adresse_livraison.id}) }}" class="nav-links">Mon adresse de livraison </a> </li>
+            </ol>
+        </nav>
+    </div>
+</div>
+
 <div class="my-formular example-wrapper">
 
 
     <h1 class="text-center">Adresse de livraison</h1>
     <table class="table">
         <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ adresse_livraison.id }}</td>
-            </tr>
             <tr>
                 <th>Nom</th>
                 <td>{{ adresse_livraison.nom }}</td>
@@ -44,9 +52,9 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_adresse_livraison_index') }}" class="btn btn-primary">Retour</a>
+    <a href="{{ path('app_adresse_livraison_index') }}" class="btn btn-info">Retour</a>
 
-    <a href="{{ path('app_adresse_livraison_edit', {'id': adresse_livraison.id}) }} " class="btn btn-primary">Modifier</a>
+    <a href="{{ path('app_adresse_livraison_edit', {'id': adresse_livraison.id}) }} " class="btn btn-info">Modifier</a>
 
 </div>
 {% endblock %}

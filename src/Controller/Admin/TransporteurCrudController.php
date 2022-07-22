@@ -3,12 +3,10 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Transporteur;
-use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use EasyCorp\Bundle\EasyAdminBundle\Field\MoneyField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 
 class TransporteurCrudController extends AbstractCrudController
 {
@@ -23,7 +21,7 @@ class TransporteurCrudController extends AbstractCrudController
         return [
             // IdField::new('id'),
             TextField::new('nom'),
-            MoneyField::new('tarif')->setCurrency('EUR'),
+            IntegerField::new('tarif'),
             TextEditorField::new('description'),
             TextField::new('suivi'),
             TextField::new('numeroSuivi'),

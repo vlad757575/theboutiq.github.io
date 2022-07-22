@@ -3,11 +3,23 @@
 {% block title %}Nouvelle adresse de livraison{% endblock %}
 
 {% block body %}
+
+<div>
+    <div>
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{path('index')}}" class="nav-links">Accueil</a></li>
+                <li class="breadcrumb-item"> <a href="{{path('app_adresse_facturation_index')}}" class="nav-links">Mes adresses de livraison</a> </li>
+                <li class="breadcrumb-item current-page"> <a href="{{path('index')}}" class="nav-links">Nouvelle adresse de livraison</a> </li>
+            </ol>
+        </nav>
+    </div>
+</div>
 <div class="my-formular container ">
     <h1 class="text-center m-5">Nouvelle adresse de livraison</h1>
 
     {{ include('adresse_livraison/_form.html.twig') }}
-    <a class="btn btn-primary m-2" href="{{ path('app_adresse_livraison_index') }}">Retour</a>
+    <a class="btn btn-info m-2" href="{{ path('app_adresse_livraison_index') }}">Retour</a>
 </div>
 
 

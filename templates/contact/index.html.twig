@@ -3,12 +3,12 @@
 {% block title %}Contact{% endblock %}
 
 {% block body %}
-<div class="example-wrapper my-formular">
+<div class="example-wrapper my-formular ">
     <h3 class="title">Formulaire de contact</h3>
     {{ form_start(form) }}
     {{ form_widget(form) }}
     <div class="d-flex mt-3">
-        <input type="submit" class="btn btn-primary" value="Envoyer" title="ps: nous ne transférons pas vos données personnelles à des tiers ">
+        <input type="submit" class="btn btn-info" value="Envoyer" title="ps: nous ne transférons pas vos données personnelles à des tiers ">
         <p class="m-2">En cliquant sur envoyer je reconnais avoir lu et compris <a href="{{path('app_cguv')}}" title="ps: nous ne transférons pas vos données personnelles à des tiers ">les CGUV et je les accepte.</a></p>
     </div>
     {{ form_end(form) }}

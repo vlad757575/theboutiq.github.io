@@ -15,7 +15,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class MonCompteController extends AbstractController
 {
     /**
-     * @Route("/mon/compte", name="mon_compte")
+     * @Route("/mon-compte", name="mon_compte")
      */
     public function index(): Response
     {

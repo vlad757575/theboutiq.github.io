@@ -1,9 +1,18 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Mon adresse de livraison{% endblock %}
+{% block title %}Mes adresses de livraison{% endblock %}
 
 {% block body %}
-
+<div>
+    <div>
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{path('mon_compte')}}" class="nav-links">Mon compte</a></li>
+                <li class="breadcrumb-item"> <a href="{{path('app_adresse_livraison_index')}}" class="nav-links">Mes adresses de livraison</a> </li>
+            </ol>
+        </nav>
+    </div>
+</div>
 
 <div class="my-formular example-wrapper">
     <h1 class="text-center m-5">Mes adresses de livraison</h1>
@@ -14,7 +23,7 @@
     <div class="row">
         {% for adresse_livraison in app.user.adresseLivraison %}
         <div class="col-md-4">
-            <div class="card" style="width: 18rem;">
+            <div class="card m-2" style="width: 18rem;">
 
                 <div class="card-body">
                     <h5 class="card-title">{{ adresse_livraison.nom }}</h5>
@@ -31,6 +40,6 @@
         {% endfor %}
         {% endif %}
     </div>
-    <a class="btn btn-primary m-3" href="{{ path('app_adresse_livraison_new') }}">Créer une nouvelle adresse</a>
+    <a class="btn btn-info m-3" href="{{ path('app_adresse_livraison_new') }}">Créer une nouvelle adresse</a>
 </div>
 {% endblock %}

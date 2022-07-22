@@ -12,7 +12,7 @@ use App\Repository\AdresseFacturationRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
- * @Route("/adresse/facturation")
+ * @Route("/adresse-facturation")
  */
 class AdresseFacturationController extends AbstractController
 {

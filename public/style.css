@@ -5,8 +5,9 @@
   background-color: white;
   border: white;
   box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.3);
-  padding: 20px;
+  padding: 10px;
   border-radius: 5px;
+  margin: auto;
 }
 
 body {
@@ -31,7 +32,28 @@ h4 {
 p {
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 }
-/* ---------------------NAVBARs CSS--------------------- */
+
+/* ---------------------BOOTSTRAP AJUSTEMENT--------------------- */
+
+.btn-primary {
+  background-color: #29d2bb;
+  color: #e97864 !important;
+}
+.btn-primary .btn-info .btn:hover {
+  background-color: #29d2bb;
+  color: #e97864 !important;
+}
+
+.btn {
+  color: #e97864 !important;
+}
+.btn-info {
+  background-color: #29d2bb !important;
+}
+.link-style {
+  color: #e97864 !important;
+}
+
 .logo {
   margin: -10px;
   margin-left: 5%;
@@ -76,13 +98,14 @@ a-hover:hover {
   margin-top: 10px;
   margin-bottom: 35px;
   padding: 20px;
+  background-color: #f5f5f5;
   border: #f5f5f5 solid 2px;
-  box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.3);
+  margin: 55px;
+  /* box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.3); */
 }
 .my-picture {
   padding: 10px;
-  border-top-right-radius: 15%;
-  border-top-left-radius: 15%;
+  border-radius: 5%;
 }
 
 .my-product h5 {
@@ -287,6 +310,11 @@ a .main-logo {
   text-decoration: none;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
     border-color 0.15s ease-in-out;
+}
+
+a:hover {
+  text-decoration: none !important;
+  color: #29d2bb;
 }
 
 /* Modal */

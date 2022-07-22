@@ -12,10 +12,10 @@
     {% block css %}
     <!-- Bootstrap  and CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{asset('bootstrap.css')}}">
+    <!-- <link rel="stylesheet" href="{{asset('bootstrap.css')}}"> -->
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap-grid.min.css" integrity="sha512-q0LpKnEKG/pAf1qi1SAyX0lCNnrlJDjAvsyaygu07x8OF4CEOpQhBnYiFW6YDUnOOcyAEiEYlV4S9vEc6akTEw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.2.1/css/bootstrap-grid.css" integrity="sha512-KF/6FqRdILMKNYOavw2tfYxI4OVyEg7udJH13gG5i/9h8COE7WCQDFpo9HC+vT9hLD0S06mMOCxwA1XH/QtE8A==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous"> -->
     <link rel="stylesheet" href="{{asset('landing-page.css')}}">
     <link rel="stylesheet" href="{{asset('style.css')}}">
     <link rel="stylesheet" href="{{asset('responsive.css')}}">
@@ -41,7 +41,7 @@
                             <a class="nav-link active link-style" aria-current="page" href="{{path('index')}}">Accueil</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active link-style" href="{{path('app_produit_index')}}">Produit</a>
+                            <a class="nav-link active link-style" href="{{path('app_produit_index')}}">Boutique</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link active link-style" href="{{path('app_contact')}}">Contact</a>
@@ -110,16 +110,8 @@
         </div>
     </footer>
     {% block javascript %}
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-
     <script src="{{asset('bootstrap.bundle.min')}}"></script>
     <script src="{{asset('script.js')}}"></script>
-
-    <!-- <script src="/script.js"></script> -->
-    <!-- JavaScript Bundle with Popper -->
-
-
     <script src="https://cdn.jsdelivr.net/npm/axentix@2.0.1/dist/axentix.min.js">
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>

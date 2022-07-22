@@ -7,13 +7,13 @@
     <div>
         <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{path('index')}}">Accueil</a></li>
-                <li class="breadcrumb-item current-page"> <a href="{{path('index')}}">Mes adresses de facturation</a> </li>
+                <li class="breadcrumb-item"><a href="{{path('mon_compte')}}" class="nav-links">Mon compte</a></li>
+                <li class="breadcrumb-item current-page"> <a href="{{path('app_adresse_facturation_index')}}" class="nav-links">Mes adresses de facturation</a> </li>
             </ol>
         </nav>
     </div>
 </div>
-<div class="my-formular example-wrapper">
+<div class="my-formular container">
     <h1 class="text-center m-3">Mes adresses de facturation</h1>
     {% if app.user.adresseFacturation is empty %}
     <p class="text-center"> Vous n'avez pas encore ajouté d'adresse de Facturation. Pour en ajouter une, veuillez
@@ -40,6 +40,6 @@
 
         {% endif %}
     </div>
-    <a class="btn btn-primary m-3" href="{{ path('app_adresse_facturation_new') }}">Créer une nouvelle adresse</a>
+    <a class="btn btn-info m-3" href="{{ path('app_adresse_facturation_new') }}">Créer une nouvelle adresse</a>
 </div>
 {% endblock %}

@@ -3,6 +3,17 @@
 {% block title %}Modifier votre Adresse de facturation{% endblock %}
 
 {% block body %}
+<div>
+    <div>
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{path('mon_compte')}}" class="nav-links">Mon compte</a></li>
+                <li class="breadcrumb-item"><a href="{{path('app_adresse_facturation_index')}}" class="nav-links">Mes adresses de facturation</a></li>
+                <li class="breadcrumb-item current-page"> <a href="{{path('app_adresse_facturation_edit', {'id': adresse_facturation.id })}}" class="nav-links">Modifier adresse de facturation</a> </li>
+            </ol>
+        </nav>
+    </div>
+</div>
 <div class=" my-formular container">
     <h1 class="text-center m-5">Modifier votre adresse de facturation</h1>
 

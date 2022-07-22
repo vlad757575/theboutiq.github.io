@@ -3,8 +3,17 @@
 {% block title %}Mes informations {{utilisateur.getFullName}}{% endblock %}
 
 {% block body %}
-
-<div class="my-formular example-wrapper">
+<div>
+    <div>
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{path('mon_compte')}}" class="nav-links">Mon compte</a></li>
+                <li class="breadcrumb-item current-page"> <a href="{{path('user', {'id':utilisateur.id})}}" class="nav-links">Mes informations</a> </li>
+            </ol>
+        </nav>
+    </div>
+</div>
+<div class="my-formular container">
     <h1 class="text-center m-4">Mes informations personnelles</h1>
     <table class="table">
         <tbody>
@@ -21,11 +30,11 @@
                 <td>{{utilisateur.telephone}}</td>
             </tr>
             <tr>
-                <th>date de naissance</th>
+                <th>Date de naissance</th>
                 <td>{{utilisateur.datenaissance|date('d/m/Y')}}</td>
             </tr>
             <tr>
-                <th>Nom</th>
+                <th>Email</th>
                 <td>{{ utilisateur.email }}</td>
 
             </tr>
@@ -33,10 +42,10 @@
     </table>
     {% if app.user %}
     <div class="account-helper m-3">
-        <a href=" {{ path('app_forgot_password_request') }}" class="btn btn-primary m-2">Modifier votre mot de passe</a>
-        <a href="{{ path('app_utilisateur_edit', {'id': utilisateur.id}) }}" class="btn btn-primary m-2" name="_token" value="{{ csrf_token('edit' ~ utilisateur.id) }}">Modifier vos informations</a>
-        <a href="{{path('mes-infos', {'id': utilisateur.id})}}" class="btn btn-primary m-2">Exporter mes données</a>
-        <a class="btn btn-primary m-2"> {{ include('utilisateur/_delete_form.html.twig') }}</a>
+        <a href=" {{ path('app_forgot_password_request') }}" class="btn btn-info m-2">Modifier votre mot de passe</a>
+        <a href="{{ path('app_utilisateur_edit', {'id': utilisateur.id}) }}" class="btn btn-info m-2" name="_token" value="{{ csrf_token('edit' ~ utilisateur.id) }}">Modifier vos informations</a>
+        <a href="{{path('mes-infos', {'id': utilisateur.id})}}" class="btn btn-info m-2">Exporter mes données</a>
+        <a class="btn btn-info m-2"> {{ include('utilisateur/_delete_form.html.twig') }}</a>
     </div>
 </div>
 {% endif %}

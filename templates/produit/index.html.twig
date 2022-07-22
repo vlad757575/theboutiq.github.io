@@ -3,11 +3,7 @@
 {% block title %}produit{% endblock %}
 
 {% block body %}
-<div class="my-product">
 
-
-
-</div>
 <!-- //modal si un visiteur veut rajouter un produit au panier -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -40,7 +36,7 @@
                 <span class="product-price">{{ produit.montant|number_format(2) }} €</span>
                 <form action="{{path('add_panier', {'id': produit.id}) }}" method="POST">
                     <div class="input-button">
-                        <button type="submit" class="btn btn-primary">
+                        <button type="submit" class="btn btn-info">
                             <i class="fa fa-shopping-cart " aria-hidden="true"></i>Ajouter
                         </button>
                     </div>

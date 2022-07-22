@@ -22,15 +22,9 @@
     display: block;
     justify-content: center;
   }
-  /* .landing-btn a {
-    position: relative;
-    text-decoration: none !important;
-    width: auto;
-    height: 50px;
-    line-height: 50px;
-    color: whitesmoke !important;
-    padding: 50px;
-  } */
+  .landing-btn a {
+    display: none;
+  }
   .decouvrir {
     display: block;
     position: relative;

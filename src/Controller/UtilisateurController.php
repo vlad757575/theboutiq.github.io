@@ -32,7 +32,13 @@ class UtilisateurController extends AbstractController
     {
         $user = $utilisateurRepository->find($id);
         if (!$this->getUser() || !$user || $user != $this->getUser()) {
-            return $this->redirectToRoute('index');
+
+            //je crée une nouvelle session
+            $session = new Session();
+
+            // Je ferme la session de l'utilisateur
+            $session->invalidate();
+            return $this->redirectToRoute('login');
         }
         return $this->render(
             'utilisateur/index.html.twig',
@@ -70,8 +76,21 @@ class UtilisateurController extends AbstractController
     /**
      * @Route("utilisateur/{id}", name="showUtilisateur", methods={"GET"})
      */
-    public function show(Utilisateur $utilisateur): Response
+    public function show(Utilisateur $utilisateur, UtilisateurRepository $utilisateurRepository, $id): Response
     {
+
+        // Je déclare la variable user et je place l'utilisateur dedans
+        $user = $utilisateurRepository->find($id);
+        // Verification que c'est le meme utilisateur, si c'est pas le meme redirection à l'accueil
+        if (!$this->getUser() || !$user || $user != $this->getUser()) {
+
+            //je crée une nouvelle session
+            $session = new Session();
+
+            // Je ferme la session de l'utilisateur
+            $session->invalidate();
+            return $this->redirectToRoute('login');
+        }
         return $this->render('utilisateur/show.html.twig', [
             'utilisateur' => $utilisateur,
         ]);
@@ -87,7 +106,13 @@ class UtilisateurController extends AbstractController
         $user = $utilisateurRepository->find($id);
         // Verification que c'est le meme utilisateur, si c'est pas le meme redirection à l'accueil
         if (!$this->getUser() || !$user || $user != $this->getUser()) {
-            return $this->redirectToRoute('index');
+
+            //je crée une nouvelle session
+            $session = new Session();
+
+            // Je ferme la session de l'utilisateur
+            $session->invalidate();
+            return $this->redirectToRoute('login');
         }
 
         $form = $this->createForm(UtilisateurType::class, $utilisateur);
