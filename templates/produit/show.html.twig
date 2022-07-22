@@ -6,9 +6,7 @@
 <div>
     <div class="my-product-detail">
         <div class="my-product text-center">
-            <a href=""> <img src="{{ asset('uploads/') ~ produit.image  }}" alt="{{produit.nom}}" class="img-fluid my-picture" style="width:380px ;">
-                <button id="modal-open">fff</button>
-            </a>
+            <img src="{{ asset('uploads/') ~ produit.image  }}" alt="{{produit.nom}}" class="img-fluid my-picture" style="width:380px ;">
         </div>
         <div class="detail-product-right">
             <h5>{{produit.nom}}</h5>
@@ -29,25 +27,14 @@
             <div class="description">
                 <h3>Déscription</h3>
                 <p>{{produit.description}}</p>
-                <p> <a href="#" id="modal-open">Agrandir</a> </p>
+
             </div>
             {% endif %}
         </div>
     </div>
 </div>
-<!-- modal -->
-<div class="mon-modal" id="myModal">
 
 
-    <div class="mon-modal-content">
-        <a href="{{path('app_produit_show', {'id': produit.id}) }}" id="modal-bttn"> <img src="{{ asset('uploads/') ~ produit.image  }}" alt="{{produit.nom}}" class="modal-picture" style="width:380px ;">
-        </a>
-        <span class="close">
-            &times;
-
-        </span>
-    </div>
-</div>
 
 
 
