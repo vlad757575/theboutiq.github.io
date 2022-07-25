@@ -98,10 +98,12 @@ class UtilisateurController extends AbstractController
 
 
     /**
-     * @Route("/{id}/edit", name="app_utilisateur_edit", methods={"GET"})
+     * 
+     * @Route("/{id}/edit", name="app_utilisateur_edit")
      */
     public function edit(Request $request, Utilisateur $utilisateur, UtilisateurRepository $utilisateurRepository, $id): Response
     {
+
         // Je déclare la variable user et je place l'utilisateur dedans
         $user = $utilisateurRepository->find($id);
         // Verification que c'est le meme utilisateur, si c'est pas le meme redirection à l'accueil
@@ -117,13 +119,12 @@ class UtilisateurController extends AbstractController
 
         $form = $this->createForm(UtilisateurType::class, $utilisateur);
         $form->handleRequest($request);
+
         //Tu m'nvoies ca si le formulaire est valide et est soumit 
         if ($form->isSubmitted() && $form->isValid()) {
             $utilisateurRepository->add($utilisateur);
             return $this->redirectToRoute('mon_compte', [], Response::HTTP_SEE_OTHER);
         }
-
-
 
         return $this->renderForm('utilisateur/edit.html.twig', [
             'utilisateur' => $utilisateur,
@@ -183,7 +184,7 @@ class UtilisateurController extends AbstractController
         $domPdf->setBasePath($request->getSchemeAndHttpHost());
         $domPdf->render();
         $domPdf->stream(
-            "Votre facture - theboutiq!"
+            "Vos informations - theboutiq!"
         );
     }
 

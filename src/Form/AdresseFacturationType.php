@@ -33,7 +33,7 @@ class AdresseFacturationType extends AbstractType
                 'label' => 'Votre societé',
                 'required' => false,
                 'attr' => [
-                    'placeholder' => 'Facultatif'
+                    'placeholder' => 'Facultatif',
                 ]
             ])
             ->add('numero_rue', NumberType::class, [
@@ -50,7 +50,7 @@ class AdresseFacturationType extends AbstractType
                 ]
             ])
             ->add('rue', TextType::class, [
-                'label' => 'Numéro et nom de rue',
+                'label' => 'Nom de rue',
                 'attr' => ['placeholder' => 'Saisissez le numéro et le nom de rue']
             ])
             ->add('codepostal', NumberType::class, [

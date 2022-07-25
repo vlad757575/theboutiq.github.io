@@ -100,24 +100,15 @@ class CommandeController extends AbstractController
         ]);
     }
 
-    /**
-     * @IsGranted("ROLE_ADMIN")
-     * @Route("/{id}", name="app_commande_delete", methods={"POST"})
-     */
-    public function delete(Request $request, Commande $commande, CommandeRepository $commandeRepository): Response
-    {
-        if ($this->isCsrfTokenValid('delete' . $commande->getId(), $request->request->get('_token'))) {
-            $commandeRepository->remove($commande);
-        }
 
-        return $this->redirectToRoute('app_commande_index', [], Response::HTTP_SEE_OTHER);
-    }
+
 
     /**
-     * @Route("/commande/choix", name="choix")
+     * @Route("/votre/choix", name="choix")
      */
     public function choix(Panier $panier, Request $request): Response
     {
+
         if (!$this->getUser()->isVerified()) {
 
             return $this->redirectToRoute('index');
@@ -125,6 +116,10 @@ class CommandeController extends AbstractController
         if (!$this->getUser()->getAdresseLivraison()->getValues()) {
 
             return $this->redirectToRoute('app_adresse_livraison_new');
+        }
+        if (!$this->getUser()->getAdresseFacturation()->getValues()) {
+
+            return $this->redirectToRoute('app_adresse_facturation_new');
         }
 
         $form = $this->createForm(MyOrderType::class, null, [
@@ -143,7 +138,7 @@ class CommandeController extends AbstractController
     }
 
     /**
-     * @Route("/commande/recapitulatif", name="recapitulatif", methods="POST")
+     * @Route("/recapitulatif", name="recapitulatif", methods="POST")
      */
     public function recapitulatif(Panier $panier, Request $request,  EtatRepository $er, ProduitRepository $produitRepository)
     {
@@ -232,6 +227,7 @@ class CommandeController extends AbstractController
                 $this->entityManager->persist($commandeProduit);
             }
 
+
             // J'envoi tout en bdd
             $this->entityManager->flush();
 
@@ -247,10 +243,11 @@ class CommandeController extends AbstractController
     }
 
     /**     
-     * @Route("/commande/generatePdf/{id}", name="facture", methods={"GET"})
+     * @Route("/generatePdf/{id}", name="facture", methods={"GET"})
      */
-    public function getPdf(CommandeRepository $commandeRepository, $id, Request $request)
+    public function getPdf(CommandeRepository $commandeRepository, $id, Request $request, Commande $commande)
     {
+
         //j'instancie les options et parametres
         $options = new Options();
         $options->set('defaultFont', 'Calibri');
@@ -259,6 +256,9 @@ class CommandeController extends AbstractController
 
         $domPdf->setOptions($options);
         $domPdf->setPaper('A4', 'portrait');
+        if (!$commande || $commande->getUtilisateur() != $this->getUser()) {
+            return $this->render('commande/show.html.twig');
+        }
 
         $html = $this->renderView('commande/telechargement.html.twig', [
             'facture' => $commandeRepository->findOneBy(['id' => $id]),
@@ -267,10 +267,23 @@ class CommandeController extends AbstractController
         //j'injecte ma vue html
         $domPdf->loadHtml($html);
         //Je crée le pdf
-        // $domPdf->output();
         $domPdf->setBasePath($request->getSchemeAndHttpHost());
         $domPdf->render();
         // Je lui donne un nom
         $domPdf->stream("Votre facture - theboutiq!");
+    }
+
+
+    /**
+     * @IsGranted("ROLE_ADMIN")
+     * @Route("/{id}", name="app_commande_delete", methods={"POST"})
+     */
+    public function delete(Request $request, Commande $commande, CommandeRepository $commandeRepository): Response
+    {
+        if ($this->isCsrfTokenValid('delete' . $commande->getId(), $request->request->get('_token'))) {
+            $commandeRepository->remove($commande);
+        }
+
+        return $this->redirectToRoute('app_commande_index', [], Response::HTTP_SEE_OTHER);
     }
 }

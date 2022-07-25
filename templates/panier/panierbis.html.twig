@@ -29,8 +29,7 @@
                 {% set total = total + (produit.produit.montant * produit.quantite|number_format(2)) %}
 
                 <td></td>
-
-                <td><a href="{{path('add_panier', {'id' : produit.produit.id})}}"><img src="{{asset('icons/plus.png')}}" alt="ajout" style="width:18px ;"></a></td>
+                <td><a href="{{path('incremente_panier', {'id' : produit.produit.id})}}"><img src="{{asset('icons/plus.png')}}" alt="ajout" style="width:18px ;"></a></td>
                 <td><a href="{{path('del_ligne-panier', {'id' : produit.produit.id})}}"><img src="{{asset('icons/trash.png')}}" alt="supprimer" style="width:18px ;"></a></td>
                 <td><a href="{{path('decremente_panier', {'id' : produit.produit.id})}}"><img src="{{asset('icons/minus.png')}}" alt="supprimer" style="width:18px ;"></a></td>
             </tr>

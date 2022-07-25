@@ -4,7 +4,7 @@
 <h2>Votre facture n°{{facture.getOrderNumber}}</h2>
 <hr>
 <div>
-    <strong class="text-left">THEBOUTIQ! <br> 9 boulevard de la boissiere <br> 93130 Noisy-Le-Sec <br> FR <br> TVA: FR87898258728 <br> SIRET: 89825872800028 <br> Capital social : 4500 euros </strong>
+    <strong>THEBOUTIQ! <br> 9 boulevard de la boissiere <br> 93130 Noisy-Le-Sec <br> FR <br> TVA: FR87898258728 <br> SIRET: 89825872800028 <br> Capital social : 4500 euros </strong>
 </div>
 <h3>Votre adresse de livraison :</h3>
 <p>{{facture.livraisonAdresse|raw}}</p>
@@ -17,26 +17,23 @@
                 <th scope="col">Produit</th>
                 <th scope="col">Quantité</th>
                 <th scope="col">Prix unitaire</th>
-                <th>TVA unitaire</th>
+                <th scope="col">TVA unitaire</th>
                 <th scope="col">Sous total</th>
             </tr>
         </thead>
-        <tbody>
-            {% for produit in facture.commandeProduits %}
-            <tr>
-                <th>{{produit.monProduit}}</th>
-                <td>{{produit.quantite}}</td>
-                <td>{{produit.prix|number_format(2)}} €</td>
-                <td>{{(0.20 * produit.prix)/(1 + 0.20)|round|number_format(2) }} €</td>
-                <td>{{ produit.total|number_format(2)}} €</td>
-            </tr>
-        </tbody>
     </table>
-    {% endfor %}
+    {% for produit in facture.commandeProduits %}
+    <span class="margin">{{produit.monProduit}}</span>
+    <span class="margin">{{produit.prix|number_format(2)}} €</span>
+    <span class="margin">{{(0.20 * produit.prix)/(1 + 0.20)|round|number_format(2) }} €</span>
+    <span class="margin">{{ produit.total|number_format(2)}} €</span><span></span>
 </div>
 <h3>Les informations de livraison : </h3>
 <p>{{facture.TransporteurNom}}</p>
 <p>{{facture.TransporteurTarif}}</p>
+
+<h2 style="text-decoration: bold;">Total : {{ produit.total + facture.TransporteurTarif }}</h2>
+{% endfor %}
 <hr>
 <div>
     <H2 style="color: red;"><strong>{{facture.etat}}</strong></H2>
@@ -45,6 +42,10 @@
 
 {% block css %}
 <style>
+    .margin {
+        margin-right: 50px;
+    }
+
     h2 {
         color: brown;
         font-weight: bolder;

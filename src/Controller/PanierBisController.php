@@ -40,6 +40,16 @@ class PanierBisController extends AbstractController
     }
 
     /**
+     * @route("/panier/plus/{id}", name="incremente_panier")
+     */
+    public function incrementePanier(Panier $panier, $id)
+    {
+        // j'ajoute un produit grace à son id
+        $panier->add($id);
+        return $this->redirectToRoute('app_mpanier');
+    }
+
+    /**
      * @route("/panier/decremente/{id}", name="decremente_panier")
      */
     public function decremente(Panier $panier, $id)
