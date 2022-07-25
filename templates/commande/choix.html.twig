@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Mon panier{% endblock %}
+{% block title %}The boutiq ! | Mon panier{% endblock %}
 
 {% block body %}
 <div class="container">
@@ -40,8 +40,8 @@
         <div class="col-md-6">
             {% set formHtml %}
             {{form_start(form, {action: path('recapitulatif')})}}
-            <a href="{{path('app_adresse_livraison_new')}}" class="nav-linkBis">Créer une nouvelle adresse de livraison</a> <br>
-            <a href="{{path('app_adresse_facturation_new')}}" class="nav-linkBis">Créer une nouvelle adresse de facturation</a>
+            <a href="{{path('app_adresse_livraison_new')}}" class="nav-linkBis link-style">Créer une nouvelle adresse de livraison</a> <br>
+            <a href="{{path('app_adresse_facturation_new')}}" class="nav-linkBis link-style">Créer une nouvelle adresse de facturation</a>
             {{form_end(form)}}
             {% endset %}
             {{ formHtml|replace({'[br]' : '<br/>', '[€]' : '€'})|raw }}

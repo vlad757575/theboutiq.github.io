@@ -3,9 +3,11 @@
 {% block title %}Changement de mot de passe THEBOUTIQ!{% endblock %}
 
 {% block body %}
-<p>
-    Si votre compte matches avec l'adresse email saisie vous allez recevoir un lien pour reinitialiser votre mot de passe.
-    Ce lien va expirer dans {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.
-</p>
-<p>Si vous n'avez pas recu l'email regardez dans vos spams ou <a href="{{ path('app_forgot_password_request') }}">réessayez</a>.</p>
+<div class="container mt-5">
+    <p>
+        Si votre compte matches avec l'adresse email saisie vous allez recevoir un lien pour reinitialiser votre mot de passe.
+        Ce lien va expirer dans {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.
+    </p>
+    <p> Si vous n'avez pas recu l'email regardez dans vos spams ou <a href="{{ path('app_forgot_password_request') }}" class="link-style">réessayez</a>.</p>
+</div>
 {% endblock %}
